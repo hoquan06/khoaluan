@@ -37,8 +37,8 @@
                     <div class="mb-1">
                         <label class="form-label" for="basic-default-name">Tình trạng</label>
                         <select id="tinh_trang" name="tinh_trang" class="select2 form-select select2-hidden-accessible">
-                            <option value="0">Đang mở bán</option>
-                            <option value="1">Tạm ngưng</option>
+                            <option value="1">Đang mở bán</option>
+                            <option value="0">Tạm ngưng</option>
                         </select>
                     </div>
                     <div class="text-center">
@@ -148,8 +148,8 @@
             <div class="mb-1">
                 <label class="form-label" for="basic-default-name">Tình trạng</label>
                 <select id="tinh_trang_edit" name="tinh_trang_edit" class="select2 form-select select2-hidden-accessible">
-                    <option value="0">Đang mở bán</option>
-                    <option value="1">Tạm ngưng</option>
+                    <option value="1">Đang mở bán</option>
+                    <option value="0">Tạm ngưng</option>
                 </select>
             </div>
         </div>
@@ -201,7 +201,7 @@
                                 var tenDMCha = value.ten_danh_muc_cha;
                             }
 
-                            if(value.tinh_trang == 0){
+                            if(value.tinh_trang == 1){
                                 var tenTrangThai = 'Đang mở bán';
                                 var mauTrangThai = 'btn-primary';
                             } else{
@@ -285,13 +285,13 @@
                         if(res.doitrangthai){
                             toastr.success("Đổi trạng thái thành công!!!");
                             if(res.tinhtrang){
-                                self.html("Tạm ngưng");
-                                self.removeClass('btn-primary');
-                                self.addClass('btn-danger');
-                            } else{
                                 self.html("Đang mở bán");
                                 self.removeClass('btn-danger');
                                 self.addClass('btn-primary');
+                            } else{
+                                self.html("Tạm ngưng");
+                                self.removeClass('btn-primary');
+                                self.addClass('btn-danger');
                             }
                         } else{
                             toastr.error("Vui lòng không can thiệp hệ thống!!!");

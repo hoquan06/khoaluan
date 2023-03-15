@@ -27,5 +27,8 @@ Route::prefix('admin')->group(function () {
         Route::post('/update', [\App\Http\Controllers\DanhMucSanPhamController::class, 'update']);
         Route::get('data', [\App\Http\Controllers\DanhMucSanPhamController::class, 'getData']);
     });
+    Route::prefix('san-pham')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
+    });
 });
 
