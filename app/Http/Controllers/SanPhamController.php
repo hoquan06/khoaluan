@@ -11,5 +11,4 @@ class SanPhamController extends Controller
     {
         return view('admin.pages.san_pham.index');
     }
-    dcbhjdchdcb;
 }
