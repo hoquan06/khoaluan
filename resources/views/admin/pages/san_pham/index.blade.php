@@ -6,16 +6,23 @@
         <div class="card-body"> <h5 class="card-title">Thêm Mới Sản Phẩm</h5>
             <form class="" id="formCreate">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="position-relative form-group">
                             <label>Tên Sản Phẩm</label>
                             <input id="ten_san_pham" placeholder="Nhập vào tên sản phẩm" type="text" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="position-relative form-group">
                             <label>Slug Sản Phẩm</label>
                             <input id="slug_san_pham" placeholder="Nhập vào slug sản phẩm" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="position-relative form-group">
+                            <label>Số lượng</label>
+                            <input id="slug_san_pham" placeholder="Nhập vào số lượng sản phẩm" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
