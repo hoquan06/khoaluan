@@ -22,7 +22,7 @@ class DanhMucSanPhamRequest extends FormRequest
     public function rules()
     {
         return [
-            'ten_danh_muc'      => 'required|min:3|max:50|unique:danh_muc_san_phams,ten_danh_muc', //unique: không được trùng
+            'ten_danh_muc'      => 'required|min:3|max:50|unique:danh_muc_san_phams,ten_danh_muc', //unique: không được trùng/duy nhất
             'slug_danh_muc'     => 'required|min:3|max:50|unique:danh_muc_san_phams,slug_danh_muc',
             'hinh_anh'          => 'required',
             'id_danh_muc_cha'   => 'required',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DanhMucSanPhamRequest;
 use App\Http\Requests\DanhMucUpdateRequest;
+use App\Http\Requests\UpdateDanhMucRequest;
 use App\Models\DanhMucSanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +73,7 @@ class DanhMucSanPhamController extends Controller
         }
     }
 
-    public function update(DanhMucUpdateRequest $request)
+    public function update(UpdateDanhMucRequest $request)
     {
         $data     = $request->all();
         $danh_muc = DanhMucSanPham::find($request->id);

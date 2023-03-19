@@ -10,15 +10,15 @@
             <div class="card-body">
                 <form id="jquery-val-form" novalidate="novalidate">
                     <div class="mb-1">
-                        <label class="form-label" for="basic-default-name">Tên danh mục</label>
+                        <label class="form-label" for="basic-default-name">Tên danh mục(*)</label>
                         <input type="text" class="form-control" id="ten_danh_muc" name="ten_danh_muc" placeholder="Nhập vào tên danh mục">
                     </div>
                     <div class="mb-1">
-                        <label class="form-label" for="basic-default-name">Slug danh mục</label>
+                        <label class="form-label" for="basic-default-name">Slug danh mục(*)</label>
                         <input type="text" class="form-control" id="slug_danh_muc" name="slug_danh_muc" placeholder="Nhập vào slug danh mục">
                     </div>
                     <div class="mb-1">
-                        <label class="form-label">Hình ảnh</label>
+                        <label class="form-label">Hình ảnh(*)</label>
                         <div class="input-group">
                             <input id="hinh_anh" name="hinh_anh" class="form-control" type="text">
                             <input type="button" class="btn btn-info" id="lfm1" data-input="hinh_anh" data-preview="holder" value="Chọn ảnh">
@@ -26,7 +26,7 @@
                         <img id="holder" style="margin-top:15px;max-height:100px;">
                     </div>
                     <div class="mb-1">
-                        <label class="form-label" for="basic-default-name">Danh mục cha</label>
+                        <label class="form-label" for="basic-default-name">Danh mục cha(*)</label>
                         <select id="id_danh_muc_cha" name="id_danh_muc_cha" class="select2 form-select select2-hidden-accessible">
                             {{-- <option value="0">Root</option>
                             @foreach ($danh_muc_cha as $key => $value)
@@ -35,7 +35,7 @@
                         </select>
                     </div>
                     <div class="mb-1">
-                        <label class="form-label" for="basic-default-name">Tình trạng</label>
+                        <label class="form-label" for="basic-default-name">Tình trạng(*)</label>
                         <select id="tinh_trang" name="tinh_trang" class="select2 form-select select2-hidden-accessible">
                             <option value="1">Đang mở bán</option>
                             <option value="0">Tạm ngưng</option>
@@ -51,7 +51,7 @@
     <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body text-center"><h5 class="card-title">Danh Sách Danh Mục</h5>
-                <table class="mb-0 table table-bordered" id="tableDanhMuc">
+                <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -106,7 +106,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-primary">Xóa danh mục</button>
+          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa danh mục</button>
         </div>
       </div>
     </div>
@@ -216,9 +216,10 @@
                             noiDung += '<button data-id="' + value.id + '" class="doiTrangThai btn ' + mauTrangThai + '">' + tenTrangThai + '</button>';
                             noiDung += '</td>';
                             noiDung += '<td class="text-center">';
-                            noiDung += '<button class="btn btn-success edit" data-idedit="' + value.id + '" data-bs-toggle="modal" data-bs-target="#editModal">Chỉnh sửa</button>';
-                            noiDung += '<button class="btn btn-primary delete" data-iddelete="' + value.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
+                            noiDung += '<button class="btn btn-success edit me-1" data-idedit="' + value.id + '" data-bs-toggle="modal" data-bs-target="#editModal">Chỉnh sửa</button>';
+                            noiDung += '<button class="btn btn-danger delete" data-iddelete="' + value.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
                             noiDung += '</td>';
+                            noiDung += '</tr>';
                         });
                         var danhMucCha = res.danh_muc_cha;
                         var noiDungDMCha =  '<option value="0">Root</option>';
@@ -294,7 +295,7 @@
                                 self.addClass('btn-danger');
                             }
                         } else{
-                            toastr.error("Vui lòng không can thiệp hệ thống!!!");
+                            toastr.error("Danh mục sản phẩm không tồn tại!!!");
                         }
                     }
                 });

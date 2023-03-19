@@ -29,6 +29,12 @@ Route::prefix('admin')->group(function () {
     });
     Route::prefix('san-pham')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
+        Route::post('/index', [\App\Http\Controllers\SanPhamController::class, 'store']);
+        Route::get('data', [\App\Http\Controllers\SanPhamController::class, 'getData']);
+        Route::get('/doi-trang-thai/{id}', [\App\Http\Controllers\SanPhamController:: class, 'doiTrangThai']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\SanPhamController::class, 'destroy']);
+        Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
+        Route::post('update', [\App\Http\Controllers\SanPhamController::class, 'update']);
     });
 });
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DanhMucUpdateRequest extends FormRequest
+class UpdateDanhMucRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,12 @@ class DanhMucUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'ten_danh_muc'      => 'required|min:3|max:50|unique:danh_muc_san_phams,ten_danh_muc,' .$this->id, //unique: không được trùng
+            'ten_danh_muc'      => 'required|min:3|max:50|unique:danh_muc_san_phams,ten_danh_muc,' .$this->id, //unique: không được trùng/ duy nhất
             'slug_danh_muc'     => 'required|min:3|max:50|unique:danh_muc_san_phams,slug_danh_muc,' .$this->id, //trừ cái tên và slug của nó ra
             'hinh_anh'          => 'required',
             'id_danh_muc_cha'   => 'required',
             'tinh_trang'        => 'required|boolean',
-            'id'                => 'required|exists:danh_muc_san_phams,id',
+            'id'                => 'required|exists:danh_muc_san_phams,id', //tồn tại
         ];
     }
 
