@@ -37,11 +37,11 @@
                             <label>Số lượng(*)</label>
                             <div class="input-group input-group-lg bootstrap-touchspin">
                                 <span class="input-group-btn bootstrap-touchspin-injected">
-                                    <button class="btn btn-primary bootstrap-touchspin-down minus" id="minus" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                                    <button class="btn btn-primary bootstrap-touchspin-down" id="minus" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
                                 </span>
-                                <input type="number" class="touchspin form-control" id="so_luong" value="0">
+                                <input type="number" class="touchspin form-control" id="so_luong" value="1">
                                 <span class="input-group-btn bootstrap-touchspin-injected">
-                                    <button class="btn btn-primary bootstrap-touchspin-up plus" id="plus" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                                    <button class="btn btn-primary bootstrap-touchspin-up" id="plus" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
                                 </span>
                             </div>
                         </div>
@@ -226,11 +226,11 @@
                     <label>Số lượng(*)</label>
                     <div class="input-group input-group-lg bootstrap-touchspin">
                         <span class="input-group-btn bootstrap-touchspin-injected">
-                            <button class="btn btn-primary bootstrap-touchspin-down minus" id="minus_edit" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                            <button class="btn btn-primary bootstrap-touchspin-down" id="minus_edit" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
                         </span>
                         <input type="number" class="touchspin form-control" id="so_luong_edit" value="0">
                         <span class="input-group-btn bootstrap-touchspin-injected">
-                            <button class="btn btn-primary bootstrap-touchspin-up plus" id="plus_edit" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                            <button class="btn btn-primary bootstrap-touchspin-up" id="plus_edit" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
                         </span>
                     </div>
                 </div>
@@ -351,24 +351,33 @@
             $("#slug_san_pham_edit").val(slug);
         });
 
-        $(".minus").click(function(){
+        $("#minus").click(function(){
             var so = $("#so_luong").val();
-            so--;
-            $("#so_luong").val(so);
-            //Edit
-            var so_edit = $("#so_luong_edit").val();
-            so_edit--;
-            $("#so_luong_edit").val(so_edit);
+            if(so <= 1){
+                toastr.error("Số lượng phải lớn hơn hoặc bằng 1");
+            } else{
+                so--;
+                $("#so_luong").val(so);s
+            }
         });
-
-        $(".plus").click(function(){
+        $("#plus").click(function(){
             var so = $("#so_luong").val();
             so++;
             $("#so_luong").val(so);
-            //Edit
-            var so_edit = $("#so_luong_edit").val();
-            so_edit++;
-            $("#so_luong_edit").val(so_edit);
+        });
+        $("#minus_edit").click(function(){
+            var so = $("#so_luong_edit").val();
+            if(so <= 1){
+                toastr.error("Số lượng phải lớn hơn hoặc bằng 1");
+            } else{
+                so--;
+                $("#so_luong_edit").val(so);s
+            }
+        });
+        $("#plus_edit").click(function(){
+            var so = $("#so_luong_edit").val();
+            so++;
+            $("#so_luong_edit").val(so);
         });
 
 
