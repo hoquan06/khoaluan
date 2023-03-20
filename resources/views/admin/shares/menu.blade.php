@@ -37,16 +37,11 @@
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Invoice</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Quản lý</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a>
+                    <li><a class="d-flex align-items-center" href="/admin/danh-muc-san-pham/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Danh mục sản phẩm</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Preview</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Edit</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Add</span></a>
-                    </li>
+                    <li><a class="d-flex align-items-center" href="/admin/san-pham/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Sản phẩm</span></a>
                 </ul>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="shopping-cart"></i><span class="menu-title text-truncate" data-i18n="eCommerce">eCommerce</span></a>
