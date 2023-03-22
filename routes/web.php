@@ -38,3 +38,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+Route::prefix('khach_hang')->group(function () {
+    Route::get('/dang-ky', [\App\Http\Controllers\KhachHangController::class, 'index']);
+});
+
