@@ -37,4 +37,9 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="/assets_client/css/style.css">
     <link rel="stylesheet" href="/assets_client/css/responsive.css">
-    </head>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/> --}}
+</head>

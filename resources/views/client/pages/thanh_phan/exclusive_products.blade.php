@@ -1,14 +1,14 @@
 <div class="section small_pt pb-0">
-	<div class="custom-container">
-    	<div class="row">
-        	<div class="col-xl-3 d-none d-xl-block">
-            	<div class="sale-banner">
-                	<a class="hover_effect1" href="#">
-                		<img src="/assets_client/images/shop_banner_img6.jpg" alt="shop_banner_img6">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-xl-3 d-none d-xl-block">
+                <div class="sale-banner">
+                    <a class="hover_effect1" href="#">
+                        <img src="/assets_client/images/shop_banner_img6.jpg" alt="shop_banner_img6">
                     </a>
                 </div>
             </div>
-        	<div class="col-xl-9">
+            <div class="col-xl-9">
                 <div class="row">
                     <div class="col-12">
                         <div class="heading_tab_header">
@@ -951,7 +951,7 @@
                         </div>
                     </div>
                 </div>
-        	</div>
+            </div>
         </div>
     </div>
 </div>

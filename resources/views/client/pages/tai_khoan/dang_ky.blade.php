@@ -30,22 +30,25 @@
                             </div>
                             <form method="post">
                                 <div class="form-group">
-                                    <input type="text" id="ho_va_ten" required="" class="form-control" placeholder="Nhập Họ Tên Của Bạn">
+                                    <input type="text" id="ho_va_ten" required="" class="form-control" placeholder="Nhập họ tên của bạn">
                                 </div>
                                 <div class="form-group">
-                                    <input type="phone" id="so_dien_thoai" required="" class="form-control" placeholder="Nhập Số Điện Thoại">
+                                    <input type="phone" id="so_dien_thoai" required="" class="form-control" placeholder="Nhập số điện thoại">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" id="email" required="" class="form-control" placeholder="Nhập Email Của Bạn">
+                                    <input type="email" id="email" required="" class="form-control" placeholder="Nhập email của bạn">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" id="password" placeholder="Mật Khẩu">
+                                    <input type="date" id="ngay_sinh" required="" class="form-control" placeholder="Nhập ngày sinh của bạn">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" id="re_password" placeholder="Nhập Lại Mật Khẩu">
+                                    <input class="form-control" required="" type="password" id="mat_khau" placeholder="Mật khẩu">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="dia_chi" required="" class="form-control" placeholder="Nhập Địa Chỉ Của Bạn">
+                                    <input class="form-control" required="" type="password" id="mat_khau_2" placeholder="Nhập lại mật khẩu">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="dia_chi" required="" class="form-control" placeholder="Nhập địa chỉ của bạn">
                                 </div>
                                 <div class="login_footer form-group">
                                     <div class="chek-form">
@@ -65,7 +68,7 @@
                                     <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
                                     <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
                                 </ul>
-                                <div class="form-note text-center">Bạn đã có tài khoản? <a href="/agent/login">Đăng nhập</a></div>
+                                <div class="form-note text-center">Bạn đã có tài khoản? <a href="/khach-hang/login">Đăng nhập</a></div>
                             </form>
                         </div>
                     </div>
@@ -74,4 +77,50 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $("#register").click(function(){
+            var payload = {
+                'ho_va_ten'         : $("#ho_va_ten").val(),
+                'ngay_sinh'         : $("#ngay_sinh").val(),
+                'so_dien_thoai'     : $("#so_dien_thoai").val(),
+                'email'             : $("#email").val(),
+                'mat_khau'          : $("#mat_khau").val(),
+                'mat_khau_2'        : $("#mat_khau_2").val(),
+                'dia_chi'           : $("#dia_chi").val(),
+                'agree'             : $("#agree").get(0).checked,
+            };
+            console.log(payload);
+
+            $.ajax({
+                url         : '/khach-hang/register',
+                type        : 'post',
+                data        : payload,
+                success     : function(res){
+                    if(res.dangky){
+                        toastr.success("Đã đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản!!!");
+                        setTimeout(function(){
+                            $(location).attr('href','/agent/login');
+                        }, 3000);
+                    }
+                },
+                error       : function(res){
+                    var danh_sach_loi = res.responseJSON.errors;
+                    $.each(danh_sach_loi, function(key, value){
+                        toastr.error(value[0]);
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('client.master');
+    return view('client.home');
 });
 
 Route::prefix('admin')->group(function () {
@@ -38,7 +38,11 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::prefix('khach_hang')->group(function () {
-    Route::get('/dang-ky', [\App\Http\Controllers\KhachHangController::class, 'index']);
+Route::prefix('khach-hang')->group(function () {
+    Route::get('/register', [\App\Http\Controllers\KhachHangController::class, 'register']);
+    Route::post('/register', [\App\Http\Controllers\KhachHangController::class, 'registerAction']);
+    Route::get('/login', [\App\Http\Controllers\KhachHangController::class, 'login']);
+    Route::post('/login', [\App\Http\Controllers\KhachHangController::class, 'loginAction']);
+    Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
 });
 

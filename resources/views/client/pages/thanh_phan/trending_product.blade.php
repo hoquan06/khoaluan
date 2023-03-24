@@ -1,14 +1,14 @@
 <div class="section small_pt small_pb">
-	<div class="custom-container">
-    	<div class="row">
-        	<div class="col-xl-3 d-none d-xl-block">
-            	<div class="sale-banner">
-                	<a class="hover_effect1" href="#">
-                		<img src="/assets_client/images/shop_banner_img10.jpg" alt="shop_banner_img10">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-xl-3 d-none d-xl-block">
+                <div class="sale-banner">
+                    <a class="hover_effect1" href="#">
+                        <img src="/assets_client/images/shop_banner_img10.jpg" alt="shop_banner_img10">
                     </a>
                 </div>
             </div>
-        	<div class="col-xl-9">
+            <div class="col-xl-9">
                 <div class="row">
                     <div class="col-12">
                         <div class="heading_tab_header">
@@ -16,7 +16,7 @@
                                 <h4>Trending products</h4>
                             </div>
                             <div class="view_all">
-                            	<a href="#" class="text_default"><i class="linearicons-power"></i> <span>View All</span></a>
+                                <a href="#" class="text_default"><i class="linearicons-power"></i> <span>View All</span></a>
                             </div>
                         </div>
                     </div>
@@ -249,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-        	</div>
+            </div>
         </div>
     </div>
 </div>

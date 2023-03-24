@@ -1,8 +1,8 @@
 <div class="section pt-0 pb-0">
-	<div class="custom-container">
-    	<div class="row">
-        	<div class="col-md-12">
-            	<div class="heading_tab_header">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading_tab_header">
                     <div class="heading_s2">
                         <h4>Deal Of The Day</h4>
                     </div>
@@ -10,9 +10,9 @@
             </div>
         </div>
         <div class="row">
-        	<div class="col-md-12">
-            	<div class="product_slider carousel_slider owl-carousel owl-theme nav_style3" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "650":{"items": "2"}, "1199":{"items": "2"}}'>
-            		<div class="item">
+            <div class="col-md-12">
+                <div class="product_slider carousel_slider owl-carousel owl-theme nav_style3" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "650":{"items": "2"}, "1199":{"items": "2"}}'>
+                    <div class="item">
                         <div class="deal_wrap">
                             <div class="product_img">
                                 <a href="shop-product-detail.html">

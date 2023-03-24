@@ -26,4 +26,3 @@
 <script src="/assets_client/js/jquery.elevatezoom.js"></script>
 <!-- scripts js -->
 <script src="/assets_client/js/scripts.js"></script>
-
