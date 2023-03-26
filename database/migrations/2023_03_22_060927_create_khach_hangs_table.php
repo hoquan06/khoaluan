@@ -19,10 +19,9 @@ return new class extends Migration
             $table->date('ngay_sinh');
             $table->integer('so_dien_thoai');
             $table->string('email');
-            $table->string('mat_khau');
+            $table->string('password');
             $table->string('dia_chi');
-            $table->integer('is_block')->default(0);
-            $table->integer('is_email')->default(0);
+            $table->integer('loai_tai_khoan')->default(0);
             $table->string('hash');
             $table->timestamps();
         });

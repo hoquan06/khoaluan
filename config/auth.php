@@ -41,10 +41,27 @@ return [
             'provider' => 'users',
         ],
 
-        'khach_hangs' => [
+        'khach_hang' => [
             'driver' => 'session',
             'provider' => 'khach_hangs',
         ],
+    ],
+
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'khach_hangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\KhachHang::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*
@@ -64,22 +81,6 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
-        'khach_hangs' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\KhachHang::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
 
     /*
     |--------------------------------------------------------------------------

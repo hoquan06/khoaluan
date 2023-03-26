@@ -42,10 +42,10 @@
                                     <input type="date" id="ngay_sinh" required="" class="form-control" placeholder="Nhập ngày sinh của bạn">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" id="mat_khau" placeholder="Mật khẩu">
+                                    <input class="form-control" required="" type="password" id="password" placeholder="Mật khẩu">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" id="mat_khau_2" placeholder="Nhập lại mật khẩu">
+                                    <input class="form-control" required="" type="password" id="re_password" placeholder="Nhập lại mật khẩu">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="dia_chi" required="" class="form-control" placeholder="Nhập địa chỉ của bạn">
@@ -94,8 +94,8 @@
                 'ngay_sinh'         : $("#ngay_sinh").val(),
                 'so_dien_thoai'     : $("#so_dien_thoai").val(),
                 'email'             : $("#email").val(),
-                'mat_khau'          : $("#mat_khau").val(),
-                'mat_khau_2'        : $("#mat_khau_2").val(),
+                'password'          : $("#password").val(),
+                're_password'       : $("#re_password").val(),
                 'dia_chi'           : $("#dia_chi").val(),
                 'agree'             : $("#agree").get(0).checked,
             };
@@ -109,7 +109,7 @@
                     if(res.dangky){
                         toastr.success("Đã đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản!!!");
                         setTimeout(function(){
-                            $(location).attr('href','/agent/login');
+                            $(location).attr('href','/khach-hang/login');
                         }, 3000);
                     }
                 },

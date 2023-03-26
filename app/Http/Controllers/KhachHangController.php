@@ -35,10 +35,10 @@ class KhachHangController extends Controller
         $data['ho_lot'] = $firstname;
         $data['ten'] = $lastname;
         $data['hash'] = Str::uuid();
-        $data['mat_khau'] = bcrypt($request->mat_khau);
+        $data['password'] = bcrypt($request->password);
         KhachHang::create($data);
 
-        //Gửi mail
+        // Gửi mail
         Mail::to($request->email)->send(new KichHoatMail(
             $request->ho_va_ten,
             $data['hash'],
@@ -57,25 +57,23 @@ class KhachHangController extends Controller
 
     public function loginAction(DangNhapRequest $request)
     {
-        $data = $request->all();
-        //Kiểm tra đăng nhập
-        $check = Auth::guard('khach_hangs')->attempt($data);
+        $data['email'] = $request->email;
+        $data['password'] = $request->password;
+        $check = Auth::guard('khach_hang')->attempt($data);
         if($check){
-            //Nếu đăng nhập thành công
-            $khach_hang = Auth::guard('khach_hangs')->user();
-            //Kiểm tra xem user đã active hay chưa
-            if($khach_hang->is_email){ //Đã active
+            $khach_hang = Auth::guard('khach_hang')->user();
+            if($khach_hang->loai_tai_khoan){
                 return response()->json([
                     'login'         => 2,
                 ]);
             } else{
-                Auth::guard('khach_hangs')->logout();
-                return response()->json([ //chưa active
+                Auth::guard('khach_hang')->logout();
+                return response()->json([
                     'login'         => 1,
                 ]);
             }
         } else{
-            return response()->json([ //sai tk hoặc mk
+            return response()->json([
                 'login'         => 0,
             ]);
         }
@@ -84,10 +82,10 @@ class KhachHangController extends Controller
     public function active($hash)
     {
         $data = KhachHang::where('hash', $hash)->first();
-        if($data->is_email){
+        if($data->loai_tai_khoan){
             toastr()->warning('Tài khoản của bạn đã được kích hoạt trước đó!!!');
         } else{
-            $data->is_email = 1;
+            $data->loai_tai_khoan = 1;
             $data->save();
             toastr()->success("Đã xác thực mail thành công!!!");
         }

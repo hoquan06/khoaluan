@@ -27,8 +27,8 @@ class DangKyRequest extends FormRequest
             'ngay_sinh'             => 'required|date|before:today|max:10',
             'so_dien_thoai'         => 'required|digits:10|unique:khach_hangs,so_dien_thoai',
             'email'                 => 'required|email|unique:khach_hangs,email',
-            'mat_khau'              => 'required|min:2|max:50',
-            'mat_khau_2'            => 'required|same:mat_khau',
+            'password'              => 'required|min:2|max:50',
+            're_password'           => 'required|same:password',
             'dia_chi'               => 'required|min:5',
             'agree'                 => 'accepted',
         ];
@@ -57,8 +57,8 @@ class DangKyRequest extends FormRequest
             'ngay_sinh'             => 'Ngày sinh',
             'so_dien_thoai'         => 'Số điện thoại',
             'email'                 => 'Email',
-            'mat_khau'              => 'Mật khẩu',
-            'mat_khau_2'            => 'Nhập lại mật khẩu',
+            'password'              => 'Mật khẩu',
+            're_password'            => 'Nhập lại mật khẩu',
             'dia_chi'               => 'Địa chỉ',
         ];
     }

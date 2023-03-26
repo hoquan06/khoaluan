@@ -28,15 +28,15 @@
                             <div class="heading_s1">
                                 <h3>Đăng nhập</h3>
                             </div>
-                            <form method="post">
+                            <form method="post" action=''>
                                 <div class="form-group">
-                                    <input type="email" id="email" required="" class="form-control" placeholder="Nhập email đăng nhập">
+                                    <input type="email" name="email" id="email" required="" class="form-control" placeholder="Nhập email đăng nhập">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" required="" type="password" id="mat_khau" placeholder="Mật khẩu">
+                                    <input class="form-control" name="password" required="" type="password" id="password" placeholder="Mật khẩu">
                                 </div>
                                 <div class="form-group">
-                                    <button id="login" type="button" class="btn btn-fill-out btn-block">Đăng nhập</button>
+                                    <button id="login" type="submit" class="btn btn-fill-out btn-block">Đăng nhập</button>
                                 </div>
                                 <div class="different_login">
                                     <span> hoặc</span>
@@ -69,7 +69,7 @@
                 e.preventDefault();
                 var payload = {
                     'email'         : $("#email").val(),
-                    'mat_khau'      : $("#mat_khau").val(),
+                    'password'      : $("#password").val(),
                 };
                 $.ajax({
                     url             : '/khach-hang/login',
@@ -82,7 +82,7 @@
                             toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
                         } else{
                             toastr.error("Sai tên đăng nhập hoặc mật khẩu, vui lòng kiểm tra lại!!!");
-                            $("#mat_khau").val('');
+                            $("#password").val('');
                         }
                     },
                     error           : function(res){

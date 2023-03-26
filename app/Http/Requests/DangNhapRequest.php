@@ -23,7 +23,7 @@ class DangNhapRequest extends FormRequest
     {
         return [
             'email'         => 'required',
-            'mat_khau'      => 'required',
+            'password'      => 'required',
         ];
     }
 
@@ -38,7 +38,7 @@ class DangNhapRequest extends FormRequest
     {
         return [
             'email'         => 'Email',
-            'mat_khau'      => 'Mật khẩu',
+            'password'      => 'Mật khẩu',
         ];
     }
 }
