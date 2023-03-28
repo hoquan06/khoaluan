@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DangKyRequest;
 use App\Http\Requests\DangNhapRequest;
 use App\Mail\KichHoatMail;
+use App\Models\DanhMucSanPham;
 use App\Models\KhachHang;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;

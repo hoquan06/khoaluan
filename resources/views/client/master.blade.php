@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('client.shares.head')
+<head>
+    @include('client.shares.head')
+</head>
 <body>
     @include('client.shares.top')
     @yield('content')

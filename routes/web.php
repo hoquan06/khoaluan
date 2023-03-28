@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('client.home');
-});
+
 
 Route::prefix('admin')->group(function () {
     Route::prefix('danh-muc-san-pham')->group(function () {
@@ -45,4 +44,6 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/login', [\App\Http\Controllers\KhachHangController::class, 'loginAction']);
     Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
 });
+
+Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
 
