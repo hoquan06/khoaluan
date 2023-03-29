@@ -132,7 +132,7 @@
                 <label class="form-label">Hình ảnh</label>
                 <div class="input-group">
                     <input id="hinh_anh_edit" name="hinh_anh_edit" class="form-control" type="text">
-                    <input type="button" class="btn btn-info" id="lfm2" data-input="hinh_anh_edit" data-preview="holder" value="Chọn ảnh">
+                    <input type="button" class="btn btn-info" id="lfm2" data-input="hinh_anh_edit" data-preview="holder_edit" value="Chọn ảnh">
                 </div>
                 <img id="holder_edit" style="margin-top:15px;max-height:100px;">
             </div>
@@ -363,6 +363,7 @@
                         if(res.update){
                             toastr.success("Đã cập nhật thành công!!!");
                             loadTable();
+                            $("#holder").attr('src', '');
                             $("#close").click();
                         }
                     },

@@ -46,4 +46,6 @@ Route::prefix('khach-hang')->group(function () {
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
+Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
+Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
 

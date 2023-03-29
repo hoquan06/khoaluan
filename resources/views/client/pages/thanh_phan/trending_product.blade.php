@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Trending products</h4>
+                                <h4>Sản phẩm thịnh hành</h4>
                             </div>
                             <div class="view_all">
                                 <a href="#" class="text_default"><i class="linearicons-power"></i> <span>View All</span></a>

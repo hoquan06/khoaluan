@@ -41,7 +41,7 @@
     <div class="middle-header dark_skin">
     	<div class="container">
             <div class="nav_block">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="/">
                     <img class="logo_light" src="/assets_client/images/logo_light.png" alt="logo">
                     <img class="logo_dark" src="/assets_client/images/logo_dark.png" alt="logo">
                 </a>
@@ -51,12 +51,7 @@
                             <div class="input-group-prepend">
                                 <div class="custom_select">
                                     <select class="first_null not_chosen">
-                                        <option value="">All Category</option>
-                                        <option value="Dresses">Dresses</option>
-                                        <option value="Shirt-Tops">Shirt &amp; Tops</option>
-                                        <option value="T-Shirt">T-Shirt</option>
-                                        <option value="Pents">Pents</option>
-                                        <option value="Jeans">Jeans</option>
+                                        <option value="">Tất cả danh mục</option>
                                     </select>
                                 </div>
                             </div>

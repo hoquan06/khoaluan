@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Exclusive Products</h4>
+                                <h4>Sản phẩm độc quyền</h4>
                             </div>
                             <div class="tab-style2">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tabmenubar" aria-expanded="false">
@@ -21,17 +21,13 @@
                                 </button>
                                 <ul class="nav nav-tabs justify-content-center justify-content-md-end" id="tabmenubar" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">New Arrival</a>
+                                        <a class="nav-link active" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">Hàng mới về</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Best Sellers</a>
+                                        <a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Khuyến mãi</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="featured-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Featured</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="special-tab" data-toggle="tab" href="#special" role="tab" aria-controls="special" aria-selected="false">Special Offer
-                                        </a>
+                                        <a class="nav-link" id="featured-tab" data-toggle="tab" href="#featured" role="tab" aria-controls="featured" aria-selected="false">Bán chạy</a>
                                     </li>
                                 </ul>
                             </div>
@@ -88,7 +84,7 @@
                                             <div class="item">
                                                 <div class="product_wrap">
                                                     <div class="product_img">
-                                                        <a href="shop-product-detail.html">
+                                                        <a href="/san-pham/{{$value->slug_san_pham}}-post{{ $value->id }}">
                                                             <img src="{{ $value->hinh_anh }}" alt="el_img7">
                                                             <img class="product_hover_img" src="{{ $value->hinh_anh }}" alt="el_hover_img7">
                                                         </a>
@@ -102,7 +98,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product_info">
-                                                        <h6 class="product_title"><a href="shop-product-detail.html">{{ $value->ten_san_pham }}</a></h6>
+                                                        <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{ $value->id }}">{{ $value->ten_san_pham }}</a></h6>
                                                         <div class="product_price">
                                                             <span class="price">{{ number_format($value->gia_khuyen_mai, 0) }}</span>
                                                             <del>{{ number_format($value->gia_ban, 0) }}</del>

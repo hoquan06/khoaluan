@@ -6,7 +6,7 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Featured Products</h4>
+                                <h4>Sản phẩm nổi bật</h4>
                             </div>
                             <div class="view_all">
                                 <a href="#" class="text_default"><span>View All</span></a>
@@ -190,7 +190,7 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Top Rated Products</h4>
+                                <h4>Sản phẩm hàng đầu</h4>
                             </div>
                             <div class="view_all">
                                 <a href="#" class="text_default"><span>View All</span></a>
@@ -379,7 +379,7 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>On Sale Products</h4>
+                                <h4>Đang giảm giá</h4>
                             </div>
                             <div class="view_all">
                                 <a href="#" class="text_default"><span>View All</span></a>
