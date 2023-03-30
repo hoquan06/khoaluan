@@ -49,12 +49,6 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Khách Hàng</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="/admin/khach-hang/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>
-                    </li>
-                </ul>
-            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner và Slide</span></a>
                 <ul class="menu-content">
                     <li><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>

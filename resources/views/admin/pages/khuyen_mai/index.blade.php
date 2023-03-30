@@ -53,3 +53,40 @@
     </div>
 </div>
 @endsection
+@section('js')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $("#themMoi").click(function(e){
+                e.preventDefault();
+                var payload = {
+                    'ten_chuong_trinh'    : $("#ten_chuong_trinh").val(),
+                    'san_pham_giam'       : $("#san_pham_giam").val(),
+                    'thoi_gian_bat_dau'   : $("#thoi_gian_bat_dau").val(),
+                    'thoi_gian_ket_thuc'  : $("#thoi_gian_ket_thuc").val(),
+                    'loai_chuong_trinh'   : $("#loai_chuong_trinh").val(),
+                    'muc_giam'            : $("#muc_giam").val(),
+                };
+
+                $.ajax({
+                    url     : '/admin/khuyen-mai/index',
+                    type    : 'post',
+                    data    : payload,
+                    success : function(res){
+                        toastr.success("Thêm mới chương trình khuyến mãi thành công!!!");
+                    },
+                    error   : function(res){;
+                        var danh_sach_loi = res.responseJSON.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    },
+                });
+            });
+        });
+    </script>
+@endsection
