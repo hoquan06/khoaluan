@@ -4,7 +4,7 @@
             <div class="col-xl-3 d-none d-xl-block">
                 <div class="sale-banner">
                     <a class="hover_effect1" href="#">
-                        <img src="/assets_client/images/shop_banner_img10.jpg" alt="shop_banner_img10">
+                        <img src="\photos\shares\others\2.png" alt="shop_banner_img10">
                     </a>
                 </div>
             </div>

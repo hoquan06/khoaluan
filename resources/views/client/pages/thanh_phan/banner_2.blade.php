@@ -1,27 +1,21 @@
 <div class="section pb_20 small_pt">
     <div class="custom-container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="sale-banner mb-3 mb-md-4">
-                    <a class="hover_effect1" href="#">
-                        <img src="/assets_client/images/shop_banner_img7.jpg" alt="shop_banner_img7">
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="sale-banner mb-3 mb-md-4">
-                    <a class="hover_effect1" href="#">
-                        <img src="/assets_client/images/shop_banner_img8.jpg" alt="shop_banner_img8">
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="sale-banner mb-3 mb-md-4">
-                    <a class="hover_effect1" href="#">
-                        <img src="/assets_client/images/shop_banner_img9.jpg" alt="shop_banner_img9">
-                    </a>
-                </div>
-            </div>
+            @for($i = 1; $i < 4; $i++)
+                @php
+                    $name = 'banner_' . $i;
+                    $name_link = 'link_banner_' . $i;
+                @endphp
+                @if(isset($banner->$name) && isset($banner->$name_link) && Str::length($banner->$name) && Str::length($banner->$name_link) > 0)
+                    <div class="col-md-4">
+                        <div class="sale-banner mb-3 mb-md-4">
+                            <a class="hover_effect1" href="{{ $banner->$name_link}}">
+                                <img src="{{ $banner->$name }}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                @endif
+            @endfor
         </div>
     </div>
 </div>

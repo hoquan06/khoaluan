@@ -1,53 +1,32 @@
 <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
     <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item background_bg active" data-img-src="/assets_client/images/banner16.jpg">
-                <div class="banner_slide_content banner_content_inner">
-                	<div class="container">
-                    	<div class="row">
-                            <div class="col-lg-7 col-10">
-                                <div class="banner_content overflow-hidden">
-                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.5s">LED 75 INCH F58</h2>
-                                    <h5 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="1s">Get up to <span class="text_default">50%</span> off Today Only!</h5>
-                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+            @php
+                $check = true;
+            @endphp
+
+            @for($i = 1; $i < 4; $i++)
+                @php
+                    $name = 'slide_' . $i;
+                @endphp
+                @if(isset($slide->$name) && Str::length($slide->$name) > 0) 
+                <div class="carousel-item background_bg {{ $check == true ? 'active' : '' }}" data-img-src="{{ $slide->$name}}">
+                    <div class="banner_slide_content banner_content_inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7 col-10">
+                                    <div class="banner_content overflow-hidden">
+                                        <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.5s">Welcome to Smart Tech</h2>
+                                        <h5 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="1s">Cửa hàng đang giảm giá <span class="text_default">50%</span> cho tất cả sản phẩm trong ngày hôm nay!</h5>
+                                        <a class="btn btn-fill-out staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
+                                    </div>
                                 </div>
                             </div>
-                    	</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item background_bg" data-img-src="/assets_client/images/banner17.jpg">
-                <div class="banner_slide_content banner_content_inner">
-                	<div class="container">
-                    	<div class="row">
-                    		<div class="col-lg-8 col-10">
-                                <div class="banner_content overflow-hidden">
-                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.5s">Smart Phones</h2>
-                                    <h5 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="1s"><span class="text_default">50%</span> off in all products</h5>
-                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
-                                </div>
-                            </div>
-                    	</div>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item background_bg" data-img-src="/assets_client/images/banner18.jpg">
-                <div class="banner_slide_content banner_content_inner">
-                	<div class="container">
-                    	<div class="row">
-                    		<div class="col-lg-8 col-10">
-                                <div class="banner_content overflow-hidden">
-                                    <h2 class="staggered-animation" data-animation="slideInLeft" data-animation-delay="0.5s">Beat Headphone</h2>
-                                    <h5 class="mb-3 mb-sm-4 staggered-animation font-weight-light" data-animation="slideInLeft" data-animation-delay="1s">Taking your Viewing Experience to Next Level</h5>
-                                    <a class="btn btn-fill-out staggered-animation text-uppercase" href="shop-left-sidebar.html" data-animation="slideInLeft" data-animation-delay="1.5s">Shop Now</a>
-                                </div>
-                            </div>
-                    	</div>
-                    </div>
-                </div>
-            </div>
+            @endif
+            @endfor
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"><i class="ion-chevron-left"></i></a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"><i class="ion-chevron-right"></i></a>
     </div>
 </div>

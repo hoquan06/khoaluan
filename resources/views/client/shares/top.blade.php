@@ -42,8 +42,8 @@
     	<div class="container">
             <div class="nav_block">
                 <a class="navbar-brand" href="/">
-                    <img class="logo_light" src="/assets_client/images/logo_light.png" alt="logo">
-                    <img class="logo_dark" src="/assets_client/images/logo_dark.png" alt="logo">
+                    <img class="logo_light" src="\photos\shares\logo\logo.png" alt="logo">
+                    <img class="logo_dark" src="\photos\shares\logo\logo.png" alt="logo">
                 </a>
                 <div class="product_search_form rounded_input">
                     <form>

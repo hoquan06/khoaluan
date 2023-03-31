@@ -42,9 +42,15 @@ Route::prefix('admin')->group(function () {
         Route::post('/index', [\App\Http\Controllers\BannerController::class, 'store']);
     });
 
+    Route::prefix('slide')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\SlideController::class, 'index']); 
+        Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
+    });
+
     Route::prefix('khuyen-mai')->group(function () {
         Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']); 
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
+        Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
     });
 });
 

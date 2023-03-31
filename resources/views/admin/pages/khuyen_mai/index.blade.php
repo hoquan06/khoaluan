@@ -15,8 +15,8 @@
                         </div>
                         <div class="col-md-6 mb-2">
                             <div class="position-relative form-group">
-                                <label>Sản Phẩm Giảm(*)</label>
-                                <input id="san_pham_giam" placeholder="Nhập vào tên sản phẩm giảm" type="text" class="form-control">
+                                <label>Mức Giảm(*)</label>
+                                <input id="muc_giam" placeholder="Nhập vào mức giảm" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -32,18 +32,21 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="basic-default-name">Loại Chương Trình(*)</label>
-                            <select id="loai_chuong_trinh" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
-                                <option value="1">Giảm theo %</option>
-                                <option value="0">Giảm theo số tiền</option>
+                            <label class="form-label" for="basic-default-name">Áp dụng cho</label>
+                            <select id="loai_ap_dung" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                                @foreach($menuCha as $key => $value)
+                                    <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <div class="position-relative form-group">
-                                <label>Mức Giảm(*)</label>
-                                <input id="muc_giam" placeholder="Nhập vào mức giảm" type="text" class="form-control">
-                            </div>
-                        </div>   
+                            <label class="form-label" for="basic-default-name">Sản phẩm</label>
+                            <select id="san_pham_giam" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                                @foreach($menuCon as $key => $value)
+                                <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                                @endforeach
+                            </select>
+                        </div>      
                     <div class="text-center">
                         <button class="mt-1 btn btn-primary" id="themMoi">Thêm Mới Khuyến Mãi</button>
                     </div>
@@ -68,7 +71,7 @@
                     'san_pham_giam'       : $("#san_pham_giam").val(),
                     'thoi_gian_bat_dau'   : $("#thoi_gian_bat_dau").val(),
                     'thoi_gian_ket_thuc'  : $("#thoi_gian_ket_thuc").val(),
-                    'loai_chuong_trinh'   : $("#loai_chuong_trinh").val(),
+                    'loai_ap_dung'        : $("#loai_ap_dung").val(),
                     'muc_giam'            : $("#muc_giam").val(),
                 };
 

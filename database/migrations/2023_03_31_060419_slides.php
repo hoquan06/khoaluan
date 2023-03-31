@@ -10,15 +10,10 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('banners', function (Blueprint $table) {
+    {  
+        Schema::create('slides', function (Blueprint $table) {
             $table->id();
-            $table->string('banner_1');
-            $table->string('banner_2');
-            $table->string('banner_3');
-            $table->string('link_banner_1');
-            $table->string('link_banner_2');
-            $table->string('link_banner_3');
+            $table->string('slide_1');
             $table->timestamps();
         });
     }
