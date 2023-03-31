@@ -43,9 +43,14 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/login', [\App\Http\Controllers\KhachHangController::class, 'login']);
     Route::post('/login', [\App\Http\Controllers\KhachHangController::class, 'loginAction']);
     Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
+    Route::get('/logout', [\App\Http\Controllers\KhachHangController::class, 'logout']);
+
+    Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
+    Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
+Route::post('/search', [\App\Http\Controllers\HomePageControlller::class, 'search']);
 

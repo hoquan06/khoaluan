@@ -7,57 +7,56 @@
                         <div class="footer_logo">
                             <a href="#"><img src="/assets_client/images/logo_dark.png" alt="logo"/></a>
                         </div>
-                        <p class="mb-3">If you are going to use of Lorem Ipsum need to be sure there isn't anything hidden of text</p>
                         <ul class="contact_info">
                             <li>
                                 <i class="ti-location-pin"></i>
-                                <p>123 Street, Old Trafford, NewYork, USA</p>
+                                <p>03 Quang Trung, Đà Nẵng, Việt Nam</p>
                             </li>
                             <li>
                                 <i class="ti-email"></i>
-                                <a href="mailto:info@sitename.com">info@sitename.com</a>
+                                <a href="mailto:info@sitename.com">SmartTech@gmail.com</a>
                             </li>
                             <li>
                                 <i class="ti-mobile"></i>
-                                <p>+ 457 789 789 65</p>
+                                <p>+ 84 905 79 79 79</p>
                             </li>
                         </ul>
                     </div>
         		</div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
                 	<div class="widget">
-                        <h6 class="widget_title">Useful Links</h6>
+                        <h6 class="widget_title">Liên kết hữu ích</h6>
                         <ul class="widget_links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Location</a></li>
-                            <li><a href="#">Affiliates</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
+                            <li><a href="#">Địa điểm</a></li>
+                            <li><a href="#">Chi nhánh</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-sm-6">
                 	<div class="widget">
-                        <h6 class="widget_title">My Account</h6>
+                        <h6 class="widget_title">Tài khoản của tôi</h6>
                         <ul class="widget_links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Discount</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Orders History</a></li>
-                            <li><a href="#">Order Tracking</a></li>
+                            <li><a href="#">Tài khoản của tôi</a></li>
+                            <li><a href="#">Giảm giá</a></li>
+                            <li><a href="#">Lợi nhuận</a></li>
+                            <li><a href="#">Lịch sử mua hàng</a></li>
+                            <li><a href="#">Theo dõi đơn hàng</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
                 	<div class="widget">
-                    	<h6 class="widget_title">Download App</h6>
+                    	<h6 class="widget_title">Tải ngay tại</h6>
                         <ul class="app_list">
                             <li><a href="#"><img src="/assets_client/images/f1.png" alt="f1"/></a></li>
                             <li><a href="#"><img src="/assets_client/images/f2.png" alt="f2"/></a></li>
                         </ul>
                     </div>
                 	<div class="widget">
-                    	<h6 class="widget_title">Social</h6>
+                    	<h6 class="widget_title">Trang mạng xã hội</h6>
                         <ul class="social_icons">
                             <li><a href="#" class="sc_facebook"><i class="ion-social-facebook"></i></a></li>
                             <li><a href="#" class="sc_twitter"><i class="ion-social-twitter"></i></a></li>
@@ -82,8 +81,8 @@
                                         <i class="flaticon-shipped"></i>
                                     </div>
                                     <div class="icon_box_content">
-                                    	<h5>Free Delivery</h5>
-                                        <p>Phasellus blandit massa enim elit of passage varius nunc.</p>
+                                    	<h5>Miễn phí vận chuyển</h5>
+                                        <p>Phạm vi áp dụng trên toàn quốc</p>
                                     </div>
                                 </div>
                             </div>
@@ -93,8 +92,8 @@
                                         <i class="flaticon-money-back"></i>
                                     </div>
                                     <div class="icon_box_content">
-                                    	<h5>30 Day Returns Guarantee</h5>
-                                        <p>Phasellus blandit massa enim elit of passage varius nunc.</p>
+                                    	<h5>Hỗ trợ đổi trả trong vòng 30 ngày</h5>
+                                        <p>Đổi trả miễn phí nếu có lỗi do nhà sản xuất.</p>
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +103,8 @@
                                         <i class="flaticon-support"></i>
                                     </div>
                                     <div class="icon_box_content">
-                                    	<h5>27/4 Online Support</h5>
-                                        <p>Phasellus blandit massa enim elit of passage varius nunc.</p>
+                                    	<h5>Hỗ trợ 24/7</h5>
+                                        <p>Nhân viên tư vấn hỗ trợ trong bất kỳ thời gian nào</p>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +118,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="text-center text-md-left mb-md-0">© 2020 All Rights Reserved by Bestwebcreator</p>
+                    <p class="text-center text-md-left mb-md-0">© 2023 All Rights Reserved by SmartTech</p>
                 </div>
                 <div class="col-lg-6">
                     <ul class="footer_payment text-center text-md-right">

@@ -78,6 +78,9 @@
                     success         : function(res){
                         if(res.login == 2){
                             toastr.success("Bạn đã đăng nhập thành công!!!");
+                            setTimeout(() => {
+                                $(location).attr('href', '/');
+                            }, 2000);
                         } else if(res.login == 1){
                             toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
                         } else{

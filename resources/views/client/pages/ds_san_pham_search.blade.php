@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row shop_container grid">
-                        @foreach ($sanPham as $key => $value)
+                        @foreach ($danhSach as $key => $value)
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <div class="product_img">
@@ -48,7 +48,7 @@
                                         </a>
                                         <div class="product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li class="addToCart" data-id="{{$value->id}}"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                 <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
                                                 <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
                                                 <li><a href="#"><i class="icon-heart"></i></a></li>
