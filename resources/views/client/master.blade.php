@@ -10,5 +10,108 @@
     <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
     @include('client.shares.bot')
     @yield('js')
+
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $("#register").click(function(){
+                var payload = {
+                    'ho_va_ten'         : $("#ho_va_ten").val(),
+                    'ngay_sinh'         : $("#ngay_sinh").val(),
+                    'so_dien_thoai'     : $("#so_dien_thoai").val(),
+                    'email'             : $("#email").val(),
+                    'password'          : $("#password").val(),
+                    're_password'       : $("#re_password").val(),
+                    'dia_chi'           : $("#dia_chi").val(),
+                    'agree'             : $("#agree").get(0).checked,
+                };
+                console.log(payload);
+
+                $.ajax({
+                    url         : '/khach-hang/register',
+                    type        : 'post',
+                    data        : payload,
+                    success     : function(res){
+                        if(res.dangky){
+                            toastr.success("Đã đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản!!!");
+                            setTimeout(function(){
+                                $(location).attr('href','/khach-hang/login');
+                            }, 3000);
+                        }
+                    },
+                    error       : function(res){
+                        var danh_sach_loi = res.responseJSON.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
+
+            $("#login").click(function(e){
+                e.preventDefault();
+                var payload = {
+                    'email'         : $("#email").val(),
+                    'password'      : $("#password").val(),
+                };
+                $.ajax({
+                    url             : '/khach-hang/login',
+                    type            : 'post',
+                    data            : payload,
+                    success         : function(res){
+                        if(res.login == 2){
+                            toastr.success("Bạn đã đăng nhập thành công!!!");
+                            setTimeout(() => {
+                                $(location).attr('href', '/');
+                            }, 2000);
+                        } else if(res.login == 1){
+                            toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
+                        } else{
+                            toastr.error("Sai tên đăng nhập hoặc mật khẩu, vui lòng kiểm tra lại!!!");
+                            $("#password").val('');
+                        }
+                    },
+                    error           : function(res){
+                        var danh_sach_loi = res.responseJSON.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    }
+                });
+            });
+
+            $(".addToCart").click(function(){
+                var san_pham_id = $(this).data('id');
+                var payload = {
+                    'san_pham_id'       : san_pham_id,
+                    'so_luong'          : 1,
+                };
+
+                $.ajax({
+                    url             : '/khach-hang/gio-hang',
+                    type            : 'post',
+                    data            : payload,
+                    success         : function(res){
+                        if(res.giohang){
+                            toastr.success("Đã thêm vào giỏ hàng!");
+                        } else{
+                            toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                        }
+                    },
+                    error           : function(res){
+                        var danh_sach_loi = res.responseJSON.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    },
+                });
+            });
+        });
+    </script>
 </body>
 </html>

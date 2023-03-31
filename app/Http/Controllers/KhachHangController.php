@@ -63,7 +63,7 @@ class KhachHangController extends Controller
         $check = Auth::guard('khach_hang')->attempt($data);
         if($check){
             $khach_hang = Auth::guard('khach_hang')->user();
-            if($khach_hang->loai_tai_khoan){
+            if($khach_hang->loai_tai_khoan == 1){
                 return response()->json([
                     'login'         => 2,
                 ]);
@@ -88,8 +88,15 @@ class KhachHangController extends Controller
         } else{
             $data->loai_tai_khoan = 1;
             $data->save();
-            toastr()->success("Đã xác thực mail thành công!!!");
+            toastr()->success("Tài khoản của bạn đã được xác thực", "Thành công!!!");
         }
         return redirect('/khach-hang/login');
+    }
+
+    public function logout()
+    {
+        Auth::guard('khach_hang')->logout();
+        toastr()->success("Đã đăng xuất", "Thành công!!!");
+        return redirect()->back();
     }
 }

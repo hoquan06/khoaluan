@@ -90,7 +90,7 @@
                                                         </a>
                                                         <div class="product_action_box">
                                                             <ul class="list_none pr_action_btn">
-                                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                                <li class="addToCart" data-id="{{ $value->id }}"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                                 <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
                                                                 <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
                                                                 <li><a href="#"><i class="icon-heart"></i></a></li>
@@ -118,6 +118,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @if ($key > 8)
+                                                @break
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>

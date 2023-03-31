@@ -64,7 +64,7 @@
                     </div>
                     <div class="contact_phone contact_support">
                         <i class="linearicons-phone-wave"></i>
-                        <span>123-456-7689</span>
+                        <span>0905797979</span>
                     </div>
                 </nav>
             </div>
