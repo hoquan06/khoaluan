@@ -45,6 +45,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('slide')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SlideController::class, 'index']); 
         Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
+        Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
     });
 
     Route::prefix('khuyen-mai')->group(function () {
