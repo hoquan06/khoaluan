@@ -21,8 +21,8 @@ class HomePageControlller extends Controller
                                  ->where('tinh_trang', 1)
                                  ->get();
 
-        // $slide = Slide::latest()->first();
-        // $banner = Banner::latest()->first();
+        $slide = Slide::latest()->first();
+        $banner = Banner::latest()->first();
         // $sql = "SELECT *, (gia_ban - gia_khuyen_mai) / gia_ban * 100 as ty_le_giam FROM `san_phams` ORDER BY ty_le_giam DESC";
         $sql = "SELECT *, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam` FROM `san_phams` ORDER BY ty_le_giam DESC";
         $best_seller = DB::select($sql);
