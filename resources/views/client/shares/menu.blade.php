@@ -10,7 +10,7 @@
                         <ul>
                             @foreach ($menuCha as $key => $value_cha)
                                 <li class="dropdown dropdown-mega-menu">
-                                    <a class="dropdown-item nav-link dropdown-toggler" href="#" data-toggle="dropdown"><img src="{{$value_cha->hinh_anh}}" style="height: 40px;" > <span>{{ $value_cha -> ten_danh_muc }}</span></a>
+                                    <a class="dropdown-item nav-link dropdown-toggler" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{$value_cha->id}}" data-toggle="dropdown"><img src="{{$value_cha->hinh_anh}}" style="height: 40px;" > <span>{{ $value_cha -> ten_danh_muc }}</span></a>
                                     <div class="dropdown-menu">
                                         <ul class="mega-menu d-lg-flex">
                                             <li class="mega-menu-col col-lg-7">
@@ -47,7 +47,7 @@
                         <ul class="navbar-nav">
                             @foreach ($menuCha as $key => $value_cha)
                             <li class="dropdown">
-                                <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">{{ $value_cha->ten_danh_muc }}</a>
+                                <a class="dropdown-toggle nav-link" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{$value_cha->id}}" data-toggle="dropdown">{{ $value_cha->ten_danh_muc }}</a>
                                 <div class="dropdown-menu">
                                     <ul>
                                         @foreach ($menuCon as $key => $value_con)

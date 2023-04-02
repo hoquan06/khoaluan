@@ -65,37 +65,37 @@
                 }
             });
 
-            $("#login").click(function(e){
-                e.preventDefault();
-                var payload = {
-                    'email'         : $("#email").val(),
-                    'password'      : $("#password").val(),
-                };
-                $.ajax({
-                    url             : '/khach-hang/login',
-                    type            : 'post',
-                    data            : payload,
-                    success         : function(res){
-                        if(res.login == 2){
-                            toastr.success("Bạn đã đăng nhập thành công!!!");
-                            setTimeout(() => {
-                                $(location).attr('href', '/');
-                            }, 2000);
-                        } else if(res.login == 1){
-                            toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
-                        } else{
-                            toastr.error("Sai tên đăng nhập hoặc mật khẩu, vui lòng kiểm tra lại!!!");
-                            $("#password").val('');
-                        }
-                    },
-                    error           : function(res){
-                        var danh_sach_loi = res.responseJSON.errors;
-                        $.each(danh_sach_loi, function(key, value){
-                            toastr.error(value[0]);
-                        });
-                    }
-                });
-            });
+            // $("#login").click(function(e){
+            //     e.preventDefault();
+            //     var payload = {
+            //         'email'         : $("#email").val(),
+            //         'password'      : $("#password").val(),
+            //     };
+            //     $.ajax({
+            //         url             : '/khach-hang/login',
+            //         type            : 'post',
+            //         data            : payload,
+            //         success         : function(res){
+            //             if(res.login == 2){
+            //                 toastr.success("Bạn đã đăng nhập thành công!!!");
+            //                 setTimeout(() => {
+            //                     $(location).attr('href', '/');
+            //                 }, 2000);
+            //             } else if(res.login == 1){
+            //                 toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
+            //             } else{
+            //                 toastr.error("Sai tên đăng nhập hoặc mật khẩu, vui lòng kiểm tra lại!!!");
+            //                 $("#password").val('');
+            //             }
+            //         },
+            //         error           : function(res){
+            //             var danh_sach_loi = res.responseJSON.errors;
+            //             $.each(danh_sach_loi, function(key, value){
+            //                 toastr.error(value[0]);
+            //             });
+            //         }
+            //     });
+            // });
         });
     </script>
 @endsection

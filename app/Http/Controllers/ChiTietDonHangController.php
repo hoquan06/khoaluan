@@ -12,7 +12,17 @@ class ChiTietDonHangController extends Controller
 {
     public function index()
     {
-        return view('client.pages.gio_hang.index');
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $cart = ChiTietDonHang::join('san_phams', 'chi_tiet_don_hangs.san_pham_id', 'san_phams.id')
+                                  ->where('agent_id', $agent->id)
+                                  ->where('is_cart', 0)
+                                  ->select('chi_tiet_don_hangs.*', 'san_phams.hinh_anh')
+                                  ->get();
+        } else{
+            return view('client.pages.404');
+        }
+        return view('client.pages.gio_hang.index', compact('cart'));
     }
 
     public function addToCart(Request $request)

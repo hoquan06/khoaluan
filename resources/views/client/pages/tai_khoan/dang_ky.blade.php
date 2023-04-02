@@ -88,39 +88,39 @@
             }
         });
 
-        $("#register").click(function(){
-            var payload = {
-                'ho_va_ten'         : $("#ho_va_ten").val(),
-                'ngay_sinh'         : $("#ngay_sinh").val(),
-                'so_dien_thoai'     : $("#so_dien_thoai").val(),
-                'email'             : $("#email").val(),
-                'password'          : $("#password").val(),
-                're_password'       : $("#re_password").val(),
-                'dia_chi'           : $("#dia_chi").val(),
-                'agree'             : $("#agree").get(0).checked,
-            };
-            console.log(payload);
+        // $("#register").click(function(){
+        //     var payload = {
+        //         'ho_va_ten'         : $("#ho_va_ten").val(),
+        //         'ngay_sinh'         : $("#ngay_sinh").val(),
+        //         'so_dien_thoai'     : $("#so_dien_thoai").val(),
+        //         'email'             : $("#email").val(),
+        //         'password'          : $("#password").val(),
+        //         're_password'       : $("#re_password").val(),
+        //         'dia_chi'           : $("#dia_chi").val(),
+        //         'agree'             : $("#agree").get(0).checked,
+        //     };
+        //     console.log(payload);
 
-            $.ajax({
-                url         : '/khach-hang/register',
-                type        : 'post',
-                data        : payload,
-                success     : function(res){
-                    if(res.dangky){
-                        toastr.success("Đã đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản!!!");
-                        setTimeout(function(){
-                            $(location).attr('href','/khach-hang/login');
-                        }, 3000);
-                    }
-                },
-                error       : function(res){
-                    var danh_sach_loi = res.responseJSON.errors;
-                    $.each(danh_sach_loi, function(key, value){
-                        toastr.error(value[0]);
-                    });
-                }
-            });
-        });
+        //     $.ajax({
+        //         url         : '/khach-hang/register',
+        //         type        : 'post',
+        //         data        : payload,
+        //         success     : function(res){
+        //             if(res.dangky){
+        //                 toastr.success("Đã đăng ký thành công. Vui lòng kiểm tra email để kích hoạt tài khoản!!!");
+        //                 setTimeout(function(){
+        //                     $(location).attr('href','/khach-hang/login');
+        //                 }, 3000);
+        //             }
+        //         },
+        //         error       : function(res){
+        //             var danh_sach_loi = res.responseJSON.errors;
+        //             $.each(danh_sach_loi, function(key, value){
+        //                 toastr.error(value[0]);
+        //             });
+        //         }
+        //     });
+        // });
     });
 </script>
 @endsection

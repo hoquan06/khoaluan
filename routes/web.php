@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/update', [\App\Http\Controllers\DanhMucSanPhamController::class, 'update']);
         Route::get('data', [\App\Http\Controllers\DanhMucSanPhamController::class, 'getData']);
     });
-    
+
     Route::prefix('san-pham')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\SanPhamController::class, 'store']);
@@ -35,20 +35,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [\App\Http\Controllers\SanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
         Route::post('update', [\App\Http\Controllers\SanPhamController::class, 'update']);
+
     });
 
     Route::prefix('banner')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\BannerController::class, 'index']); 
+        Route::get('/index', [\App\Http\Controllers\BannerController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\BannerController::class, 'store']);
     });
 
     Route::prefix('slide')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\SlideController::class, 'index']); 
+        Route::get('/index', [\App\Http\Controllers\SlideController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
     });
 
     Route::prefix('khuyen-mai')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']); 
+        Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
         Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
     });

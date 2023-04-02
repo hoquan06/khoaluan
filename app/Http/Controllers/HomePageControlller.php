@@ -21,8 +21,8 @@ class HomePageControlller extends Controller
                                  ->where('tinh_trang', 1)
                                  ->get();
 
-        // $slide = Slide::latest()->first();
-        // $banner = Banner::latest()->first();
+        $slide = Slide::latest()->first();
+        $banner = Banner::latest()->first();
         // $sql = "SELECT *, (gia_ban - gia_khuyen_mai) / gia_ban * 100 as ty_le_giam FROM `san_phams` ORDER BY ty_le_giam DESC";
         $sql = "SELECT *, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam` FROM `san_phams` ORDER BY ty_le_giam DESC";
         $best_seller = DB::select($sql);
@@ -36,8 +36,9 @@ class HomePageControlller extends Controller
             $id = Str::substr($id, $viTri + 4);
         }
         $sanPham = SanPham::find($id);
+        $spLienQuan = SanPham::where('id_danh_muc', $sanPham->id_danh_muc)->get();
         if($sanPham){
-            return view('client.pages.chi_tiet_san_pham', compact('sanPham'));
+            return view('client.pages.chi_tiet_san_pham', compact('sanPham', 'spLienQuan'));
         } else{
             return view('client.pages.404');
         }
@@ -52,19 +53,20 @@ class HomePageControlller extends Controller
         $danhMuc = DanhMucSanPham::find($id);
         if($danhMuc){
             // Nếu là danh mục con
+            $danhSach   = $danhMuc->id;
             if($danhMuc->id_danh_muc_cha > 0) {
                 $sanPham = SanPham::where('tinh_trang', 1)
-                                  ->where('id_danh_muc', $danhMuc->id)
+                                  ->where('id_danh_muc', $danhSach)
                                   ->get();
             } else {
                 // Nó là danh mục cha. Tìm toàn bộ danh mục con
-                // $danhSach   = $danhMuc->id;
-                // $danhMucCon = DanhMucSanPham::where('id_danh_muc_cha', $danhSach)
-                //                             ->get();
-                // foreach($danhMucCon as $key => $value) {
-                //     $danhSach = $danhSach . ',' . $value->id;
-                // }
-                // $sanPham = SanPham::whereIn('id_danh_muc', explode(",", $danhSach))->get();
+                $danhMucCon = DanhMucSanPham::where('tinh_trang', 1)
+                                            ->where('id_danh_muc_cha', $danhSach)
+                                            ->get();
+                foreach($danhMucCon as $key => $value) {
+                    $danhSach = $danhSach . ',' . $value->id;
+                }
+                $sanPham = SanPham::whereIn('id_danh_muc', explode(",", $danhSach))->get();
             }
 
             return view('client.pages.ds_san_pham', compact('sanPham'));
@@ -76,7 +78,7 @@ class HomePageControlller extends Controller
     {
         $data = $request->search;
 
-        $danhSach = SanPham::where('ten_san_pham', 'like', "%" .$data. "%")->get();
+        $danhSach = SanPham::where('ten_san_pham', 'like', "%". $data ."%")->get();
         return view('client.pages.ds_san_pham_search', compact('danhSach'));
     }
 }
