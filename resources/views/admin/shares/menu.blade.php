@@ -25,7 +25,7 @@
                                 </g>
                             </g>
                         </svg></span>
-                    <h2 class="brand-text">Vuexy</h2>
+                    <h2 class="brand-text">SmartTech</h2>
                 </a></li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
@@ -33,33 +33,44 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Trang Chủ</a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Trang Chủ</a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Quản lý</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Danh Mục Sản Phẩm</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/danh-muc-san-pham/index"><i data-feather='briefcase'></i><span class="menu-title text-truncate" data-i18n="Invoice">Danh mục sản phẩm</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/san-pham/index"><i data-feather='smartphone'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner và Slide</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='dollar-sign'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản khách hàng</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='star'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đánh giá</span></a>
+            </li>
+
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Thống kê</span><i data-feather="more-horizontal"></i>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Doanh thu</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="/admin/danh-muc-san-pham/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>
+                    <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Ngày</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Preview">Tuần</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Tháng</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Năm</span></a>
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản Phẩm</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="/admin/san-pham/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>
-                    </li>
-                </ul>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy nhất</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner và Slide</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>
-                    </li>
-                </ul>
-            </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến Mãi</span></a>
-                <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Thêm,Sửa,Xóa</span></a>
-                    </li>
-                </ul>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Hàng tồn kho</span></a>
             </li>
         </ul>
     </div>

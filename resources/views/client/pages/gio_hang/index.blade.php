@@ -37,19 +37,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($cart as $key => $value)
                                 <tr>
-                                    <td class="product-thumbnail"><a href="#"><img src="assets/images/product_img1.jpg" alt="product1"></a></td>
-                                    <td class="product-name" data-title="Product"><a href="#">Blue Dress For Woman</a></td>
+                                    <td class="product-thumbnail"><a href="#"><img src="{{$value->hinh_anh}}" alt="product1"></a></td>
+                                    <td class="product-name" data-title="Product"><a href="#">{{$value->ten_san_pham}}</a></td>
                                     <td class="product-name" data-title="Product"><a href="#">Đen</a></td>
-                                    <td class="product-price" data-title="Price">$45.00</td>
+                                    <td class="product-price" data-title="Price">{{number_format($value->don_gia, 0)}}</td>
                                     <td class="product-quantity" data-title="Quantity"><div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="2" title="Qty" class="qty" size="4">
+                                    <input type="text" name="quantity" value="{{$value->so_luong}}" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                     </div></td>
-                                    <td class="product-subtotal" data-title="Total">$90.00</td>
+                                    <td class="product-subtotal" data-title="Total">{{number_format(($value->so_luong * $value->don_gia), 0)}}</td>
                                     <td class="product-remove" data-title="Remove"><a href="#"><i class="ti-close"></i></a></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

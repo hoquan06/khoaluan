@@ -61,7 +61,7 @@
                                             <span class="price">{{ number_format($value->gia_khuyen_mai, 0) }}</span>
                                             <del>{{ number_format($value->gia_ban, 0) }}</del>
                                             <div class="on_sale">
-                                                <span>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) / $value->gia_ban * 100) }}% Off</span>
+                                                <span>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) / $value->gia_ban * 100) }}%</span>
                                             </div>
                                         </div>
                                         <div class="rating_wrap">
