@@ -46,13 +46,18 @@ Route::prefix('admin')->group(function () {
     Route::prefix('slide')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SlideController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
-        Route::post('/index', [\App\Http\Controllers\SlideController::class, 'store']);
     });
 
     Route::prefix('khuyen-mai')->group(function () {
         Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
         Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
+    });
+
+    Route::prefix('tai-khoan')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\TaiKhoanController::class, 'index']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'destroy']);
+        Route::get('/lock/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'lock']);
     });
 });
 

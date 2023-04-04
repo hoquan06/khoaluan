@@ -9,7 +9,7 @@ class SlideController extends Controller
 {
     public function index() 
     { 
-        $slide = Slide::latest()->first();
+        $slide = Slide::all();
         return view('admin.pages.slide.index',compact('slide'));
     }
 
