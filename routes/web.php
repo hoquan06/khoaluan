@@ -53,6 +53,12 @@ Route::prefix('admin')->group(function () {
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
         Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
     });
+
+    Route::prefix('tai-khoan')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\TaiKhoanController::class, 'index']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'destroy']);
+        Route::get('/lock/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'lock']);
+    });
 });
 
 Route::prefix('khach-hang')->group(function () {

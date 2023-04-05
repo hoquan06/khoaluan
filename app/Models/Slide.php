@@ -11,5 +11,7 @@ class Slide extends Model
     protected $table = 'slides';
     protected $fillable = [
         'slide_1',
+        'slide_2',
+        'slide_3',
     ];
 }

@@ -41,13 +41,15 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/san-pham/index"><i data-feather='smartphone'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner và Slide</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/slide/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Slide</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='dollar-sign'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản khách hàng</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản khách hàng</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
             </li>
