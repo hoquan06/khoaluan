@@ -70,6 +70,9 @@
                                 history.go(-1);
                                 window.location.reload();
                             }, 2000);
+                        } else if(res.login == 3){
+                            toastr.warning("Tài khoản của bạn đã bị vô hiệu hóa!!!");
+                            $("#password").val('');
                         } else if(res.login == 1){
                             toastr.warning("Bạn chưa xác thực mail, vui lòng kiểm tra lại!!!");
                         } else{

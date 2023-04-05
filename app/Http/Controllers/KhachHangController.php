@@ -63,11 +63,16 @@ class KhachHangController extends Controller
         $check = Auth::guard('khach_hang')->attempt($data);
         if($check){
             $khach_hang = Auth::guard('khach_hang')->user();
-            if($khach_hang->loai_tai_khoan == 1){
+            if($khach_hang->loai_tai_khoan == 1 && $khach_hang->is_block == 0){
                 return response()->json([
                     'login'         => 2,
                 ]);
-            } else{
+            } else if($khach_hang->loai_tai_khoan == 1 && $khach_hang->is_block == 1){
+                Auth::guard('khach_hang')->logout();
+                return response()->json([
+                    'login'         => 3,
+                ]);
+            } else if($khach_hang->loai_tai_khoan == 0 && $khach_hang->is_block == 0){
                 Auth::guard('khach_hang')->logout();
                 return response()->json([
                     'login'         => 1,
