@@ -48,9 +48,11 @@
                                         </a>
                                         <div class="product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li class="addToCart" data-id="{{$value->id}}"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                @if (Auth::guard('khach_hang')->check())
+                                                    <li class="addToCart" data-id="{{$value->id}}"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                @else
+                                                    <li class="addToCart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                @endif
                                                 <li><a href="#"><i class="icon-heart"></i></a></li>
                                             </ul>
                                         </div>
@@ -81,9 +83,11 @@
                                         </div>
                                         <div class="list_product_action_box">
                                             <ul class="list_none pr_action_btn">
-                                                <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
-                                                <li><a href="shop-compare.html" class="popup-ajax"><i class="icon-shuffle"></i></a></li>
-                                                <li><a href="shop-quick-view.html" class="popup-ajax"><i class="icon-magnifier-add"></i></a></li>
+                                                @if (Auth::guard('khach_hang')->check())
+                                                    <li class="add-to-cart addToCart" data-id="{{$value->id}}"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                @else
+                                                    <li class="add-to-cart addToCart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
+                                                @endif
                                                 <li><a href="#"><i class="icon-heart"></i></a></li>
                                             </ul>
                                         </div>
@@ -98,7 +102,39 @@
     </div>
 </div>
 @endsection
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" >
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="alert alert-success text-center" role="alert">
+                    Bạn phải đăng nhập để mua sản phẩm!!!
+                </div>
+                <form method="post">
+                    <div class="form-group">
+                        <input type="email" id="email" required="" class="form-control" placeholder="Nhập Email Của Bạn">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" required="" type="password" id="password" placeholder="Mật Khẩu">
+                    </div>
+                    <div class="form-group">
+                        <button id="login" type="button" class="btn btn-fill-out btn-block">Đăng nhập</button>
+                    </div>
+                    <div class="different_login">
+                        <span> hoặc</span>
+                    </div>
+                    <ul class="btn-login list_none text-center">
+                        <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
+                        <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                    </ul>
+                    <div class="form-note text-center">Bạn chưa có tài khoản? <a href="/agent/register">Đăng ký</a></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-@section('js')
-
-@endsection

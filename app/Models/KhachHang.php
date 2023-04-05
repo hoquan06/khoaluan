@@ -22,6 +22,7 @@ class KhachHang extends Authenticatable
         'dia_chi',
         'is_lock',
         'loai_tai_khoan',
+        'is_block',
         'hash',
     ];
 }
