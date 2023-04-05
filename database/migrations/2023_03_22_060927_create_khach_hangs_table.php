@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('dia_chi');
             $table->integer('loai_tai_khoan')->default(0);
+            $table->integer('is_block')->default(0);
             $table->string('hash');
             $table->timestamps();
         });
