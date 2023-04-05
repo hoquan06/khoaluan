@@ -23,10 +23,16 @@ class HomePageControlller extends Controller
 
         $slide = Slide::latest()->first();
         $banner = Banner::latest()->first();
-        // $sql = "SELECT *, (gia_ban - gia_khuyen_mai) / gia_ban * 100 as ty_le_giam FROM `san_phams` ORDER BY ty_le_giam DESC";
+
         $sql = "SELECT *, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam` FROM `san_phams` ORDER BY ty_le_giam DESC";
         $best_seller = DB::select($sql);
-        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller','slide','banner'));
+
+        $sp_moi = SanPham::orderByDesc('created_at')->get()->take(8);
+        $sp_hang_dau = SanPham::orderByDesc('gia_khuyen_mai')->get();
+
+        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
+        $spThinhHanh = DB::select($sp_thinh_hanh);
+        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller','slide','banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
     }
 
     public function viewSanPham($id)
