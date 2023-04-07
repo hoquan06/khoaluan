@@ -59,6 +59,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'destroy']);
         Route::get('/lock/{id}', [\App\Http\Controllers\TaiKhoanController::class, 'lock']);
     });
+
+    Route::prefix('don-hang')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
+    });
 });
 
 Route::prefix('khach-hang')->group(function () {
@@ -71,10 +76,13 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
     Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
+
+    Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
 Route::post('/search', [\App\Http\Controllers\HomePageControlller::class, 'search']);
+
 
