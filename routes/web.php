@@ -77,7 +77,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
     Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
 
-    Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
+    Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\QuanLyThongTinController::class, 'index']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
