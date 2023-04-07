@@ -64,7 +64,7 @@
                     'slide_2'  : $("#slide_2").val(),
                     'slide_3'  : $("#slide_3").val(),
                 };
-                
+
                 $.ajax({
                     url     : '/admin/slide/index',
                     type    : 'post',

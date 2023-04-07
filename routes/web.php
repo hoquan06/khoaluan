@@ -71,6 +71,10 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
     Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
+    Route::get('/gio-hang/data', [\App\Http\Controllers\ChiTietDonHangController::class, 'dataCart']);
+    Route::post('/gio-hang/update', [\App\Http\Controllers\ChiTietDonHangController::class, 'cartUpdate']);
+    Route::get('/gio-hang/delete/{id}', [\App\Http\Controllers\ChiTietDonHangController::class, 'cartDelete']);
+    // Route::post('/gio-hang/delete', [\App\Http\Controllers\ChiTietDonHangController::class, 'cartDelete']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);

@@ -10,12 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {  
+    {
         Schema::create('slides', function (Blueprint $table) {
             $table->id();
             $table->string('slide_1');
-            $table->string('slide_2');
-            $table->string('slide_3');
+            $table->string('slide_2')->nullable();
+            $table->string('slide_3')->nullable();
             $table->timestamps();
         });
     }

@@ -50,7 +50,8 @@
     </div>
     <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title">Danh Sách Danh Mục</h5>
+            <div class="card-body text-center">
+                <h5 class="card-title">Danh Sách Danh Mục</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
