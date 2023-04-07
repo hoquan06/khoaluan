@@ -24,7 +24,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [\App\Http\Controllers\DanhMucSanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\DanhMucSanPhamController::class, 'edit']);
         Route::post('/update', [\App\Http\Controllers\DanhMucSanPhamController::class, 'update']);
-        Route::get('data', [\App\Http\Controllers\DanhMucSanPhamController::class, 'getData']);
+        Route::get('/data', [\App\Http\Controllers\DanhMucSanPhamController::class, 'getData']);
     });
 
     Route::prefix('san-pham')->group(function () {
@@ -34,7 +34,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/doi-trang-thai/{id}', [\App\Http\Controllers\SanPhamController:: class, 'doiTrangThai']);
         Route::get('/delete/{id}', [\App\Http\Controllers\SanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
-        Route::post('update', [\App\Http\Controllers\SanPhamController::class, 'update']);
+        Route::post('/update', [\App\Http\Controllers\SanPhamController::class, 'update']);
 
     });
 
@@ -78,6 +78,8 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
 
     Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\QuanLyThongTinController::class, 'index']);
+    Route::get('/edit/{id}', [\App\Http\Controllers\QuanLyThongTinController::class, 'edit']);
+    Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
