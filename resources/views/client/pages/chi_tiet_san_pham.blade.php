@@ -98,7 +98,11 @@
                                 @else
                                     <button class="btn btn-fill-out btn-addtocart addToCart" data-toggle="modal" data-target="#myModal" type="button"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
                                 @endif
-                                <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                                @if (Auth::guard('khach_hang')->check())
+                                    <a data-id="{{$sanPham->id}}" class="add_wishlist favourite"><i class="icon-heart"></i></a>
+                                @else
+                                    <a data-id="{{$sanPham->id}}" data-toggle="modal" data-target="#myModal" class="add_wishlist favourite"><i class="icon-heart"></i></a>
+                                @endif
                             </div>
                         </div>
                         <hr />
@@ -213,7 +217,11 @@
                                             @else
                                                 <li class="add-to-cart addToCart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                             @endif
-                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                            @if (Auth::guard('khach_hang')->check())
+                                                <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
+                                            @else
+                                                <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -265,7 +273,7 @@
             </div>
             <div class="modal-body text-center">
                 <div class="alert alert-success text-center" role="alert">
-                    Bạn phải đăng nhập để mua sản phẩm!!!
+                    Bạn phải đăng nhập để sử dụng tính năng này!!!
                 </div>
                 <form method="post">
                     <div class="form-group">

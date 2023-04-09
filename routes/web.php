@@ -82,15 +82,20 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/gio-hang/delete/{id}', [\App\Http\Controllers\ChiTietDonHangController::class, 'cartDelete']);
     // Route::post('/gio-hang/delete', [\App\Http\Controllers\ChiTietDonHangController::class, 'cartDelete']);
 
+    Route::get('/yeu-thich', [\App\Http\Controllers\YeuThichController::class, 'index']);
+    Route::post('/yeu-thich', [\App\Http\Controllers\YeuThichController::class, 'store']);
+
     Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\QuanLyThongTinController::class, 'index']);
     Route::get('/edit/{id}', [\App\Http\Controllers\QuanLyThongTinController::class, 'edit']);
     Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
 
+    Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
 Route::post('/search', [\App\Http\Controllers\HomePageControlller::class, 'search']);
+
 
 

@@ -87,7 +87,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="#" class="btn btn-fill-out">Đến trang thanh toán</a>
+                        <a class="btn btn-fill-out" v-on:click="createBill()">Mua hàng</a>
+                        <a class="btn btn-fill-out">Đến trang thanh toán</a>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -163,6 +164,23 @@
                     tong_tien += value.so_luong * value.don_gia;
                 });
                 return tong_tien;
+            },
+
+            createBill(){
+                axios
+                    .get('/khach-hang/tao-don-hang')
+                    .then((res) => {
+                        if(res.data.donhang == 0){
+                            toastr.error("Số lượng sản phẩm bạn quá nhiều!");
+                        } else if(res.data.donhang == 1){
+                            toastr.success("Mua hàng thành công!");
+                            this.loadCart();
+                        } else if(res.data.donhang == 2){
+                            toastr.error("Giỏ hàng rỗng!");
+                        } else{
+                            toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
+                        }
+                    })
             }
         },
     });
