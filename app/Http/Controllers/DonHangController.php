@@ -13,6 +13,11 @@ class DonHangController extends Controller
         return view("admin.pages.don_hang.index",compact('don_hang'));
     }
 
+    public function view()
+    {
+        return view("admin.pages.don_hang.view");
+    }
+
     public function destroy($id)
     {
         $data = DonHang::find($id);

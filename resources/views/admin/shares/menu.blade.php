@@ -49,13 +49,14 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='dollar-sign'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản khách hàng</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/don-hang/index"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/don-hang/index"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Khách hàng</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/don-hang/view"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='star'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đánh giá</span></a>
             </li>
-
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Thống kê</span><i data-feather="more-horizontal"></i>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Doanh thu</span></a>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title">Danh Sách Đơn Hàng</h5>
+            <div class="card-body text-center"><h5 class="card-title">Danh Sách Khách Hàng</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -11,8 +11,6 @@
                             <th class="text-center">Tên Khách Hàng</th>
                             <th class="text-center">Địa Chỉ</th>
                             <th class="text-center">SDT</th>
-                            <th class="text-center">Mã Đơn Hàng</th>
-                            <th class="text-center">Ngày Đặt Hàng</th>
                             <th class="text-center">Trạng Thái</th>
                             <th class="text-center">Thao Tác</th>
                         </tr>
@@ -23,14 +21,12 @@
                             <td>2</td>
                             <td>3</td>
                             <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
+                            <td>5</td>                
                             <td>
-                                <button class="btn btn-success" data-idview="" data-bs-toggle="modal" data-bs-target="#viewModal">Xem</button>
+                                <a href="/admin/don-hang/view" class="btn btn-success">Xem</a>
                                 <button class="btn btn-danger delete" data-iddelete=""  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                             </td>
-                        </tr>
+                        </tr>                      
                     </tbody>
                 </table>
             </div>
@@ -50,19 +46,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
           <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa</button>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh Sửa Danh Mục Sản Phẩm</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
         </div>
       </div>
     </div>
