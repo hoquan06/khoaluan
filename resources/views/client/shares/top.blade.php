@@ -66,7 +66,7 @@
                     <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="/khach-hang/gio-hang"><i class="linearicons-bag2"></i><span class="cart_count">2</span></a></li>
                     @if (Auth::guard('khach_hang')->check())
                         <li>
-                            <a href="" class="nav-link"><i class="linearicons-user"></i>
+                            <a href="/khach-hang/thong-tin-ca-nhan" class="nav-link"><i class="linearicons-user"></i>
                                 <span class="my-cart">
                                     <span>
                                         <strong>{{ Auth::guard('khach_hang')->user()->ho_va_ten }}</strong>

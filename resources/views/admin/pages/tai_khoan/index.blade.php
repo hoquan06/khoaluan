@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title">Danh sách tài khoản đã đăng ký</h5>
+            <div class="card-body text-center"><h5 class="card-title">Danh Sách Tài Khoản Đã Đăng Ký</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -35,9 +35,9 @@
                                 <td>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                     @if ($value->is_lock)
-                                        <button data-id="{{ $value->id }}" class="khoaTaiKhoan btn btn-primary">Khóa</button>
+                                        <button data-id="{{ $value->id }}" class="khoaTaiKhoan btn btn-success">Mở Khóa</button>
                                     @else
-                                        <button data-id="{{ $value->id }}" class="btn btn-danger khoaTaiKhoan">Mở Khóa</button>
+                                        <button data-id="{{ $value->id }}" class="btn btn-danger khoaTaiKhoan">Khóa</button>
                                     @endif
                                 </td>
                            </tr>
@@ -75,7 +75,7 @@
                 }
             });
 
-            $('body').on('click', '#khoaTaiKhoan', function(){
+            $('body').on('click', '.khoaTaiKhoan', function(){
 
                 var idTaiKhoan = $(this).data('id');
 
@@ -84,18 +84,19 @@
                     url         : '/admin/tai-khoan/lock/' + idTaiKhoan,
                     type        : 'get',
                     success     : function(res){
-                        if(res.status){
-                            toastr.success("Khóa tài khoản thành công!!!");
-                            if(res.loai_tai_khoan == 1){
-                                self.html("Khóa");
-                                self.removeClass('btn-primary');
-                                self.addClass('btn-danger');                                          
-                            } else{
+                        if(res.status){  
+                            if(res.lock){
                                 self.html("Mở Khóa");
                                 self.removeClass('btn-danger');
-                                self.addClass('btn-primary');
+                                self.addClass('btn-success');   
+                                toastr.success("Khóa tài khoản thành công!!!");                                   
+                            } else{
+                                self.html("Khóa");
+                                self.removeClass('btn-primary');
+                                self.addClass('btn-danger');   
+                                toastr.success("Mở khóa tài khoản thành công!!!");     
                             }
-                        } else{
+                        } else{                         
                             toastr.error("Tài khoản không tồn tại!!!");
                         }
                     }

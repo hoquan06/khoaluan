@@ -5,7 +5,7 @@
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Thêm mới slide</h4>
+                    <h4 class="card-title">Thêm Mới Slide</h4>
                 </div>
                 <div class="card-body">
                     <form novalidate id="novalidate">

@@ -30,10 +30,17 @@ class TaiKhoanController extends Controller
 
     public function lock($id) 
     {
-        $data = KhachHang::find($id);
+        $data = KhachHang::find($id);        
         if($data) {
             $data->is_lock = !$data->is_lock;
+            $data->save();
+            return response()->json([
+                "status" => true,
+                "lock" => $data->is_lock,
+                ]);
+        } else {
+            return response()->json(["status" => false]);
         }
-        return response()->json(["status" => true]);
+        
     }
 }
