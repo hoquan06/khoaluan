@@ -53,7 +53,11 @@
                                                 @else
                                                     <li class="addToCart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                 @endif
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                @if (Auth::guard('khach_hang')->check())
+                                                    <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
+                                                @else
+                                                    <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -88,7 +92,11 @@
                                                 @else
                                                     <li class="add-to-cart addToCart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                 @endif
-                                                <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                @if (Auth::guard('khach_hang')->check())
+                                                    <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
+                                                @else
+                                                    <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -112,7 +120,7 @@
             </div>
             <div class="modal-body text-center">
                 <div class="alert alert-success text-center" role="alert">
-                    Bạn phải đăng nhập để mua sản phẩm!!!
+                    Bạn phải đăng nhập để sử dụng tính năng này!!!
                 </div>
                 <form method="post">
                     <div class="form-group">
