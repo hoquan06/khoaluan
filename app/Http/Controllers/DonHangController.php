@@ -13,8 +13,7 @@ class DonHangController extends Controller
 {
     public function index()
     {
-        $don_hang = DonHang::all();
-        return view("admin.pages.don_hang.index",compact('don_hang'));
+        return view("admin.pages.don_hang.index");
     }
 
     public function view()
