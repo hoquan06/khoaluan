@@ -37,7 +37,7 @@
                         <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#change-password" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Mật Khẩu</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="/khach-hang/logout"><i class="ti-lock"></i>Logout</a>
+                        <a class="nav-link" href="/khach-hang/logout"><i class="ti-lock"></i>Đăng xuất</a>
                       </li>
                     </ul>
                 </div>
@@ -61,10 +61,10 @@
                             </div>
                             <div class="card-body">
                     			<div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table text-nowrap text-center">
                                         <thead>
                                             <tr>
-                                                <th>Mã Đơn Hàng</th>
+                                                <th>STT</th>
                                                 <th>Ngày Đặt Hàng</th>
                                                 <th>Trạng Thái</th>
                                                 <th>Tổng Tiền</th>
@@ -77,14 +77,10 @@
                                                 <td>March 15, 2020</td>
                                                 <td>Processing</td>
                                                 <td>$78.00 for 1 item</td>
-                                                <td><a href="#" class="btn btn-fill-out btn-sm">View</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>#2366</td>
-                                                <td>June 20, 2020</td>
-                                                <td>Completed</td>
-                                                <td>$81.00 for 1 item</td>
-                                                <td><a href="#" class="btn btn-fill-out btn-sm">View</a></td>
+                                                <td>
+                                                    <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
+                                                    <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -101,7 +97,7 @@
                     			<!-- <p>Already have an account? <a href="#">Log in instead!</a></p> -->
                                 <form method="post">
                                     <div class="row">
-                                        @if(Auth::guard('khach_hang')->check()) 
+                                        @if(Auth::guard('khach_hang')->check())
                                             <div class="form-group col-md-6">
                                                 <label>Họ và tên<span class="required">*</span></label>
                                                 <input required="" id="ho_va_ten" class="form-control" value = "{{Auth::guard('khach_hang')->user()->ho_va_ten}}"  type="text">
@@ -122,7 +118,7 @@
                                                 <label>Địa chỉ<span class="required">*</span></label>
                                                 <input required=""  id="dia_chi" class="form-control" value = "{{Auth::guard('khach_hang')->user()->dia_chi}}"  type="text">
                                             </div>
-                                            <div class="col-md-12"> 
+                                            <div class="col-md-12">
                                             <button type="button"  data-id = "{{Auth::guard('khach_hang')->user()->id }}" id="update" class="btn btn-fill-out edit"  data-toggle="modal" data-target="#deleteModal" >Cập Nhật</button>
                                             </div>
                                         @endif
@@ -152,7 +148,7 @@
                                                 <label>Xác Nhận Mật Khẩu<span class="required">*</span></label>
                                                 <input required="" id="ho_va_ten" class="form-control"  type="text">
                                             </div>
-                                            <div class="col-md-12"> 
+                                            <div class="col-md-12">
                                             <button type="button"  id="update" class="btn btn-fill-out edit"  data-toggle="modal" data-target="#deleteModal" >Thay Đổi</button>
                                             </div>
                                     </div>
@@ -166,8 +162,8 @@
 	</div>
 </div>
 <div class="section bg_default small_pt small_pb">
-	<div class="container">	
-    	<div class="row align-items-center">	
+	<div class="container">
+    	<div class="row align-items-center">
             <div class="col-md-6">
                 <div class="heading_s1 mb-md-0 heading_light">
                     <h3>Đăng ký để trở thành hội viên</h3>
@@ -197,7 +193,7 @@
 
         $('body').on('click', '.edit', function(){
             var id = $(this).data('id');
-            
+
             $.ajax({
                 url         : '/khach-hang/edit/' + id,
                 type        : 'get',
@@ -226,7 +222,7 @@
                 'email'                  : $("#email").val(),
                 'dia_chi'                : $("#dia_chi").val(),
             };
-            
+
             $.ajax({
                 url             : '/khach-hang/update/',
                 type            : 'post',

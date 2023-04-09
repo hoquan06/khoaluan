@@ -51,7 +51,7 @@
                                                             @else
                                                                 <li class="add-to-cart addToCart" data-toggle="modal" data-target="#myModal"><a ><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                             @endif
-                                                            <li><a href="#"><i class="icon-heart"></i></a></li>
+                                                            <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
