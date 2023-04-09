@@ -96,7 +96,8 @@ Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
 Route::post('/search', [\App\Http\Controllers\HomePageControlller::class, 'search']);
-Route::post('/searchs', [\App\Http\Controllers\HomePageControlller::class, 'searchs']);
+Route::post('/fefeffe', [\App\Http\Controllers\HomePageControlller::class, 'search']);
+
 
 
 
