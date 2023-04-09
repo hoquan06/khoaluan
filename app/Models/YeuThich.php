@@ -15,7 +15,6 @@ class YeuThich extends Model
         'ten_san_pham',
         'so_luong',
         'don_gia',
-        'is_cart',
         'agent_id',
     ];
 }

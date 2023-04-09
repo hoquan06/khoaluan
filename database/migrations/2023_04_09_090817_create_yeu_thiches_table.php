@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('ten_san_pham');
             $table->integer('so_luong')->default(1);
             $table->double('don_gia', 18, 0);
-            $table->integer('is_cart')->default(2); //=1 là giỏ hàng
             $table->integer('agent_id');
             $table->timestamps();
         });
