@@ -18,20 +18,18 @@
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        <tr>
-                           @foreach($don_hang as $key => $value)
-                                <!-- <td>{{ $key + 1 }}</td>
-                                <td>{{ $value->ten_don_hang }}</td>
-                                <td>{{ $value->ten_don_hang }}</td>
-                                <td>{{ $value->ten_don_hang }}</td>
-                                <td>{{ $value->ten_don_hang }}</td>
-                                <td>{{ $value->ten_don_hang }}</td>
-                                <td>{{ $value->ten_don_hang }}</td> -->
-                                <td>
-                                    <button class="btn btn-success">Xem</button>
-                                    <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
-                                </td>
-                           @endforeach
+                        <tr> 
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                            <td>
+                                <button class="btn btn-success" data-idview="" data-bs-toggle="modal" data-bs-target="#viewModal">Xem</button>
+                                <button class="btn btn-danger delete" data-iddelete=""  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -42,16 +40,29 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Tài Khoản</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Đơn Hàng</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            Bạn thực sự muốn xóa tài khoản này?
-            <input type="text" class="form-control" id="idDelete" hidden>
+            Bạn thực sự muốn xóa đơn hàng này?
+            <input type="text" class="form-control" id="idDelete" hide>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa tài khoản</button>
+          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Chỉnh Sửa Danh Mục Sản Phẩm</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
         </div>
       </div>
     </div>
