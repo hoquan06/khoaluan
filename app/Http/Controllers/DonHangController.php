@@ -102,9 +102,9 @@ class DonHangController extends Controller
             $data = DonHang::where('agent_id', $agent->id)
                            ->where('tinh_trang', '<>', '-1')
                            ->get();
-            return response()->json([
-                'donhang'       => $data
-            ]);
+        } else{
+            $data = DonHang::all();
         }
+        return view('client.pages.thong_tin_ca_nhan.index', compact('data'));
     }
 }

@@ -92,7 +92,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
 
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
-    Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
+    // Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
