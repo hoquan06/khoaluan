@@ -104,7 +104,6 @@
         el          : "#app",
         data        : {
             dsCart      : [],
-            iddelete    : 0,
         },
         created(){
             this.loadCart();
@@ -137,7 +136,7 @@
                     .get('/khach-hang/gio-hang/delete/' + idRemove, row)
                     .then((res) => {
                         if(res.data.remove){
-                            toastr.success('Đã cập nhật giỏ hàng!');
+                            toastr.success('Đã xóa sản phẩm khỏi giỏ giỏ hàng!');
                             this.loadCart();
                         } else{
                             toastr.error("Sản phẩm không có trong giỏ hàng!");

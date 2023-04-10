@@ -88,13 +88,13 @@
                             <div class="cart-product-quantity">
                                 <div class="quantity">
                                     <input type="button" value="-" class="minus">
-                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="text" name="quantity" value="1" id="soluong" title="Qty" class="qty" size="4">
                                     <input type="button" value="+" class="plus">
                                 </div>
                             </div>
                             <div class="cart_btn">
                                 @if (Auth::guard('khach_hang')->check())
-                                    <button class="btn btn-fill-out btn-addtocart addToCart" data-id="{{$sanPham->id}}" type="button"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
+                                    <button class="btn btn-fill-out btn-addtocart detail_addToCart" data-id="{{$sanPham->id}}" type="button"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
                                 @else
                                     <button class="btn btn-fill-out btn-addtocart addToCart" data-toggle="modal" data-target="#myModal" type="button"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</button>
                                 @endif
@@ -298,3 +298,41 @@
         </div>
     </div>
 </div>
+@section('js')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(".detail_addToCart").click(function(){
+                var san_pham_id = $(this).data('id');
+                var so_luong = $("#soluong").val();
+                var payload = {
+                    'san_pham_id'       : san_pham_id,
+                    'so_luong'          : so_luong,
+                };
+
+                $.ajax({
+                    url             : '/khach-hang/gio-hang',
+                    type            : 'post',
+                    data            : payload,
+                    success         : function(res){
+                        if(res.giohang){
+                            toastr.success("Đã thêm vào giỏ hàng!");
+                        } else{
+                            toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                        }
+                    },
+                    error           : function(res){
+                        var danh_sach_loi = res.responseJSON.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    },
+                });
+            });
+        });
+   </script>
+@endsection

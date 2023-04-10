@@ -44,4 +44,35 @@ class YeuThichController extends Controller
             ]);
         }
     }
+
+    public function getData(){
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $data = YeuThich::join('san_phams', 'yeu_thiches.san_pham_id', 'san_phams.id')
+                            ->where('agent_id', $agent->id)
+                            ->select('yeu_thiches.*', 'san_phams.hinh_anh')
+                            ->get();
+            return response()->json([
+                'yeuthich'      => $data,
+            ]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $data = YeuThich::find($id);
+            if($data){
+                $data->delete();
+                return response()->json([
+                    'xoa'       => true,
+                ]);
+            } else{
+                return response()->json([
+                    'xoa'       => false,
+                ]);
+            }
+        }
+    }
 }

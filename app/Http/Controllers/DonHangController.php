@@ -94,4 +94,17 @@ class DonHangController extends Controller
             ]);
         }
     }
+
+    public function getData()
+    {
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $data = DonHang::where('agent_id', $agent->id)
+                           ->where('tinh_trang', '<>', '-1')
+                           ->get();
+            return response()->json([
+                'donhang'       => $data
+            ]);
+        }
+    }
 }

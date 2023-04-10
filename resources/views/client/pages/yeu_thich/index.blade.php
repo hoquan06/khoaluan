@@ -19,13 +19,13 @@
     </div><!-- END CONTAINER-->
 </div>
 
-<div class="main_content">
+<div class="main_content" id="app">
     <div class="section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive wishlist_table">
-                        <table class="table">
+                        <table class="table text-nowrap text-center">
                             <thead>
                                 <tr>
                                     <th class="product-thumbnail">&nbsp;</th>
@@ -37,14 +37,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="product-thumbnail"><a href="#"><img src="assets/images/product_img1.jpg" alt="product1"></a></td>
-                                    <td class="product-name" data-title="Product"><a href="#">Blue Dress For Woman</a></td>
-                                    <td class="product-price" data-title="Price">$45.00</td>
-                                    <td class="product-stock-status" data-title="Stock Status"><span class="badge badge-pill badge-success">In Stock</span></td>
-                                    <td class="product-add-to-cart"><a href="#" class="btn btn-fill-out"><i class="icon-basket-loaded"></i> Add to Cart</a></td>
-                                    <td class="product-remove" data-title="Remove"><a href="#"><i class="ti-close"></i></a></td>
-                                </tr>
+                                <template v-for="(value, key) in list">
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img v-bind:src="value.hinh_anh" alt="product1"></a></td>
+                                        <td class="product-name" data-title="Product"><a href="#">@{{value.ten_san_pham}}</a></td>
+                                        <td class="product-price" data-title="Price">@{{numberFormat(value.don_gia)}}</td>
+                                        <td class="product-stock-status" data-title="Stock Status"><span class="badge badge-pill badge-success">Còn hàng</span></td>
+                                        <td class="product-add-to-cart" v-on:click="addToCart()" :data-id="value.san_pham_id"><a class="btn btn-fill-out" :data-id="value.san_pham_id"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></td>
+                                        <td class="product-remove" data-title="Remove"><a><i :data-id='value.id' v-on:click="removeTable(value)" class="ti-close"></i></a></td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -53,4 +55,60 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script>
+        var app = new Vue({
+            el              : '#app',
+            data            : {
+                list        : [],
+            },
+            created(){
+                this.loadTable();
+            },
+            methods:{
+                loadTable(){
+                    axios
+                        .get('/khach-hang/yeu-thich/data')
+                        .then((res) => {
+                            this.list = res.data.yeuthich;
+                        })
+                },
+                numberFormat(number){
+                    return  Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+                },
+                removeTable(row){
+                    var idRemove = event.target.getAttribute('data-id');
+
+                    axios
+                        .get('/khach-hang/yeu-thich/delete/' + idRemove, row)
+                        .then((res) => {
+                            if(res.data.xoa){
+                                toastr.success("Đã bỏ yêu thích sản phẩm này!");
+                                this.loadTable();
+                            } else{
+                                toastr.warning("Sản phẩm không tồn tại!");
+                            }
+                        })
+                },
+                addToCart(){
+                    var san_pham_id = event.target.getAttribute('data-id');
+                    var payload = {
+                        'san_pham_id'       : san_pham_id,
+                        'so_luong'          : 1,
+                    };
+                    axios
+                        .post('/khach-hang/gio-hang', payload)
+                        .then((res) => {
+                            if(res.data.giohang){
+                                toastr.success("Đã thêm vào giỏ hàng!");
+                            } else{
+                                toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                            }
+                        });
+                }
+            }
+        });
+    </script>
 @endsection

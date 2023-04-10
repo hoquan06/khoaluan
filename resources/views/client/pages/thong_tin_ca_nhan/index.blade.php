@@ -18,23 +18,26 @@
         </div>
     </div><!-- END CONTAINER-->
 </div>
-<div class="section">
+<div class="section" id="app">
 	<div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <div class="dashboard_menu">
                     <ul class="nav nav-tabs flex-column" role="tablist">
                       <li class="nav-item">
-                        <a class="nav-link active" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="ti-layout-grid2"></i>Quản Lý</a>
+                        <a class="nav-link active" id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="ti-layout-grid2"></i>Quản lý</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="ti-shopping-cart-full"></i>Đơn Hàng</a>
+                        <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="ti-shopping-cart-full"></i>Đơn hàng</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Tài Khoản</a>
+                        <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders_cancel" role="tab" aria-controls="orders" aria-selected="false"><i class="ti-shopping-cart-full"></i>Đơn hàng đã hủy</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#change-password" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Mật Khẩu</a>
+                        <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="ti-id-badge"></i>Tài khoản</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="account-detail-tab" data-toggle="tab" href="#change-password" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fa fa-key" aria-hidden="true"></i> Mật khẩu</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="/khach-hang/logout"><i class="ti-lock"></i>Đăng xuất</a>
@@ -57,7 +60,7 @@
                   	<div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                     	<div class="card">
                         	<div class="card-header">
-                                <h3>Danh Sách Đơn Hàng</h3>
+                                <h3>Đơn hàng khả dụng</h3>
                             </div>
                             <div class="card-body">
                     			<div class="table-responsive">
@@ -65,10 +68,46 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
-                                                <th>Ngày Đặt Hàng</th>
-                                                <th>Trạng Thái</th>
-                                                <th>Tổng Tiền</th>
-                                                <th>Hành Động</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Tình trạng</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template v-for="(value, key) in list">
+                                                <tr>
+                                                    <td>@{{key+1}}</td>
+                                                    <td>@{{CarbonCarbon::parse(value.created_at)->format('d M, Y')}}</td>
+                                                    <td>Processing</td>
+                                                    <td>$78.00 for 1 item</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
+                                                        <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                  	</div>
+                    <div class="tab-pane fade" id="orders_cancel" role="tabpanel" aria-labelledby="orders-tab">
+                    	<div class="card">
+                        	<div class="card-header">
+                                <h3>Đơn hàng đã hủy</h3>
+                            </div>
+                            <div class="card-body">
+                    			<div class="table-responsive">
+                                    <table class="table text-nowrap text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Ngày đặt</th>
+                                                <th>Tình trạng</th>
+                                                <th>Tổng tiền</th>
+                                                <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -161,7 +200,7 @@
 		</div>
 	</div>
 </div>
-<div class="section bg_default small_pt small_pb">
+{{-- <div class="section bg_default small_pt small_pb">
 	<div class="container">
     	<div class="row align-items-center">
             <div class="col-md-6">
@@ -179,7 +218,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 @endsection
 @section('js')
@@ -242,6 +281,24 @@
                 },
             });
         });
+    });
+    var app = new Vue({
+        el              : "#app",
+        data            : {
+            list        : [],
+        },
+        created(){
+            this.loadTable();
+        },
+        methods: {
+            loadTable(){
+                axios
+                    .get('/khach-hang/don-hang/data')
+                    .then((res) => {
+                        this.list = res.data.donhang;
+                    });
+            },
+        }
     });
 </script>
 @endsection

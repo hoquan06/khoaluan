@@ -84,12 +84,15 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/yeu-thich', [\App\Http\Controllers\YeuThichController::class, 'index']);
     Route::post('/yeu-thich', [\App\Http\Controllers\YeuThichController::class, 'store']);
+    Route::get('/yeu-thich/data', [\App\Http\Controllers\YeuThichController::class, 'getData']);
+    Route::get('/yeu-thich/delete/{id}', [\App\Http\Controllers\YeuThichController::class, 'destroy']);
 
     Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\QuanLyThongTinController::class, 'index']);
     Route::get('/edit/{id}', [\App\Http\Controllers\QuanLyThongTinController::class, 'edit']);
     Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
 
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
+    Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
