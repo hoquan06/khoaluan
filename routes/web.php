@@ -63,8 +63,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('don-hang')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
-        Route::get('/view', [\App\Http\Controllers\DonHangController::class, 'view']);
-        Route::get('/get-data', [\App\Http\Controllers\DonHangController::class, 'getData']);
+        Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 });

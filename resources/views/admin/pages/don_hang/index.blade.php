@@ -30,7 +30,7 @@
                                     </td>
                                 @endif              
                                 <td>
-                                    <a href="/admin/don-hang/view" class="btn btn-success">Xem</a>
+                                    <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-success">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
                             </tr>                                            
