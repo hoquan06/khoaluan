@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('san-pham')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\SanPhamController::class, 'store']);
-        Route::get('data', [\App\Http\Controllers\SanPhamController::class, 'getData']);
+        Route::get('/data', [\App\Http\Controllers\SanPhamController::class, 'getData']);
         Route::get('/doi-trang-thai/{id}', [\App\Http\Controllers\SanPhamController:: class, 'doiTrangThai']);
         Route::get('/delete/{id}', [\App\Http\Controllers\SanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
@@ -63,8 +63,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('don-hang')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
-
         Route::get('/view', [\App\Http\Controllers\DonHangController::class, 'view']);
+        Route::get('/get-data', [\App\Http\Controllers\DonHangController::class, 'getData']);
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 });

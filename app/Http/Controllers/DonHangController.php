@@ -12,15 +12,21 @@ use Illuminate\Support\Str;
 class DonHangController extends Controller
 {
     public function index()
-    {
-        $agent = Auth::guard('khach_hang')->user();
-        $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
-        ->where('is_cart', 0)
-        ->get();
+    {  
         $donHang = DonHang::all();
-        return view("admin.pages.don_hang.index",compact('gioHang','donHang'));
+        return view("admin.pages.don_hang.index",compact('donHang'));
     }
 
+    public function getData()
+    {
+        $chi_tiet_don_hang = DonHang::join('chi_tiet_don_hangs','don_hangs.id','chi_tiet_don_hangs.don_hang_id')
+        ->select('don_hangs.*','chi_tiet_don_hangs.ten_san_pham','chi_tiet_don_hangs.so_luong','chi_tiet_don_hangs.don_gia')
+        ->get();
+        
+        return response()->json([
+            'chiTietDonHang'        => $chi_tiet_don_hang,
+        ]);
+    }
     public function accept($id) 
     {
         $data = DonHang::find($id);

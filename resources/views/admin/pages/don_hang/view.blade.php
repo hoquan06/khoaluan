@@ -12,17 +12,12 @@
                             <th class="text-center">Đơn Giá</th>
                             <th class="text-center">Tiền Giảm Giá</th>
                             <th class="text-center">Thực Trả</th>
+                            <th class="text-center">Tổng Tiền</th>
+                            <th class="text-center">Loại Thanh Toán</th>
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        <tr> 
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>                     
-                            <td>6</td>                     
-                        </tr>                      
+                        
                     </tbody>
                 </table>
                 <div class="col-md-12">
