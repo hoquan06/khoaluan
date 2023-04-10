@@ -7,11 +7,11 @@
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th class="text-center">Tên Đơn Hàng</th>
-                            <th class="text-center">Mã Đơn Hàng</th>
-                            <th class="text-center">Ngày Đặt Hàng</th>
-                            <th class="text-center">Giá Trị Đơn Hàng</th>
-                            <th class="text-center">Tình Trạng</th>
+                            <th class="text-center">Tên Sản Phẩm</th>
+                            <th class="text-center">Số Lượng</th>
+                            <th class="text-center">Đơn Giá</th>
+                            <th class="text-center">Tiền Giảm Giá</th>
+                            <th class="text-center">Thực Trả</th>
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">

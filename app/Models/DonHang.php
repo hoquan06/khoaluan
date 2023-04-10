@@ -19,5 +19,6 @@ class DonHang extends Model
         'agent_id',
         'loai_thanh_toan',
         'dia_chi_giao_hang',
+        'tinh_trang'
     ];
 }

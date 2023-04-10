@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('agent_id');
             $table->integer('loai_thanh_toan');
             $table->string('dia_chi_giao_hang');
+            $table->integer('tinh_trang')->default(0);
             $table->timestamps();
         });
     }

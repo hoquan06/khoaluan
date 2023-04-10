@@ -13,16 +13,39 @@ class DonHangController extends Controller
 {
     public function index()
     {
-        return view("admin.pages.don_hang.index");
+        $agent = Auth::guard('khach_hang')->user();
+        $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+        ->where('is_cart', 0)
+        ->get();
+        $donHang = DonHang::all();
+        return view("admin.pages.don_hang.index",compact('gioHang','donHang'));
+    }
+
+    public function accept($id) 
+    {
+        $data = DonHang::find($id);
+       
+        if($data){
+            $data->tinh_trang = !$data->tinh_trang;
+            $data->save();
+            return response()->json([
+                'doitrangthai'      => true,
+                'tinhtrang'         => $data->tinh_trang,
+            ]);
+        } else{
+            return response()->json([
+                'doitrangthai'      => false,
+            ]);
+        }
     }
 
     public function view()
-    {
+    {      
         return view("admin.pages.don_hang.view");
     }
 
     public function destroy($id)
-    {
+    {       
         $data = DonHang::find($id);
         if($data){
             $data->delete();
