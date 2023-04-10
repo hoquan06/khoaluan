@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('san-pham')->group(function () {
         Route::get('/index', [\App\Http\Controllers\SanPhamController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\SanPhamController::class, 'store']);
-        Route::get('data', [\App\Http\Controllers\SanPhamController::class, 'getData']);
+        Route::get('/data', [\App\Http\Controllers\SanPhamController::class, 'getData']);
         Route::get('/doi-trang-thai/{id}', [\App\Http\Controllers\SanPhamController:: class, 'doiTrangThai']);
         Route::get('/delete/{id}', [\App\Http\Controllers\SanPhamController::class, 'destroy']);
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
@@ -63,8 +63,8 @@ Route::prefix('admin')->group(function () {
     Route::prefix('don-hang')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
-
-        Route::get('/view', [\App\Http\Controllers\DonHangController::class, 'view']);
+        Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
+        Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 });
 
@@ -95,10 +95,10 @@ Route::prefix('khach-hang')->group(function () {
     // Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
 });
 
-Route::get('/', [\App\Http\Controllers\HomePageControlller::class, 'index']);
-Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewSanPham']);
-Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageControlller::class, 'viewDanhMuc']);
-Route::post('/search', [\App\Http\Controllers\HomePageControlller::class, 'search']);
+Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
+Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageController::class, 'viewSanPham']);
+Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, 'viewDanhMuc']);
+Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
 
 
 
