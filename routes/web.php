@@ -64,7 +64,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
-        Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);     
+        Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 });
 
@@ -92,7 +92,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
 
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
-    // Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
+    Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);

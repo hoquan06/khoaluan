@@ -70,12 +70,23 @@
                                                 <th>STT</th>
                                                 <th>Ngày đặt</th>
                                                 <th>Tình trạng</th>
-                                                <th>Tổng tiền</th>
+                                                <th>Thực trả</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
+                                            <template v-for='(value, key) in list'>
+                                                <tr>
+                                                    <td>@{{key + 1}}</td>
+                                                    <td>@{{ moment(value.created_at) }}</td>
+                                                    <td>@{{value.tinh_trang}}</td>
+                                                    <td>@{{value.thuc_tra}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
+                                                        <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
+                                                    </td>
+                                                </tr>
+                                            </template>
                                         </tbody>
                                     </table>
                                 </div>
@@ -212,6 +223,7 @@
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
     $(document).ready(function(){
         $.ajaxSetup({
@@ -271,6 +283,27 @@
                 },
             });
         });
+    });
+    var app = new Vue({
+        el          : '#app',
+        data        : {
+            list    : [],
+        },
+        created(){
+            this.loadTable();
+        },
+        methods: {
+            loadTable(){
+                axios
+                    .get('/khach-hang/don-hang/data')
+                    .then((res) => {
+                        this.list = res.data.donhang;
+                    })
+            },
+            moment: function () {
+                return moment().locale('vi').format("LL");
+            }
+        }
     });
 </script>
 @endsection

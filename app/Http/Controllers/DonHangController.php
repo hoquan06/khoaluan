@@ -13,15 +13,15 @@ use Illuminate\Support\Str;
 class DonHangController extends Controller
 {
     public function index()
-    {  
+    {
         $donHang = DonHang::all();
         return view("admin.pages.don_hang.index",compact('donHang'));
     }
 
-    public function accept($id) 
+    public function accept($id)
     {
         $data = DonHang::find($id);
-       
+
         if($data){
             $data->tinh_trang = !$data->tinh_trang;
             $data->save();
@@ -37,7 +37,7 @@ class DonHangController extends Controller
     }
 
     public function view($id)
-    {      
+    {
         $chi_tiet_don_hang = DonHang::join('chi_tiet_don_hangs','don_hangs.id','chi_tiet_don_hangs.don_hang_id')
                             ->join('san_phams','san_phams.id','chi_tiet_don_hangs.san_pham_id')
         ->select('don_hangs.*','chi_tiet_don_hangs.ten_san_pham','chi_tiet_don_hangs.so_luong','chi_tiet_don_hangs.don_gia','san_phams.hinh_anh')
@@ -62,7 +62,7 @@ class DonHangController extends Controller
     }
 
     public function destroy($id)
-    {       
+    {
         $data = DonHang::find($id);
         if($data){
             $data->delete();
@@ -101,7 +101,7 @@ class DonHangController extends Controller
                 foreach($gioHang as $key => $value){
                     $sanPham = SanPham::find($value->san_pham_id);
                     if($sanPham){
-                        $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; // 
+                        $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
                         $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
                         $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
 
@@ -143,9 +143,9 @@ class DonHangController extends Controller
             $data = DonHang::where('agent_id', $agent->id)
                            ->where('tinh_trang', '<>', '-1')
                            ->get();
-        } else{
-            $data = DonHang::all();
+            return response()->json([
+                'donhang'       => $data,
+            ]);
         }
-        return view('client.pages.thong_tin_ca_nhan.index', compact('data'));
     }
 }
