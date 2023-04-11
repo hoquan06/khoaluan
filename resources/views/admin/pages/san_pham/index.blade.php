@@ -152,7 +152,7 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $value->ten_san_pham }}</td>
                                 <td>{{ $value->so_luong }}</td>
-                                <td>{{ $value->gia_ban }}</td>
+                                <td>{{ $value->gia_ban }} </td>
                                 <td>{{ $value->gia_khuyen_mai }}</td>
                                 <td> <img src="{{ $value->hinh_anh }}" style="height: 50px;"> </td>
                                 @if ($value->tinh_trang)
@@ -448,8 +448,8 @@
                         noiDung += '<td>' + (key + 1) + '</td>';
                         noiDung += '<td>' + value.ten_san_pham + '</td>';
                         noiDung += '<td>' + value.so_luong + '</td>';
-                        noiDung += '<td>' + value.gia_ban + '</td>';
-                        noiDung += '<td>' + value.gia_khuyen_mai + '</td>';
+                        noiDung += '<td>' + value.gia_ban + ' VND</td>';
+                        noiDung += '<td>' + value.gia_khuyen_mai + ' VND</td>';
                         noiDung += '<td> <img src="' + value.hinh_anh + '" style="height: 50px;"> </td>';
                         noiDung += '<td>';
                         noiDung +=  '<button data-id="' + value.id + '" class="doiTrangThai btn ' +  mauTrangThai + '">' + tenTrangThai + '</button>';

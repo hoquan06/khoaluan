@@ -2,7 +2,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title"> Đơn Hàng</h5>
+            <div class="card-body text-center"><h5 class="card-title"> Đơn Hàng </h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -22,12 +22,12 @@
                                 <td>{{ $value->ten_san_pham }}</td>               
                                 <td><img src="{{ $value->hinh_anh }}" alt="" style="height :50px ; width: 50px" ></td>               
                                 <td>{{ $value->so_luong }}</td>               
-                                <td>{{ number_format($value->don_gia) }}</td>                                           
-                                <td>{{ number_format($value->so_luong * $value->don_gia) }}</td>        
+                                <td>{{ number_format($value->don_gia) }} VND</td>                                           
+                                <td>{{ number_format($value->so_luong * $value->don_gia) }} VND</td>        
                                 @if($value->loai_thanh_toan ==0) 
                                     <td>Thanh toán khi nhận hàng</td>
                                 @else 
-                                    <<td>Chuyển khoản</td>                  
+                                    <td>Chuyển khoản</td>                  
                                 @endif              
                             </tr>                      
                         @endforeach
@@ -43,6 +43,8 @@
                                     <td><b><u>Số Điện Thoại </u></b> : <b>{{ $value->so_dien_thoai }}</b> </td>
                                         <br/>
                                     <td><b><u>Địa Chỉ </u></b> : <b>{{ $value->dia_chi }}</b> </td>
+                                    <br/>
+                                    <td><b><u>Tổng Tiền Cả Đơn Hàng </u></b> : <b>{{ number_format($value->tong_tien) }} VND</b> </td>
                                 </tr>
                             @endforeach
                         </div>

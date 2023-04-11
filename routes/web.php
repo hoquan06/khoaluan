@@ -64,7 +64,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
-        Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
+        Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);     
     });
 });
 
@@ -99,6 +99,8 @@ Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageController::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, 'viewDanhMuc']);
 Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
+
+Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
 
 
 

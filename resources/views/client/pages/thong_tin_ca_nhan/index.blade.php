@@ -75,18 +75,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($data as $key=>$value)
-                                                <tr>
-                                                    <td>{{$key+1}}</td>
-                                                    <td>{{Carbon\Carbon::parse($value->created_at)-> format('H:i:s d-m-y')}}</td>
-                                                    <td>{{$value->tinh_trang}}</td>
-                                                    <td>{{$value->thuc_tra}}</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
-                                                        <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                           
                                         </tbody>
                                     </table>
                                 </div>

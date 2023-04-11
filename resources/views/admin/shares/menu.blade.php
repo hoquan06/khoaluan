@@ -37,17 +37,17 @@
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Quản lý</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/danh-muc-san-pham/index"><i data-feather='briefcase'></i><span class="menu-title text-truncate" data-i18n="Invoice">Danh mục sản phẩm</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/danh-muc-san-pham/index"><i data-feather='package'></i><span class="menu-title text-truncate" data-i18n="Invoice">Danh mục sản phẩm</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/san-pham/index"><i data-feather='smartphone'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/banner/index"><i data-feather='airplay'></i><span class="menu-title text-truncate" data-i18n="Invoice">Banner</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/slide/index"><i data-feather='link-2'></i><span class="menu-title text-truncate" data-i18n="Invoice">Slide</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/slide/index"><i data-feather='monitor'></i><span class="menu-title text-truncate" data-i18n="Invoice">Slide</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='dollar-sign'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='gift'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản</span></a>
             </li>
