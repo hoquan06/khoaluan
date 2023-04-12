@@ -14,7 +14,9 @@ class DonHangController extends Controller
 {
     public function index()
     {
-        $donHang = DonHang::all();
+        $donHang = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+        ->select('khach_hangs.*','don_hangs.*')
+        ->get();
         return view("admin.pages.don_hang.index",compact('donHang'));
     }
 
@@ -40,15 +42,12 @@ class DonHangController extends Controller
     {
         $chi_tiet_don_hang = DonHang::join('chi_tiet_don_hangs','don_hangs.id','chi_tiet_don_hangs.don_hang_id')
                             ->join('san_phams','san_phams.id','chi_tiet_don_hangs.san_pham_id')
-        ->select('don_hangs.*','chi_tiet_don_hangs.ten_san_pham','chi_tiet_don_hangs.so_luong','chi_tiet_don_hangs.don_gia','san_phams.hinh_anh')
+                            ->join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+        ->select('don_hangs.*','khach_hangs.*','chi_tiet_don_hangs.ten_san_pham','chi_tiet_don_hangs.so_luong','chi_tiet_don_hangs.don_gia','san_phams.hinh_anh','san_phams.gia_ban','san_phams.gia_khuyen_mai')
         ->where('don_hang_id', $id)
         ->get();
 
-
-        $khach_hang = KhachHang::join('don_hangs','khach_hangs.id','don_hangs.agent_id')
-        ->select('khach_hangs.*','don_hangs.tong_tien')
-        ->get();
-        return view("admin.pages.don_hang.view",compact('chi_tiet_don_hang','khach_hang'));
+        return view("admin.pages.don_hang.view",compact('chi_tiet_don_hang'));
     }
 
     public function watch($id)

@@ -8,31 +8,43 @@
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
+                            <th class="text-center">Tên Khách Hàng</th>
                             <th class="text-center">Mã Đơn Hàng</th>
                             <th class="text-center">Địa Chỉ Giao Hàng</th>
+                            <th class="text-center">Giá Trị Đơn Hàng</th>
+                            <th class="text-center">Loại Thanh Toán</th>
                             <th class="text-center">Tình Trạng</th>
                             <th class="text-center">Thao Tác</th>
+                            
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
                         @foreach($donHang as $key => $value)
                             <tr> 
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $value->ma_don_hang }}</td>               
-                            <td>{{ $value->dia_chi_giao_hang }}</td>               
+                            <td>{{ $value->ho_va_ten }}</td>               
+                            <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>               
+                            <td>{{ $value->dia_chi_giao_hang }}</td>
+                            <td>{{ number_format($value->thuc_tra) }} VND</td>               
+                                @if($value->loai_thanh_toan ==0) 
+                                    <td>Thanh toán khi nhận hàng</td>
+                                @else 
+                                    <td>Chuyển khoản</td>                  
+                                @endif                  
                                 @if($value->tinh_trang == 0)
                                     <td>
                                         <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Duyệt</button>
                                     </td>
                                 @else
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="btn btn-danger doiTrangThai">Hủy Duyệt</button>
+                                        <button data-id="{{ $value->id }}" class="btn btn-info doiTrangThai">Đang Giao Hàng</button>
                                     </td>
                                 @endif              
                                 <td>
                                     <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-success">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
+                               
                             </tr>                                            
                         @endforeach
                     </tbody>
@@ -100,16 +112,16 @@
                     success     : function(res){
                         if(res.doitrangthai){
                             if(res.tinhtrang){
-                                self.html("Hủy Duyệt");
+                                self.html("Đang Giao Hàng");
                                 self.removeClass('btn-success');
-                                self.addClass('btn-danger');
-                                toastr.success("Đơn Hàng đã được duyệt!!!");
+                                self.addClass('btn-info');
+                                toastr.success("Đơn hàng đã được duyệt!!!");
                             } else{
                                 self.html("Duyệt");
-                                self.removeClass('btn-danger');
+                                self.removeClass('btn-info');
                                 self.addClass('btn-success');
                              
-                                toastr.success("Hủy duyệt đơn hàng thành công!!!");
+                                toastr.success("Đơn hàng đang ở trạng thái chờ được duyệt!!!");
                             }
                         } else{
                             toastr.error("Đơn hàng không tồn tại!!!");
