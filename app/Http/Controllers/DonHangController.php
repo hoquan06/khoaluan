@@ -164,4 +164,28 @@ class DonHangController extends Controller
             return view('client.pages.chi_tiet_don_hang.index', compact('data', 'tongTien'));
         }
     }
+
+    public function cancelOrder($id)
+    {
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $donHang = DonHang::find($id);
+            if($donHang){
+                if($donHang->tinh_trang == 0){
+                    $donHang->delete();
+                    return response()->json([
+                        'huy'       => 1,
+                    ]);
+                } else{
+                    return response()->json([
+                        'huy'       => 2,
+                    ]);
+                }
+            } else{
+                return response()->json([
+                    'huy'       => 3,
+                ]);
+            }
+        }
+    }
 }

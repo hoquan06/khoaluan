@@ -306,7 +306,7 @@
                         noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
-                        noiDung += '<a class="btn btn-fill-out btn-sm">Hủy</a>';
+                        noiDung += '<a data-id="' + value.id + '" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
                         noiDung += '</td>';
                         noiDung += '</tr>';
                     });
@@ -330,6 +330,21 @@
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
         };
 
+        $('body').on('click', '.cancelOrder', function(){
+            var idcancel = $(this).data('id');
+            axios
+                .get('/khach-hang/don-hang/huy/' + idcancel)
+                .then((res) => {
+                    if(res.data.huy == 1){
+                        toastr.success("Hủy đơn hàng thành công!");
+                        loadTable();
+                    } else if(res.data.huy == 2){
+                        toastr.warning("Hủy không thành công do đơn hàng đang được vận chuyển!");
+                    } else{
+                        toastr.error("Đơn hàng không tồn tại!");
+                    }
+                })
+        });
     });
     // var app = new Vue({
     //     el          : '#app',

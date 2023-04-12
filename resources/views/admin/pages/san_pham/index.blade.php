@@ -448,8 +448,8 @@
                         noiDung += '<td>' + (key + 1) + '</td>';
                         noiDung += '<td>' + value.ten_san_pham + '</td>';
                         noiDung += '<td>' + value.so_luong + '</td>';
-                        noiDung += '<td>' + value.gia_ban + ' VND</td>';
-                        noiDung += '<td>' + value.gia_khuyen_mai + ' VND</td>';
+                        noiDung += '<td>' + numberFormat(value.gia_ban) + ' VND</td>';
+                        noiDung += '<td>' + numberFormat(value.gia_khuyen_mai) + ' VND</td>';
                         noiDung += '<td> <img src="' + value.hinh_anh + '" style="height: 50px;"> </td>';
                         noiDung += '<td>';
                         noiDung +=  '<button data-id="' + value.id + '" class="doiTrangThai btn ' +  mauTrangThai + '">' + tenTrangThai + '</button>';
@@ -593,6 +593,10 @@
                 },
             });
         });
+
+        function numberFormat(number){
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+        };
     });
 </script>
 @endsection

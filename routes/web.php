@@ -94,6 +94,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
     Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
     Route::get('/don-hang/chi-tiet/{id}', [\App\Http\Controllers\DonHangController::class, 'viewOrder']);
+    Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
@@ -102,7 +103,6 @@ Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, '
 Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
-Route::get('/test', [\App\Http\Controllers\DonHangController::class, 'test']);
 
 
 
