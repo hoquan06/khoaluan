@@ -220,9 +220,29 @@
         </div>
     </div>
 </div> --}}
-
 @endsection
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalToggleLabel">Hủy đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc muốn hủy đơn hàng này không? Điều này không thể hoàn tác!
+                    <input type="text" class="form-control" placeholder="Nhập vào id cần xóa" id="idDelete" hidden>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button class="btn btn-danger delete" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Hủy đơn hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js" ></script>
 <script>
     $(document).ready(function(){
@@ -306,7 +326,7 @@
                         noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
-                        noiDung += '<a data-id="' + value.id + '" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
+                        noiDung += '<a data-id="' + value.id + '" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
                         noiDung += '</td>';
                         noiDung += '</tr>';
                     });
@@ -332,8 +352,12 @@
 
         $('body').on('click', '.cancelOrder', function(){
             var idcancel = $(this).data('id');
+            $("#idDelete").val(idcancel);
+        });
+        $(".delete").click(function(){
+            var id = $("#idDelete").val();
             axios
-                .get('/khach-hang/don-hang/huy/' + idcancel)
+                .get('/khach-hang/don-hang/huy/' + id)
                 .then((res) => {
                     if(res.data.huy == 1){
                         toastr.success("Hủy đơn hàng thành công!");
