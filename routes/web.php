@@ -93,6 +93,7 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
     Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
+    Route::get('/don-hang/chi-tiet/{id}', [\App\Http\Controllers\DonHangController::class, 'viewOrder']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);

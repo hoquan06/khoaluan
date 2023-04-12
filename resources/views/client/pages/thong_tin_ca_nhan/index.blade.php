@@ -62,7 +62,7 @@
                         	<div class="card-header">
                                 <h3>Đơn hàng khả dụng</h3>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" id="tableDonHang">
                     			<div class="table-responsive">
                                     <table class="table text-nowrap text-center">
                                         <thead>
@@ -75,18 +75,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <template v-for='(value, key) in list'>
+                                            {{-- <template v-for='(value, key) in list'>
                                                 <tr>
                                                     <td>@{{key + 1}}</td>
-                                                    <td>@{{ moment(value.created_at) }}</td>
-                                                    <td>@{{value.tinh_trang}}</td>
-                                                    <td>@{{value.thuc_tra}}</td>
+                                                    <td>@{{ GetNow(value.created_at) }}</td>
+                                                    <td v-if="tinh_trang == 0">Chờ xác nhận</td>
+                                                    <td v-else-if="tinh_trang == 1">Đang chuẩn bị hàng</td>
+                                                    <td>@{{numberFormat(value.thuc_tra)}}</td>
                                                     <td>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
                                                     </td>
                                                 </tr>
-                                            </template>
+                                            </template> --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -223,7 +224,6 @@
 @endsection
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 <script>
     $(document).ready(function(){
         $.ajaxSetup({
@@ -283,27 +283,86 @@
                 },
             });
         });
+
+        function loadTable(){
+            $.ajax({
+                url             : '/khach-hang/don-hang/data',
+                type            : 'get',
+                success         : function(res){
+                    var noiDung = '';
+                    $.each(res.donhang, function(key, value){
+                        var tinhTrang = '';
+                        if(value.tinh_trang == 0){
+                            tinhTrang = 'Chờ xác nhận';
+                        } else if(value.tinh_trang == 1){
+                            tinhTrang = 'Đang giao';
+                        } else{
+                            tinhTrang = 'Đã nhận hàng';
+                        }
+                        noiDung += '<tr>',
+                        noiDung += '<td>' + (key + 1) + '</td>';
+                        noiDung += '<td>' + GetNow(value.created_at) + '</td>';
+                        noiDung += '<td>' + tinhTrang + '</td>';
+                        noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDung += '<td>';
+                        noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
+                        noiDung += '<a class="btn btn-fill-out btn-sm">Hủy</a>';
+                        noiDung += '</td>';
+                        noiDung += '</tr>';
+                    });
+                    $("#tableDonHang tbody").html(noiDung);
+                }
+            });
+        };
+        loadTable();
+
+        function GetNow(){
+            var currentdate = new Date();
+            var datetime = currentdate.getDate() + "-"
+                    + (currentdate.getMonth()+1)  + "-"
+                    + currentdate.getFullYear();
+                    // + currentdate.getHours() + ":"
+                    // + currentdate.getMinutes() + ":"
+                    // + currentdate.getSeconds();
+            return datetime;
+        };
+        function numberFormat(number){
+            return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+        };
+
     });
-    var app = new Vue({
-        el          : '#app',
-        data        : {
-            list    : [],
-        },
-        created(){
-            this.loadTable();
-        },
-        methods: {
-            loadTable(){
-                axios
-                    .get('/khach-hang/don-hang/data')
-                    .then((res) => {
-                        this.list = res.data.donhang;
-                    })
-            },
-            moment: function () {
-                return moment().locale('vi').format("LL");
-            }
-        }
-    });
+    // var app = new Vue({
+    //     el          : '#app',
+    //     data        : {
+    //         list    : [],
+    //         tinh_trang: this.list,
+    //     },
+
+    //     created(){
+    //         this.loadTable();
+    //     },
+    //     methods: {
+    //         loadTable(){
+    //             axios
+    //                 .get('/khach-hang/don-hang/data')
+    //                 .then((res) => {
+    //                     this.list = res.data.donhang;
+    //                 })
+    //         },
+    //         GetNow(){
+    //             var currentdate = new Date();
+    //             var datetime = currentdate.getDate() + "-"
+    //                     + (currentdate.getMonth()+1)  + "-"
+    //                     + currentdate.getFullYear();
+    //                     // + currentdate.getHours() + ":"
+    //                     // + currentdate.getMinutes() + ":"
+    //                     // + currentdate.getSeconds();
+    //             return datetime;
+    //         },
+    //         numberFormat(number){
+    //             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+    //         },
+    //     }
+    // });
 </script>
 @endsection

@@ -148,4 +148,20 @@ class DonHangController extends Controller
             ]);
         }
     }
+
+    public function viewOrder($id)
+    {
+        $agent = Auth::guard('khach_hang')->user();
+        if($agent){
+            $data = ChiTietDonHang::join('san_phams', 'chi_tiet_don_hangs.san_pham_id', 'san_phams.id')
+                                  ->where('agent_id', $agent->id)
+                                  ->where('don_hang_id', $id)
+                                  ->select('chi_tiet_don_hangs.*', 'san_phams.hinh_anh')
+                                  ->get();
+            $tongTien = DonHang::where('agent_id', $agent->id)
+                               ->where('id', $id)
+                               ->get();
+            return view('client.pages.chi_tiet_don_hang.index', compact('data', 'tongTien'));
+        }
+    }
 }
