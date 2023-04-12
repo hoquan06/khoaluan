@@ -102,6 +102,7 @@ Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, '
 Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
+Route::get('/test', [\App\Http\Controllers\DonHangController::class, 'test']);
 
 
 
