@@ -119,12 +119,11 @@
                             } else{
                                 self.html("Duyệt");
                                 self.removeClass('btn-info');
-                                self.addClass('btn-success');
-                             
+                                self.addClass('btn-success');               
                                 toastr.success("Đơn hàng đang ở trạng thái chờ được duyệt!!!");
                             }
                         } else{
-                            toastr.error("Đơn hàng không tồn tại!!!");
+                            toastr.error("Đơn hàng đang được vận chuyển và không thể hoàn tác!!!");
                         }
                     }
                 });

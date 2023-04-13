@@ -9,9 +9,9 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Tên Tài Khoản</th>
-                            <th class="text-center">Gmail</th>
-                            <th class="text-center">SDT</th>
                             <th class="text-center">Ngày Tháng Năm Sinh</th>
+                            <th class="text-center">SDT</th>
+                            <th class="text-center">Email</th>
                             <th class="text-center">Địa Chỉ</th>
                             <th class="text-center">Loại Tài Khoản</th>
                             <th class="text-center">Thao Tác</th>
