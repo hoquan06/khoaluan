@@ -385,7 +385,6 @@
             $("#so_luong_edit").val(so);
         });
 
-
         $("#themMoi").click(function(e){
             e.preventDefault();
 
