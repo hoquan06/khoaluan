@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title">Danh Sách Tài Khoản Đã Đăng Ký</h5>
+            <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Tài Khoản Đã Đăng Ký</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -84,25 +84,25 @@
                     url         : '/admin/tai-khoan/lock/' + idTaiKhoan,
                     type        : 'get',
                     success     : function(res){
-                        if(res.status){  
+                        if(res.status){
                             if(res.lock){
                                 self.html("Mở Khóa");
                                 self.removeClass('btn-danger');
-                                self.addClass('btn-success');   
-                                toastr.success("Khóa tài khoản thành công!!!");                                   
+                                self.addClass('btn-success');
+                                toastr.success("Khóa tài khoản thành công!!!");
                             } else{
                                 self.html("Khóa");
                                 self.removeClass('btn-primary');
-                                self.addClass('btn-danger');   
-                                toastr.success("Mở khóa tài khoản thành công!!!");     
+                                self.addClass('btn-danger');
+                                toastr.success("Mở khóa tài khoản thành công!!!");
                             }
-                        } else{                         
+                        } else{
                             toastr.error("Tài khoản không tồn tại!!!");
                         }
                     }
                 });
             });
-   
+
             var row = '';
             $('body').on('click', '.delete', function(){
                 var getId = $(this).data('iddelete');

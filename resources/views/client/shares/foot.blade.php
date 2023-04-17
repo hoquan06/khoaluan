@@ -5,7 +5,7 @@
                 <div class="col-lg-4 col-md-12 col-sm-12">
                 	<div class="widget">
                         <div class="footer_logo">
-                            <a href="#"><img src="/assets_client/images/logo_dark.png" alt="logo"/></a>
+                            <a href="/"><img src="\photos\shares\logo\logo2.png" alt="logo"/></a>
                         </div>
                         <ul class="contact_info">
                             <li>

@@ -23,5 +23,6 @@ class KhachHang extends Authenticatable
         'loai_tai_khoan',
         'is_lock',
         'hash',
+        'hash_reset',
     ];
 }

@@ -139,11 +139,17 @@ class DonHangController extends Controller
     {
         $agent = Auth::guard('khach_hang')->user();
         if($agent){
+            //đơn khả dụng
             $data = DonHang::where('agent_id', $agent->id)
                            ->where('tinh_trang', '<>', '-1')
                            ->get();
+            //đơn hủy
+            $donHuy = DonHang::where('agent_id', $agent->id)
+                             ->where('tinh_trang', -1)
+                             ->get();
             return response()->json([
                 'donhang'       => $data,
+                'donhuy'        => $donHuy,
             ]);
         }
     }
@@ -171,7 +177,8 @@ class DonHangController extends Controller
             $donHang = DonHang::find($id);
             if($donHang){
                 if($donHang->tinh_trang == 0){
-                    $donHang->delete();
+                    $donHang->tinh_trang = -1;
+                    $donHang->save();
                     return response()->json([
                         'huy'       => 1,
                     ]);

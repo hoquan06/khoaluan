@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('loai_tai_khoan')->default(0);
             $table->integer('is_lock')->default(0);
             $table->string('hash');
+            $table->string('hash_reset')->nullable();
             $table->timestamps();
         });
     }

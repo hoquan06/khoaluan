@@ -30,7 +30,6 @@
                     'dia_chi'           : $("#dia_chi").val(),
                     'agree'             : $("#agree").get(0).checked,
                 };
-                console.log(payload);
 
                 $.ajax({
                     url         : '/khach-hang/register',

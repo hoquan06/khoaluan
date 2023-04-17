@@ -58,6 +58,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- <div class="form-group">
+                                    {!! NoCaptcha::renderJs() !!}
+		                            {!! NoCaptcha::display() !!}
+                                </div> --}}
                                 <div class="form-group">
                                     <button id="register" type="button" class="btn btn-fill-out btn-block">Đăng ký</button>
                                 </div>

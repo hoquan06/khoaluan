@@ -75,36 +75,6 @@ mso-hide:all;
 </tr>
 <tr style="border-collapse:collapse">
 <td valign="top" style="padding:0;Margin:0">
-<table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
-<tr style="border-collapse:collapse">
-<td align="center" style="padding:0;Margin:0">
-<table class="es-content-body" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px" cellspacing="0" cellpadding="0" align="center">
-<tr style="border-collapse:collapse">
-<td align="left" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px"><!--[if mso]><table style="width:580px" cellpadding="0" cellspacing="0"><tr><td style="width:282px" valign="top"><![endif]-->
-<table class="es-left" cellspacing="0" cellpadding="0" align="left" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:left">
-<tr style="border-collapse:collapse">
-<td align="left" style="padding:0;Margin:0;width:282px">
-<table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-<tr style="border-collapse:collapse">
-<td class="es-infoblock es-m-txt-c" align="left" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica\ neue', helvetica, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px">Put your preheader text here<br></p></td>
-</tr>
-</table></td>
-</tr>
-</table><!--[if mso]></td><td style="width:20px"></td><td style="width:278px" valign="top"><![endif]-->
-<table class="es-right" cellspacing="0" cellpadding="0" align="right" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;float:right">
-<tr style="border-collapse:collapse">
-<td align="left" style="padding:0;Margin:0;width:278px">
-<table width="100%" cellspacing="0" cellpadding="0" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
-<tr style="border-collapse:collapse">
-<td align="right" class="es-infoblock es-m-txt-c" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:14px;color:#CCCCCC;font-size:12px"><a href="https://viewstripo.email" class="view" target="_blank" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#CCCCCC;font-size:12px;font-family:arial, 'helvetica neue', helvetica, sans-serif">View in browser</a></p></td>
-</tr>
-</table></td>
-</tr>
-</table><!--[if mso]></td></tr></table><![endif]--></td>
-</tr>
-</table></td>
-</tr>
-</table>
 <table class="es-header" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%;background-color:#FFA73B;background-repeat:repeat;background-position:center top">
 <tr style="border-collapse:collapse">
 <td align="center" style="padding:0;Margin:0">
@@ -164,7 +134,7 @@ mso-hide:all;
 <td valign="top" align="center" style="padding:0;Margin:0;width:600px">
 <table style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;border-radius:4px;background-color:#ffffff" width="100%" cellspacing="0" cellpadding="0" bgcolor="#ffffff" role="presentation">
 <tr style="border-collapse:collapse">
-<td class="es-m-txt-l" bgcolor="#ffffff" align="left" style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:30px;padding-right:30px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;font-size:18px">Chào mừng <strong>{{ $ho_ten }}</strong> đã đến với website của chúng tôi. Để kích hoạt tài khoản vui lòng click vào nút <strong>KÍCH HOẠT</strong> ở dưới đây!.</p></td>
+<td class="es-m-txt-l" bgcolor="#ffffff" align="left" style="Margin:0;padding-top:20px;padding-bottom:20px;padding-left:30px;padding-right:30px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:lato, 'helvetica neue', helvetica, arial, sans-serif;line-height:27px;color:#666666;font-size:18px">Chào mừng <strong>{{ $ho_ten }}</strong> đã đến với website của chúng tôi. Để kích hoạt tài khoản vui lòng click vào nút <strong>KÍCH HOẠT</strong> ở dưới đây!</p></td>
 </tr>
 <tr style="border-collapse:collapse">
 <td align="center" style="Margin:0;padding-left:10px;padding-right:10px;padding-top:35px;padding-bottom:35px"><!--[if mso]><a href="xxxxxxxxx" target="_blank" hidden>

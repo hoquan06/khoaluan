@@ -101,7 +101,7 @@
                             </div>
                             <div class="card-body">
                     			<div class="table-responsive">
-                                    <table class="table text-nowrap text-center">
+                                    <table class="table text-nowrap text-center" id="tableDonHuy">
                                         <thead>
                                             <tr>
                                                 <th>STT</th>
@@ -112,16 +112,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            {{-- <tr>
                                                 <td>#1234</td>
                                                 <td>March 15, 2020</td>
                                                 <td>Processing</td>
                                                 <td>$78.00 for 1 item</td>
                                                 <td>
                                                     <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
-                                                    <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -159,7 +158,7 @@
                                                 <input required=""  id="dia_chi" class="form-control" value = "{{Auth::guard('khach_hang')->user()->dia_chi}}"  type="text">
                                             </div>
                                             <div class="col-md-12">
-                                            <button type="button"  data-id = "{{Auth::guard('khach_hang')->user()->id }}" id="update" class="btn btn-fill-out edit"  data-toggle="modal" data-target="#deleteModal" >Cập Nhật</button>
+                                                <button type="button"  data-id = "{{Auth::guard('khach_hang')->user()->id }}" id="update" class="btn btn-fill-out edit"  data-toggle="modal" data-target="#deleteModal" >Cập Nhật</button>
                                             </div>
                                         @endif
                                     </div>
@@ -174,23 +173,21 @@
                             </div>
                             <div class="card-body">
                     			<!-- <p>Already have an account? <a href="#">Log in instead!</a></p> -->
-                                <form method="post">
-                                    <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label>Mật Khẩu Cũ<span class="required">*</span></label>
-                                                <input required="" id="ho_va_ten" class="form-control" placeholder="Nhập vào mật khẩu cũ" type="text">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Mật Khẩu Mới<span class="required">*</span></label>
-                                                <input required="" id="ho_va_ten" class="form-control" placeholder="Nhập vào mật khẩu mới" type="text">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Xác Nhận Mật Khẩu<span class="required">*</span></label>
-                                                <input required="" id="ho_va_ten" class="form-control"  type="text">
-                                            </div>
-                                            <div class="col-md-12">
-                                            <button type="button"  id="update" class="btn btn-fill-out edit"  data-toggle="modal" data-target="#deleteModal" >Thay Đổi</button>
-                                            </div>
+                                <form method="post" action="">
+                                    {{-- <div class="form-group col-md-6">
+                                        <label>Mật Khẩu Cũ<span class="required">*</span></label>
+                                        <input required="" id="password" class="form-control" placeholder="Nhập vào mật khẩu cũ" type="text">
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label>Mật Khẩu Mới<span class="required">*</span></label>
+                                        <input required="" id="password" class="form-control" placeholder="Nhập vào mật khẩu mới" type="password">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Xác Nhận Mật Khẩu<span class="required">*</span></label>
+                                        <input required="" id="re_password" class="form-control" placeholder="Xác nhận mật khẩu" type="password">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-fill-out changePassword">Thay Đổi</button>
                                     </div>
                                 </form>
                             </div>
@@ -330,7 +327,24 @@
                         noiDung += '</td>';
                         noiDung += '</tr>';
                     });
+
+                    var noiDungHuy = '';
+                    $.each(res.donhuy, function(key, value){
+                        if(value.tinh_trang == -1){
+                            var tinhTrang = 'Đã hủy';
+                        }
+                        noiDungHuy += '<tr>';
+                        noiDungHuy += '<td>' + (key+1) + '</td>';
+                        noiDungHuy += '<td>' + GetNow(value.created_at) + '</td>';
+                        noiDungHuy += '<td>' + tinhTrang + '</td>';
+                        noiDungHuy += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDungHuy += '<td>';
+                        noiDungHuy += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
+                        noiDungHuy += '</td>';
+                        noiDungHuy += '</tr>';
+                    });
                     $("#tableDonHang tbody").html(noiDung);
+                    $("#tableDonHuy tbody").html(noiDungHuy);
                 }
             });
         };
@@ -354,6 +368,7 @@
             var idcancel = $(this).data('id');
             $("#idDelete").val(idcancel);
         });
+
         $(".delete").click(function(){
             var id = $("#idDelete").val();
             axios
@@ -368,6 +383,30 @@
                         toastr.error("Đơn hàng không tồn tại!");
                     }
                 })
+        });
+
+        $(".changePassword").click(function(){
+            var payload = {
+                'password'          : $("#password").val(),
+                're_password'       : $("#re_password").val(),
+            }
+            axios
+                .post('/khach-hang/thay-doi-mat-khau', payload)
+                .then((res) => {
+                    if(res.data.doimatkhau){
+                        toastr.success("Đã thay đổi mật khẩu thành công!");
+                        $("#password").val('');
+                        $("#re_password").val('');
+                    } else{
+                        toastr.error("Đã xảy ra lỗi!");
+                    }
+                })
+                .catch((res) => {
+                    var danh_sach_loi = res.response.data.errors;
+                    $.each(danh_sach_loi, function(key, value){
+                        toastr.error([value[0]]);
+                    });
+                });
         });
     });
     // var app = new Vue({

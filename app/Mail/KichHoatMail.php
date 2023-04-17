@@ -22,7 +22,6 @@ class KichHoatMail extends Mailable
         $this->tieu_de      = $tieu_de;
     }
 
-
     public function build()
     {
         return $this->subject($this->tieu_de)->view('client.pages.mail.kich_hoat_mail', [

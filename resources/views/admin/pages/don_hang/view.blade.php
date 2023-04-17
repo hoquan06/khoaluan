@@ -17,27 +17,29 @@
                     </thead>
                     <tbody class="text-nowrap text-center">
                         @foreach($chi_tiet_don_hang as $key => $value)
-                            <tr> 
+                            <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ Str::length($value->ten_san_pham) > 30 ? Str::substr($value->ten_san_pham, 0, 30) . '...' :  $value->ten_san_pham}} </td>               
-                                <td><img src="{{ $value->hinh_anh }}" alt="" style="height :50px ; width: 50px" ></td>               
-                                <td>{{ $value->so_luong }}</td>               
-                                <td>{{ number_format($value->gia_ban * $value->so_luong )}} VND</td>                                               
-                                <td>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) * $value->so_luong)}} VND</td>                                               
-                                <td>{{ number_format($value->don_gia * $value->so_luong )}} VND</td>                                                         
-                            </tr>                      
+                                <td>{{ Str::length($value->ten_san_pham) > 30 ? Str::substr($value->ten_san_pham, 0, 30) . '...' :  $value->ten_san_pham}} </td>
+                                <td><img src="{{ $value->hinh_anh }}" alt="" style="height :50px ; width: 50px" ></td>
+                                <td>{{ $value->so_luong }}</td>
+                                <td>{{ number_format($value->gia_ban * $value->so_luong )}} VND</td>
+                                <td>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) * $value->so_luong)}} VND</td>
+                                <td>{{ number_format($value->don_gia * $value->so_luong )}} VND</td>
+                            </tr>
                         @endforeach
                     </tbody>
                     <div class="col md-12">
                         <div class="card">
-                            <div class="card-body">
-                                <span>Tên Khách Hàng : {{ $value->ho_va_ten }}</span>
+                            <div class="card-body text-start">
+                                <span>Tên Khách Hàng : <b>{{ $value->ho_va_ten }}</b></span>
                                 <br/>
-                                <span>Địa Chỉ : {{ $value->dia_chi }}</span>
+                                <span>Địa Chỉ : <b>{{ $value->dia_chi }}</b></span>
                                 <br/>
-                                <span>Số Điện Thoại: {{ $value->so_dien_thoai }}</span>
+                                <span>Số Điện Thoại: <b>{{ $value->so_dien_thoai }}</b></span>
                                 <br/>
-                                <span>Tổng tiền của đơn hàng : {{ number_format($value->thuc_tra) }} VND</span>
+                                <span>Tổng tiền của đơn hàng : <b>{{ number_format($value->thuc_tra) }} VND </b></span>
+                                <br/>
+                                <span>Sản phẩm: </span>
                             </div>
                         </div>
                     </div>

@@ -46,6 +46,7 @@
                                     <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
                                 </ul>
                                 <div class="form-note text-center">Bạn chưa có tài khoản? <a href="/khach-hang/register">Đăng ký</a></div>
+                                <div class="form-note text-center"><a href="/khach-hang/quen-mat-khau">Quên mật khẩu?</a></div>
                             </form>
                         </div>
                     </div>

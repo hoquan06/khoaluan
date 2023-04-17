@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center"><h5 class="card-title">Danh Sách Đơn Hàng</h5>
+            <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Đơn Hàng</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -15,22 +15,22 @@
                             <th class="text-center">Loại Thanh Toán</th>
                             <th class="text-center">Tình Trạng</th>
                             <th class="text-center">Thao Tác</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
                         @foreach($donHang as $key => $value)
-                            <tr> 
+                            <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $value->ho_va_ten }}</td>               
-                            <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>               
+                            <td>{{ $value->ho_va_ten }}</td>
+                            <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>
                             <td>{{ $value->dia_chi_giao_hang }}</td>
-                            <td>{{ number_format($value->thuc_tra) }} VND</td>               
-                                @if($value->loai_thanh_toan ==0) 
+                            <td>{{ number_format($value->thuc_tra) }} VND</td>
+                                @if($value->loai_thanh_toan ==0)
                                     <td>Thanh toán khi nhận hàng</td>
-                                @else 
-                                    <td>Chuyển khoản</td>                  
-                                @endif                  
+                                @else
+                                    <td>Chuyển khoản</td>
+                                @endif
                                 @if($value->tinh_trang == 0)
                                     <td>
                                         <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Duyệt</button>
@@ -39,13 +39,13 @@
                                     <td>
                                         <button data-id="{{ $value->id }}" class="btn btn-info doiTrangThai">Đang Giao Hàng</button>
                                     </td>
-                                @endif              
+                                @endif
                                 <td>
                                     <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-success">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
-                               
-                            </tr>                                            
+
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -104,7 +104,7 @@
             });
 
             $('body').on('click', '.doiTrangThai', function(){
-                var idDonHang = $(this).data('id');      
+                var idDonHang = $(this).data('id');
                 var self = $(this);
                 $.ajax({
                     url         : '/admin/don-hang/accept/' + idDonHang,
@@ -119,7 +119,7 @@
                             } else{
                                 self.html("Duyệt");
                                 self.removeClass('btn-info');
-                                self.addClass('btn-success');               
+                                self.addClass('btn-success');
                                 toastr.success("Đơn hàng đang ở trạng thái chờ được duyệt!!!");
                             }
                         } else{

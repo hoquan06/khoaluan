@@ -75,6 +75,12 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/login', [\App\Http\Controllers\KhachHangController::class, 'loginAction']);
     Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
     Route::get('/logout', [\App\Http\Controllers\KhachHangController::class, 'logout']);
+
+    Route::get('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'resetPassword']);
+    Route::post('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'actionResetPassword']);
+    Route::get('/cap-nhat-mat-khau/{hash_reset}', [\App\Http\Controllers\KhachHangController::class, 'UpdatePassword']);
+    Route::post('/cap-nhat-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'actionUpdatePassword']);
+
     Route::get('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'index']);
     Route::post('/gio-hang', [\App\Http\Controllers\ChiTietDonHangController::class, 'addToCart']);
     Route::get('/gio-hang/data', [\App\Http\Controllers\ChiTietDonHangController::class, 'dataCart']);
@@ -87,14 +93,16 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/yeu-thich/data', [\App\Http\Controllers\YeuThichController::class, 'getData']);
     Route::get('/yeu-thich/delete/{id}', [\App\Http\Controllers\YeuThichController::class, 'destroy']);
 
-    Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\QuanLyThongTinController::class, 'index']);
-    Route::get('/edit/{id}', [\App\Http\Controllers\QuanLyThongTinController::class, 'edit']);
-    Route::post('/update', [\App\Http\Controllers\QuanLyThongTinController::class, 'update']);
+    Route::get('/thong-tin-ca-nhan', [\App\Http\Controllers\KhachHangController::class, 'view']);
+    Route::get('/edit/{id}', [\App\Http\Controllers\KhachHangController::class, 'edit']);
+    Route::post('/update', [\App\Http\Controllers\KhachHangController::class, 'update']);
 
     Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
     Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
     Route::get('/don-hang/chi-tiet/{id}', [\App\Http\Controllers\DonHangController::class, 'viewOrder']);
     Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);
+
+    Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);

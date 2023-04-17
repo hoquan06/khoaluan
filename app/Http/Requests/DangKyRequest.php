@@ -31,22 +31,24 @@ class DangKyRequest extends FormRequest
             're_password'           => 'required|same:password',
             'dia_chi'               => 'required|min:5',
             'agree'                 => 'accepted',
+            // 'g-recaptcha-response'  => 'captcha|accepted',
         ];
     }
 
     public function messages()
     {
         return [
-            'required'              => ':attribute không được để trống',
-            'min'                   => ':attribute quá ngắn',
-            'max'                   => ':attribute quá dài',
-            'date'                  => ':attribute không đúng định dạng',
-            'before'                => ':attribute không hợp lệ',
-            'digits'                => ':attribute phải là 10 số',
-            'unique'                => ':attribute đã tồn tại',
-            'email'                 => ':attribute không đúng định dạng',
-            'same'                  => ':attribute và mật khẩu không trùng khớp',
-            'agree.accepted'        => 'Bạn phải đồng ý điều khoản!',
+            'required'                       => ':attribute không được để trống',
+            'min'                            => ':attribute quá ngắn',
+            'max'                            => ':attribute quá dài',
+            'date'                           => ':attribute không đúng định dạng',
+            'before'                         => ':attribute không hợp lệ',
+            'digits'                         => ':attribute phải là 10 số',
+            'unique'                         => ':attribute đã tồn tại',
+            'email'                          => ':attribute không đúng định dạng',
+            'same'                           => ':attribute và mật khẩu không trùng khớp',
+            'agree.accepted'                 => 'Bạn phải đồng ý điều khoản!',
+            // 'g-recaptcha-response.accepted'  => 'Vui lòng xác minh rằng bạn không phải là người máy'
         ];
     }
 
@@ -58,7 +60,7 @@ class DangKyRequest extends FormRequest
             'so_dien_thoai'         => 'Số điện thoại',
             'email'                 => 'Email',
             'password'              => 'Mật khẩu',
-            're_password'            => 'Nhập lại mật khẩu',
+            're_password'           => 'Nhập lại mật khẩu',
             'dia_chi'               => 'Địa chỉ',
         ];
     }
