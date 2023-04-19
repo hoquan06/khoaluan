@@ -87,4 +87,31 @@ class HomePageController extends Controller
         $danhSach = SanPham::where('ten_san_pham', 'like', "%". $data ."%")->get();
         return view('client.pages.ds_san_pham_search', compact('danhSach'));
     }
+
+    public function spThinhHanh()
+    {
+        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
+        $spThinhHanh = DB::select($sp_thinh_hanh);
+        return view('client.pages.view_ds_san_pham.thinh_hanh', compact('spThinhHanh'));
+    }
+
+    public function spNoiBat()
+    {
+        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
+        $spThinhHanh = DB::select($sp_thinh_hanh);
+        return view('client.pages.view_ds_san_pham.noi_bat', compact('spThinhHanh'));
+    }
+
+    public function spHangDau()
+    {
+        $sp_hang_dau = SanPham::orderByDesc('gia_khuyen_mai')->get();
+        return view('client.pages.view_ds_san_pham.hang_dau', compact('sp_hang_dau'));
+    }
+
+    public function spGiamGia()
+    {
+        $sql = "SELECT *, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam` FROM `san_phams` ORDER BY ty_le_giam DESC";
+        $best_seller = DB::select($sql);
+        return view('client.pages.view_ds_san_pham.giam_gia', compact('best_seller'));
+    }
 }

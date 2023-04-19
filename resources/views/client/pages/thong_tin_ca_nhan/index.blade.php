@@ -85,6 +85,7 @@
                                                     <td>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
+                                                        <a href="#" class="btn btn-fill-out btn-sm">Đã nhận hàng</a>
                                                     </td>
                                                 </tr>
                                             </template> --}}
@@ -323,9 +324,15 @@
                         noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
-                        noiDung += '<a data-id="' + value.id + '" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
+                        if(value.tinh_trang == 0 || value.tinh_trang == 1){
+                            noiDung += '<a data-id="' + value.id + '" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
+                        }
                         noiDung += '</td>';
+                        if(value.tinh_trang == 1){
+                            noiDung += '<td><a data-id="' + value.id + '" class="btn btn-fill-out btn-sm orderCompleted">Đã nhận được hàng</a></td>';
+                        }
                         noiDung += '</tr>';
+
                     });
 
                     var noiDungHuy = '';
@@ -407,6 +414,20 @@
                         toastr.error([value[0]]);
                     });
                 });
+        });
+
+        $('body').on('click', '.orderCompleted', function(){
+            var getId = $(this).data('id');
+            axios
+                .get('/khach-hang/don-hang/da-nhan-hang/' + getId)
+                .then((res) => {
+                    if(res.data){
+                        toastr.success("Cảm ơn bạn đã tin dùng sản phẩm của chúng tôi!");
+                        loadTable();
+                    } else{
+                        toastr.error("Đơn hàng không tồn tại!");
+                    }
+                })
         });
     });
     // var app = new Vue({

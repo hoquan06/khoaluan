@@ -129,8 +129,8 @@
             <div class="card-body"><h5 class="card-title">Danh Sách Sản Phẩm</h5>
                 <div class="input-group mb-2">
                     <span class="input-group-text" id="basic-addon-search1"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
-                    <input type="text" id="search" class="form-control" placeholder="Search..." aria-label="Search..." aria-describedby="basic-addon-search1">
-                    <button id="searchAction" class="btn btn-primary searchAction">Tìm kiếm</button>
+                    <input type="text" id="search" class="form-control" placeholder="Search...">
+                    <button id="searchAction" type="button" class="btn btn-primary">Tìm kiếm</button>
                 </div>
                 <table class="mb-0 table table-bordered table-hover" id="tableSanPham">
                     <thead>
@@ -304,6 +304,8 @@
 @section('js')
 <script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
 <script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
 <script>
     // $('.lfm').filemanager('image');
     $("#lfm").filemanager('image');
@@ -470,6 +472,48 @@
                 },
             });
         }
+
+        // function loadTableSearch(){
+        //     $.ajax({
+        //         url             : '/admin/san-pham/data-search',
+        //         type            : 'post',
+        //         success         : function(res){
+        //             var noiDung = '';
+        //             $.each(res.search, function(key, value){
+        //                 if (value.tinh_trang){
+        //                     var tenTrangThai = 'Đang mở bán';
+        //                     var mauTrangThai = 'btn-primary';
+        //                 } else{
+        //                     var tenTrangThai = 'Tạm ngưng';
+        //                     var mauTrangThai = 'btn-danger';
+        //                 }
+        //                 noiDung += '<tr>';
+        //                 noiDung += '<td>' + (key + 1) + '</td>';
+        //                 noiDung += '<td>' + value.ten_san_pham + '</td>';
+        //                 noiDung += '<td>' + value.so_luong + '</td>';
+        //                 noiDung += '<td>' + numberFormat(value.gia_ban) + ' VND</td>';
+        //                 noiDung += '<td>' + numberFormat(value.gia_khuyen_mai) + ' VND</td>';
+        //                 noiDung += '<td> <img src="' + value.hinh_anh + '" style="height: 50px;"> </td>';
+        //                 noiDung += '<td>';
+        //                 noiDung +=  '<button data-id="' + value.id + '" class="doiTrangThai btn ' +  mauTrangThai + '">' + tenTrangThai + '</button>';
+        //                 noiDung += '</td>';
+        //                 noiDung += '<td>' + value.ten_danh_muc + '</td>';
+        //                 noiDung += '<td>';
+        //                 noiDung +=  '<button data-idedit="' + value.id + '" data-bs-toggle="modal" data-bs-target="#editModal" class="edit btn btn-primary me-1">Chỉnh sửa</button>';
+        //                 noiDung +=  '<button data-iddelete="' + value.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal" class="delete btn btn-danger">Xóa</button>';
+        //                 noiDung += '</td>';
+        //                 noiDung += '</tr>';
+        //             });
+        //             var noiDungDM = '';
+        //             $.each(res.danhsachDM, function(key, value){
+        //                 noiDungDM += '<option value="' + value.id + '">' + value.ten_danh_muc + '</option>';
+        //             });
+        //             $("#tableSanPham tbody").html(noiDung);
+        //             $("#id_danh_muc").html(noiDungDM);
+        //             $("#id_danh_muc_edit").html(noiDungDM);
+        //         },
+        //     });
+        // }
         loadTable();
 
         $('body').on('click', '.doiTrangThai', function(){
@@ -596,6 +640,22 @@
         function numberFormat(number){
             return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
         };
+
+        // $("#searchAction").click(function(){
+        //     var payload = {
+        //         'tenSanPham' : $('#search').val(),
+        //     };
+        //     axios
+        //         .post('/admin/san-pham/search', payload)
+        //         .then((res) => {
+        //             if(res.data.search){
+        //                 toastr.success("Đã tìm thấy sản phẩm!");
+        //                 loadTableSearch();
+        //             } else{
+        //                 toastr.error("not ok");
+        //             }
+        //         });
+        // });
     });
 </script>
 @endsection

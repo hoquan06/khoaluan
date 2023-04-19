@@ -7,7 +7,7 @@
 <meta name="keywords" content="ecommerce, electronics store, Fashion store, furniture store,  bootstrap 4, clean, minimal, modern, online store, responsive, retail, shopping, ecommerce store">
 
 <!-- SITE TITLE -->
-<title>Shopwise - eCommerce Bootstrap 4 HTML Template</title>
+<title>SmartTech - Đỉnh cao công nghệ</title>
 <!-- Favicon Icon -->
 <link rel="shortcut icon" type="image/x-icon" href="/assets_client/images/favicon.png">
 <!-- Animation CSS -->

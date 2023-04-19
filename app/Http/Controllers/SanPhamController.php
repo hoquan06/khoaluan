@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateSanPhamRequest;
 use App\Models\DanhMucSanPham;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class SanPhamController extends Controller
 {
@@ -103,5 +104,21 @@ class SanPhamController extends Controller
                 'update'        => false,
             ]);
         }
+    }
+
+    public function search(Request $request)
+    {
+        $sanPham = SanPham::where('ten_san_pham', 'like', '%'. $request->tenSanPham .'%')->get();
+        return response()->json([
+            'search'        => $sanPham,
+        ]);
+    }
+
+    public function getDataSearch(Request $request)
+    {
+        $sanPham = SanPham::where('ten_san_pham', 'like', '%'. $request->tenSanPham .'%')->get();
+        return response()->json([
+            'search'        => $sanPham,
+        ]);
     }
 }

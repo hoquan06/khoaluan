@@ -36,6 +36,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/edit/{id}', [\App\Http\Controllers\SanPhamController::class, 'edit']);
         Route::post('/update', [\App\Http\Controllers\SanPhamController::class, 'update']);
 
+        // Route::post('/data-search', [\App\Http\Controllers\SanPhamController::class, 'getDataSearch']);
+        // Route::post('/search', [\App\Http\Controllers\SanPhamController::class, 'search']);
     });
 
     Route::prefix('banner')->group(function () {
@@ -101,14 +103,19 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
     Route::get('/don-hang/chi-tiet/{id}', [\App\Http\Controllers\DonHangController::class, 'viewOrder']);
     Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);
-
+    Route::get('/don-hang/da-nhan-hang/{id}', [\App\Http\Controllers\DonHangController::class, 'orderCompleted']);
     Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);
 Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageController::class, 'viewSanPham']);
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, 'viewDanhMuc']);
-Route::post('/search', [\App\Http\Controllers\HomePageController::class, 'search']);
+Route::post('/tim-kiem', [\App\Http\Controllers\HomePageController::class, 'search']);
+
+Route::get('/san-pham-thinh-hanh', [\App\Http\Controllers\HomePageController::class, 'spThinhHanh']);
+Route::get('/san-pham-noi-bat', [\App\Http\Controllers\HomePageController::class, 'spNoiBat']);
+Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::class, 'spHangDau']);
+Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
 

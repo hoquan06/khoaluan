@@ -9,7 +9,7 @@
                     $name = 'slide_' . $i;
                 @endphp
                 @if ($slide)
-                @if(isset($slide->$name) && Str::length($slide->$name) > 0) 
+                @if(isset($slide->$name) && Str::length($slide->$name) > 0)
                     <div class="carousel-item background_bg {{ $check == true ? 'active' : '' }}">
                         <a href="#" target="_blank">
                             <img src="{{$slide->$name}}" alt="">

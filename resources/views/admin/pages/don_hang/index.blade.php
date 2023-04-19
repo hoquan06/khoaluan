@@ -26,22 +26,30 @@
                             <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>
                             <td>{{ $value->dia_chi_giao_hang }}</td>
                             <td>{{ number_format($value->thuc_tra) }} VND</td>
-                                @if($value->loai_thanh_toan ==0)
+                                @if($value->loai_thanh_toan == 0)
                                     <td>Thanh toán khi nhận hàng</td>
                                 @else
                                     <td>Chuyển khoản</td>
                                 @endif
-                                @if($value->tinh_trang == 0)
+                                @if($value->tinh_trang == -1)
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Duyệt</button>
+                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-danger">Đã hủy</button>
+                                    </td>
+                                @elseif ($value->tinh_trang == 0)
+                                    <td>
+                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-info">Duyệt</button>
+                                    </td>
+                                @elseif($value->tinh_trang == 1)
+                                    <td>
+                                        <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao hàng</button>
                                     </td>
                                 @else
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="btn btn-info doiTrangThai">Đang Giao Hàng</button>
+                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Đã giao</button>
                                     </td>
                                 @endif
                                 <td>
-                                    <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-success">Xem</a>
+                                    <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-info">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
 
@@ -110,20 +118,19 @@
                     url         : '/admin/don-hang/accept/' + idDonHang,
                     type        : 'get',
                     success     : function(res){
-                        if(res.doitrangthai){
+                        if(res.doitrangthai == 1){
                             if(res.tinhtrang){
                                 self.html("Đang Giao Hàng");
-                                self.removeClass('btn-success');
-                                self.addClass('btn-info');
-                                toastr.success("Đơn hàng đã được duyệt!!!");
-                            } else{
-                                self.html("Duyệt");
                                 self.removeClass('btn-info');
-                                self.addClass('btn-success');
-                                toastr.success("Đơn hàng đang ở trạng thái chờ được duyệt!!!");
+                                self.addClass('btn-primary');
+                                toastr.success("Đơn hàng đã được duyệt!!!");
                             }
+                        } else if(res.doitrangthai == 2){
+                            toastr.error("Đơn hàng đã bị hủy!!!");
+                        } else if(res.doitrangthai == 3){
+                            toastr.success("Đơn hàng đã được giao thành công!!!");
                         } else{
-                            toastr.error("Đơn hàng đang được vận chuyển và không thể hoàn tác!!!");
+                            toastr.warning("Đơn hàng đang được vận chuyển và không thể hoàn tác!!!");
                         }
                     }
                 });

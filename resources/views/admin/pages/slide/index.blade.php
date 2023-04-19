@@ -73,6 +73,8 @@
                         toastr.success("Thêm mới slide thành công!!!");
                         $("#novalidate").trigger('reset');
                         $("#holder_1").attr('src', '');
+                        $("#holder_2").attr('src', '');
+                        $("#holder_3").attr('src', '');
                     },
                     error   : function(res){;
                         var danh_sach_loi = res.responseJSON.errors;

@@ -46,7 +46,7 @@
                     <img class="logo_dark" src="\photos\shares\logo\logo.png" alt="logo">
                 </a>
                 <div class="product_search_form rounded_input">
-                    <form action="/search" method="post">
+                    <form action="/tim-kiem" method="post">
                         @csrf
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -62,8 +62,8 @@
                     </form>
                 </div>
                 <ul class="navbar-nav attr-nav align-items-center">
-                    <li><a href="/khach-hang/yeu-thich" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
-                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="/khach-hang/gio-hang"><i class="linearicons-bag2"></i><span class="cart_count">2</span></a></li>
+                    <li><a href="/khach-hang/yeu-thich" class="nav-link"><i class="linearicons-heart"></i></a></li>
+                    <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="/khach-hang/gio-hang"><i class="linearicons-bag2"></i></a></li>
                     @if (Auth::guard('khach_hang')->check())
                         <li>
                             <a href="/khach-hang/thong-tin-ca-nhan" class="nav-link"><i class="linearicons-user"></i>

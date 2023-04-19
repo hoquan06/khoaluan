@@ -9,7 +9,7 @@
                                 <h4>Sản phẩm nổi bật</h4>
                             </div>
                             <div class="view_all">
-                                <a href="#" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-noi-bat" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                 <h4>Sản phẩm hàng đầu</h4>
                             </div>
                             <div class="view_all">
-                                <a href="#" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-hang-dau" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                                 <h4>Đang giảm giá</h4>
                             </div>
                             <div class="view_all">
-                                <a href="#" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-giam-gia" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>

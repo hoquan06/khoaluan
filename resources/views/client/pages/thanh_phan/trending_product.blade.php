@@ -16,7 +16,7 @@
                                 <h4>Sản phẩm thịnh hành</h4>
                             </div>
                             <div class="view_all">
-                                <a href="#" class="text_default"><i class="linearicons-power"></i> <span>Xem tất cả</span></a>
+                                <a href="/san-pham-thinh-hanh" class="text_default"><i class="linearicons-power"></i> <span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>
