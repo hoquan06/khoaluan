@@ -32,7 +32,7 @@ class HomePageController extends Controller
 
         $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
         $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller','slide','banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
+        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
     }
 
     public function viewSanPham($id)

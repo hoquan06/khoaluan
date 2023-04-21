@@ -25,7 +25,7 @@
                                     <th class="product-name">Tên sản phẩm</th>
                                     <th class="product-amount">Số lượng</th>
                                     <th class="product-price">Đơn giá</th>
-                                    <th class="product-price">Tổng tiền</th>
+                                    <th class="product-price">Thành tiền</th>
                                 </tr>
                             </thead>
                             <tbody>

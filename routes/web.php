@@ -68,6 +68,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
+
+    Route::prefix('thong-ke')->group(function () {
+        Route::prefix('doanh-thu')->group(function () {
+            Route::get('ngay', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNgay']);
+            Route::get('tuan', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoTuan']);
+            Route::get('thang', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoThang']);
+            Route::get('nam', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNam']);
+        });
+    });
 });
 
 Route::prefix('khach-hang')->group(function () {

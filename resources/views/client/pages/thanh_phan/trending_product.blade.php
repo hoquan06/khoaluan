@@ -50,7 +50,7 @@
                                         <div class="product_info">
                                             <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{$value->ten_san_pham}}</a></h6>
                                             <div class="product_price">
-                                                <span class="price">{{number_format($value->gia_khuyen_mai, 0)}}</span>
+                                                <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }}</span>
                                                 <del>{{number_format($value->gia_ban, 0)}}</del>
                                                 <div class="on_sale">
                                                     <span>{{number_format(($value->gia_ban - $value->gia_khuyen_mai)/$value->gia_ban * 100, 0)}}%</span>

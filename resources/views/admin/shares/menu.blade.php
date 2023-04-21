@@ -59,13 +59,13 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Doanh thu</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Ngày</span></a>
+                    <li><a class="d-flex align-items-center" href="/admin/thong-ke/doanh-thu/ngay"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Ngày</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Preview">Tuần</span></a>
+                    <li><a class="d-flex align-items-center" href="/admin/thong-ke/doanh-thu/tuan"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Preview">Tuần</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Tháng</span></a>
+                    <li><a class="d-flex align-items-center" href="/admin/thong-ke/doanh-thu/thang"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Tháng</span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Năm</span></a>
+                    <li><a class="d-flex align-items-center" href="/admin/thong-ke/doanh-thu/nam"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Năm</span></a>
                     </li>
                 </ul>
             </li>
