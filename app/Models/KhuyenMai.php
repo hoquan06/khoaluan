@@ -11,10 +11,10 @@ class KhuyenMai extends Model
     protected $table = 'khuyen_mais';
     protected $fillable = [
         'ten_chuong_trinh',
+        'danh_muc_id',
         'muc_giam',
+        'so_luong_giam',
         'thoi_gian_bat_dau',
         'thoi_gian_ket_thuc',
-        'loai_ap_dung',
-        'san_pham_giam',
     ];
 }

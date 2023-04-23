@@ -45,7 +45,7 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/slide/index"><i data-feather='monitor'></i><span class="menu-title text-truncate" data-i18n="Invoice">Slide</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/mau-sac/index"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='gift'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
             </li>

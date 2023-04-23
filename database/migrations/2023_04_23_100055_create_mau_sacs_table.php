@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('khuyen_mais', function (Blueprint $table) {
+        Schema::create('mau_sacs', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_chuong_trinh');
-            $table->string('danh_muc_id');
-            $table->string('muc_giam');
-            $table->string('so_luong_giam');
-            $table->date('thoi_gian_bat_dau');
-            $table->date('thoi_gian_ket_thuc');
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('mau_sacs');
     }
 };

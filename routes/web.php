@@ -79,6 +79,10 @@ Route::prefix('admin')->group(function () {
         Route::get('san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
         Route::get('hang-ton-kho', [\App\Http\Controllers\ThongKeController::class, 'hangTonKho']);
     });
+
+    Route::prefix('mau-sac')->group(function() {
+        Route::get('index', [\App\Http\Controllers\MauSacController::class, 'index']);
+    });
 });
 
 Route::prefix('khach-hang')->group(function () {

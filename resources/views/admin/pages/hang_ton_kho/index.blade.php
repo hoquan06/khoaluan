@@ -14,7 +14,6 @@
                                 <th class="text-nowrap text-center">Giá Bán</th>
                                 <th class="text-nowrap text-center">Giá Khuyến Mãi</th>
                                 <th class="text-nowrap text-center">Ảnh đại diện</th>
-                                <th class="text-nowrap text-center">Lượt mua</th>
                             </tr>
                         </thead>
                         <tbody class="text-nowrap text-center">
