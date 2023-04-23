@@ -76,6 +76,8 @@ Route::prefix('admin')->group(function () {
             Route::get('thang', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoThang']);
             Route::get('nam', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNam']);
         });
+        Route::get('san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
+        Route::get('hang-ton-kho', [\App\Http\Controllers\ThongKeController::class, 'hangTonKho']);
     });
 });
 

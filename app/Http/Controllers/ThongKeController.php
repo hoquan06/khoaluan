@@ -149,4 +149,14 @@ class ThongKeController extends Controller
         $slSanPham = DB::select($sl_sp);
         return view('admin.pages.doanh_thu.nam', compact('tongDoanhThu', 'doanhThuNam', 'doanhThuNamTruoc', 'slSanPham'));
     }
+
+    public function spBanChay()
+    {
+        return view('admin.pages.sp_ban_chay.index');
+    }
+
+    public function hangTonKho()
+    {
+        return view('admin.pages.hang_ton_kho.index');
+    }
 }

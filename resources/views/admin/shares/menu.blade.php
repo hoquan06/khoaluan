@@ -69,9 +69,9 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy nhất</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-ban-chay"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy nhất</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Hàng tồn kho</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/hang-ton-kho"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Hàng tồn kho</span></a>
             </li>
         </ul>
     </div>
