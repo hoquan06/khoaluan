@@ -39,7 +39,7 @@ class ThongKeController extends Controller
                     AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
 
-        return view('admin.pages.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ'));
+        return view('admin.pages.thong_ke.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ'));
     }
 
     public function thongKeTheoTuan()
@@ -77,7 +77,7 @@ class ThongKeController extends Controller
                     AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
 
-        return view('admin.pages.doanh_thu.tuan', compact('tongDoanhThu', 'doanhThuTuan', 'doanhThuTuanTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.tuan', compact('tongDoanhThu', 'doanhThuTuan', 'doanhThuTuanTruoc', 'slSanPham'));
     }
 
     public function thongKeTheoThang()
@@ -114,7 +114,7 @@ class ThongKeController extends Controller
                   WHERE chi_tiet_don_hangs.created_at between '$start' AND '$end'
                   AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
-        return view('admin.pages.doanh_thu.thang', compact('tongDoanhThu', 'doanhThuThang', 'doanhThuThangTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.thang', compact('tongDoanhThu', 'doanhThuThang', 'doanhThuThangTruoc', 'slSanPham'));
     }
 
     public function thongKeTheoNam()
@@ -147,16 +147,40 @@ class ThongKeController extends Controller
                    WHERE chi_tiet_don_hangs.created_at LIKE '%$year%'
                    AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
-        return view('admin.pages.doanh_thu.nam', compact('tongDoanhThu', 'doanhThuNam', 'doanhThuNamTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.nam', compact('tongDoanhThu', 'doanhThuNam', 'doanhThuNamTruoc', 'slSanPham'));
     }
 
     public function spBanChay()
     {
-        return view('admin.pages.sp_ban_chay.index');
+        $sql = "SELECT chi_tiet_don_hangs.ten_san_pham, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, SUM(chi_tiet_don_hangs.so_luong) as luotban
+                FROM chi_tiet_don_hangs JOIN san_phams on san_phams.id = chi_tiet_don_hangs.san_pham_id JOIN don_hangs on chi_tiet_don_hangs.don_hang_id = don_hangs.id
+                WHERE don_hangs.tinh_trang = '2'
+                GROUP BY chi_tiet_don_hangs.ten_san_pham, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh
+                ORDER BY luotban DESC
+                LIMIT 5";
+        $spBanChay = DB::select($sql);
+        return view('admin.pages.thong_ke.sp_ban_chay.index', compact('spBanChay'));
     }
 
-    public function hangTonKho()
+    public function spChuaCoLuotMua()
     {
-        return view('admin.pages.hang_ton_kho.index');
+        $sql = "SELECT san_phams.*
+                FROM `san_phams`
+                WHERE NOT EXISTS (SELECT chi_tiet_don_hangs.*
+                                  FROM chi_tiet_don_hangs JOIN don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
+                                  WHERE san_phams.id = chi_tiet_don_hangs.san_pham_id AND tinh_trang = 2)";
+        $spChuaBanDuoc = DB::select($sql);
+        return view('admin.pages.thong_ke.san_pham_chua_co_luot_mua.index', compact('spChuaBanDuoc'));
+    }
+
+    public function khachHangMuaNhieu()
+    {
+        $sql = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi, COUNT(don_hangs.agent_id) as soDon, SUM(thuc_tra) as tongTien
+                FROM khach_hangs JOIN don_hangs ON khach_hangs.id = don_hangs.agent_id
+                WHERE tinh_trang = 2
+                GROUP BY khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi
+                ORDER BY soDon DESC";
+        $khachHang = DB::select($sql);
+        return view('admin.pages.thong_ke.khach_hang.index', compact('khachHang'));
     }
 }

@@ -76,12 +76,9 @@ Route::prefix('admin')->group(function () {
             Route::get('thang', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoThang']);
             Route::get('nam', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNam']);
         });
+        Route::get('khach-hang-mua-nhieu', [\App\Http\Controllers\ThongKeController::class, 'khachHangMuaNhieu']);
         Route::get('san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
-        Route::get('hang-ton-kho', [\App\Http\Controllers\ThongKeController::class, 'hangTonKho']);
-    });
-
-    Route::prefix('mau-sac')->group(function() {
-        Route::get('index', [\App\Http\Controllers\MauSacController::class, 'index']);
+        Route::get('san-pham-chua-co-luot-mua', [\App\Http\Controllers\ThongKeController::class, 'spChuaCoLuotMua']);
     });
 });
 

@@ -45,8 +45,6 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/slide/index"><i data-feather='monitor'></i><span class="menu-title text-truncate" data-i18n="Invoice">Slide</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/mau-sac/index"><i data-feather='droplet'></i><span class="menu-title text-truncate" data-i18n="Invoice">Màu sắc</span></a>
-            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/khuyen-mai/index"><i data-feather='gift'></i></i><span class="menu-title text-truncate" data-i18n="Invoice">Khuyến mãi</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản</span></a>
@@ -57,7 +55,7 @@
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Thống kê</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Doanh thu</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Doanh thu</span></a>
                 <ul class="menu-content">
                     <li><a class="d-flex align-items-center" href="/admin/thong-ke/doanh-thu/ngay"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Ngày</span></a>
                     </li>
@@ -69,9 +67,11 @@
                     </li>
                 </ul>
             </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/khach-hang-mua-nhieu"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Khách hàng mua nhiều nhất</span></a>
+            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-ban-chay"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy nhất</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/hang-ton-kho"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Hàng tồn kho</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-chua-co-luot-mua"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm chưa có lượt mua</span></a>
             </li>
         </ul>
     </div>
