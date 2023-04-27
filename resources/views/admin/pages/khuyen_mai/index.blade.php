@@ -47,6 +47,36 @@
         </div>
     </div>
 </div>
+<div class="table-responsive card">
+        <div class="main-card mb-3 card">
+            <div class="card-body"><h5 class="card-title">Danh Sách Các Mặt Hàng Khuyến Mãi</h5>
+                <table class="mb-0 table table-bordered table-hover" id="tableSanPham">
+                    <thead>
+                        <tr>
+                            <th class="text-nowrap text-center">#</th>
+                            <th class="text-nowrap text-center">Tên Chương Trình</th>
+                            <th class="text-nowrap text-center">Loại Sản Phẩm</th>
+                            <th class="text-nowrap text-center">Mức Giảm</th>
+                            <th class="text-nowrap text-center">Thời gian bắt đầu</th>
+                            <th class="text-nowrap text-center">Thời gian kết thúc</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-nowrap text-center">
+                        @foreach($dsKhuyenMai as $key => $value)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $value->ten_chuong_trinh }}</td>
+                                <td>{{ $value->ten_danh_muc}}</td>
+                                <td>{{ number_format($value->muc_giam) }} VND</td>
+                                <td>{{ $value->thoi_gian_bat_dau }}</td>                      
+                                <td>{{ $value->thoi_gian_ket_thuc }}</td>                      
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
 @endsection
 @section('js')
     <script>

@@ -15,7 +15,11 @@ class KhuyenMaiController extends Controller
         $menuCha = DanhMucSanPham::where('id_danh_muc_cha', 0)
                                  ->where('tinh_trang', 1)
                                  ->get();
-        return view('admin.pages.khuyen_mai.index',compact("menuCha"));
+
+        $dsKhuyenMai = KhuyenMai::join('danh_muc_san_phams','danh_muc_san_phams.id','khuyen_mais.danh_muc_id')
+                                ->select('khuyen_mais.*','danh_muc_san_phams.ten_danh_muc')
+                                ->get();
+        return view('admin.pages.khuyen_mai.index',compact("menuCha","dsKhuyenMai"));
     }
 
     public function store(Request $request)

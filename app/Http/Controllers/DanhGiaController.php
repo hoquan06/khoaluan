@@ -57,8 +57,12 @@ class DanhGiaController extends Controller
         }
     }
 
-    public function dsDanhGia()
-    {
-
+    public function dsDanhGia($id)
+    {   
+            $dsDanhGia = DanhGia::join('khach_hangs','khach_hangs.id','danh_gias.agent_id')
+                                ->join('san_phams','san_phams.id','danh_gias.san_pham_id')
+                                ->select('san_phams.ten_san_pham','danh_gias.so_sao','danh_gias.noi_dung','khach_hangs.ho_va_ten')
+                                ->get();
+        return view("admin.pages.danh_gia.index",compact('dsDanhGia'));
     }
 }
