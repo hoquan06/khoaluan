@@ -32,16 +32,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="basic-default-name">Áp dụng cho</label>
-                            <select id="loai_ap_dung" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
-                                @foreach($menuCha as $key => $value)
-                                    <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-2">
                             <label class="form-label" for="basic-default-name">Sản phẩm</label>
-                            <select id="san_pham_giam" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                            <select id="danh_muc_id" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
                                 @foreach($menuCon as $key => $value)
                                 <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
                                 @endforeach
@@ -65,16 +57,16 @@
                 }
             });
             $("#themMoi").click(function(e){
+                
                 e.preventDefault();
                 var payload = {
                     'ten_chuong_trinh'    : $("#ten_chuong_trinh").val(),
-                    'san_pham_giam'       : $("#san_pham_giam").val(),
+                    'muc_giam'            : $("#muc_giam").val(),
+                    'danh_muc_id'         : $("#danh_muc_id").val(),
                     'thoi_gian_bat_dau'   : $("#thoi_gian_bat_dau").val(),
                     'thoi_gian_ket_thuc'  : $("#thoi_gian_ket_thuc").val(),
-                    'loai_ap_dung'        : $("#loai_ap_dung").val(),
-                    'muc_giam'            : $("#muc_giam").val(),
                 };
-
+                
                 $.ajax({
                     url     : '/admin/khuyen-mai/index',
                     type    : 'post',

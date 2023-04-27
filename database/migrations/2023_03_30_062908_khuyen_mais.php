@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('khuyen_mais', function (Blueprint $table) {
             $table->id();
             $table->string('ten_chuong_trinh');
-            $table->string('danh_muc_id');
-            $table->string('muc_giam')->default(0);
+            $table->string('danh_muc_id')->default(0);
+            $table->string('muc_giam');
             $table->date('thoi_gian_bat_dau');
             $table->date('thoi_gian_ket_thuc');
             $table->timestamps();
