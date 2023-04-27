@@ -169,7 +169,7 @@ class DonHangController extends Controller
             $data = ChiTietDonHang::join('san_phams', 'chi_tiet_don_hangs.san_pham_id', 'san_phams.id')
                                   ->where('agent_id', $agent->id)
                                   ->where('don_hang_id', $id)
-                                  ->select('chi_tiet_don_hangs.*', 'san_phams.hinh_anh')
+                                  ->select('chi_tiet_don_hangs.*', 'san_phams.hinh_anh', 'san_phams.slug_san_pham')
                                   ->get();
             $tongTien = DonHang::where('agent_id', $agent->id)
                                ->where('id', $id)

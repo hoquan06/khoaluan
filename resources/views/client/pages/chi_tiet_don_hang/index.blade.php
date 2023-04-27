@@ -30,12 +30,17 @@
                             </thead>
                             <tbody>
                                 @foreach ($data as $key=>$value)
-                                    <tr>
+                                    <tr class="text-nowrap">
                                         <td class="product-thumbnail"><a><img src="{{ $value->hinh_anh }}"></a></td>
                                         <td class="product-name" data-title="Product">{{ $value->ten_san_pham }}</td>
                                         <td class="product-amount" data-title="amount">{{ $value->so_luong }}</td>
                                         <td class="product-price" data-title="Price">{{ number_format($value->don_gia) }}</td>
                                         <td class="product-price" data-title="Price">{{ number_format($value->so_luong * $value->don_gia) }} VND</td>
+                                        <td>
+                                            <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->san_pham_id}}">
+                                                <button class="btn btn-info">Đánh giá</button>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 <tr>

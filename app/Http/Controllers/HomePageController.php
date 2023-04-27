@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DanhMucSanPham;
 use App\Models\SanPham;
 use App\Models\Banner;
+use App\Models\DanhGia;
 use App\Models\Slide;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -42,9 +43,12 @@ class HomePageController extends Controller
             $id = Str::substr($id, $viTri + 4);
         }
         $sanPham = SanPham::find($id);
-        $spLienQuan = SanPham::where('id_danh_muc', $sanPham->id_danh_muc)->get();
+        $danhGia = DanhGia::join('khach_hangs', 'khach_hangs.id', 'danh_gias.agent_id')
+                          ->where('san_pham_id', $id)
+                          ->get();
         if($sanPham){
-            return view('client.pages.chi_tiet_san_pham', compact('sanPham', 'spLienQuan'));
+            $spLienQuan = SanPham::where('id_danh_muc', $sanPham->id_danh_muc)->get();
+            return view('client.pages.chi_tiet_san_pham', compact('sanPham', 'spLienQuan', 'danhGia'));
         } else{
             return view('client.pages.404');
         }

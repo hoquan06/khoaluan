@@ -71,14 +71,14 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('thong-ke')->group(function () {
         Route::prefix('doanh-thu')->group(function () {
-            Route::get('ngay', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNgay']);
-            Route::get('tuan', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoTuan']);
-            Route::get('thang', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoThang']);
-            Route::get('nam', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNam']);
+            Route::get('/ngay', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNgay']);
+            Route::get('/tuan', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoTuan']);
+            Route::get('/thang', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoThang']);
+            Route::get('/nam', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNam']);
         });
-        Route::get('khach-hang-mua-nhieu', [\App\Http\Controllers\ThongKeController::class, 'khachHangMuaNhieu']);
-        Route::get('san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
-        Route::get('san-pham-chua-co-luot-mua', [\App\Http\Controllers\ThongKeController::class, 'spChuaCoLuotMua']);
+        Route::get('/khach-hang-mua-nhieu', [\App\Http\Controllers\ThongKeController::class, 'khachHangMuaNhieu']);
+        Route::get('/san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
+        Route::get('/san-pham-chua-co-luot-mua', [\App\Http\Controllers\ThongKeController::class, 'spChuaCoLuotMua']);
     });
 });
 
@@ -117,6 +117,9 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);
     Route::get('/don-hang/da-nhan-hang/{id}', [\App\Http\Controllers\DonHangController::class, 'orderCompleted']);
     Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
+
+    // Route::get('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'index']);
+    Route::post('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'store']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);

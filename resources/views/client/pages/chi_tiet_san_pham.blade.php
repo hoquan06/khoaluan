@@ -61,7 +61,7 @@
                             </div>
                             <div class="rating_wrap">
                                     <div class="rating">
-                                        <div class="product_rate" style="width:80%"></div>
+                                        <div class="product" style="width:80%"></div>
                                     </div>
                                 </div>
                             <div class="pr_desc">
@@ -144,44 +144,57 @@
                                 <div class="comments">
                                     <h5 class="product_tab_title">Tất cả đánh giá</span></h5>
                                     <ul class="list_none comment_list mt-4">
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="/assets_client/images/user1.jpg" alt="user1"/>
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
+                                        @foreach ($danhGia as $key=>$value)
+                                            <li>
+                                                {{-- <div class="comment_img">
+                                                    <img src="/assets_client/images/user1.jpg" alt="user1"/>
+                                                </div> --}}
+                                                <div class="comment_block">
+                                                    <div class="rating_wrap">
+                                                        <div class="rating">
+                                                            @if ($value->so_sao == 1)
+                                                                <div class="product_rate" style="width:20%"></div>
+                                                            @elseif ($value->so_sao == 2)
+                                                                <div class="product_rate" style="width:40%"></div>
+                                                            @elseif ($value->so_sao == 3)
+                                                                <div class="product_rate" style="width:60%"></div>
+                                                            @elseif ($value->so_sao == 4)
+                                                                <div class="product_rate" style="width:80%"></div>
+                                                            @else
+                                                                <div class="product_rate" style="width:100%"></div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <p class="customer_meta">
+                                                        <span class="review_author">{{$value->ho_va_ten}}</span>
+                                                        <span class="comment-date">{{ ($value->created_at )}}</span>
+                                                    </p>
+                                                    <div class="description">
+                                                        <p>{{$value->noi_dung}}</p>
                                                     </div>
                                                 </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">Alea Brooks</span>
-                                                    <span class="comment-date">March 5, 2018</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>Lorem Ipsumin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="review_form field_form">
                                     <h5>Thêm đánh giá</h5>
-                                    <form class="row mt-3">
+                                    <form class="row mt-3" id="tableReset">
                                         <div class="form-group col-12">
-                                            <div class="star_rating">
+                                            <div class="star_rating selectVehicle">
                                                 <span data-value="1"><i class="far fa-star"></i></span>
                                                 <span data-value="2"><i class="far fa-star"></i></span>
                                                 <span data-value="3"><i class="far fa-star"></i></span>
                                                 <span data-value="4"><i class="far fa-star"></i></span>
                                                 <span data-value="5"><i class="far fa-star"></i></span>
                                             </div>
+                                            <input type="text" id="soSaoChon" hidden>
                                         </div>
                                         <div class="form-group col-12">
-                                            <textarea required="required" placeholder="Nhập vào đây ..." class="form-control" name="message" rows="4"></textarea>
+                                            <textarea required="required" placeholder="Nhập vào đây ..." class="form-control" id="noi_dung" rows="4"></textarea>
                                         </div>
                                         <div class="form-group col-12">
-                                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">Gửi</button>
+                                            <button data-id="{{$sanPham->id}}" type="button" class="btn btn-fill-out themDanhGia">Đánh giá</button>
                                         </div>
                                     </form>
                                 </div>
@@ -236,7 +249,7 @@
                                     </div>
                                     <div class="rating_wrap">
                                         <div class="rating">
-                                            <div class="product_rate" style="width:80%"></div>
+                                            <div class="product" style="width:80%"></div>
                                         </div>
                                     </div>
                                     <div class="pr_desc">
@@ -333,6 +346,44 @@
                     },
                 });
             });
+
+            $('.selectVehicle span').click(function() {
+                var starValue = $(this).data('value');
+                $("#soSaoChon").val(starValue);
+            });
+
+            $(".themDanhGia").click(function() {
+                var san_pham_id = $(this).data('id');
+                var payload = {
+                    'so_sao'            : $("#soSaoChon").val(),
+                    'noi_dung'          : $("#noi_dung").val(),
+                    'san_pham_id'       : san_pham_id,
+                };
+
+                axios
+                    .post('/khach-hang/danh-gia', payload)
+                    .then((res) => {
+                        if(res.data.themDanhGia == 1){
+                            toastr.success("Đã thêm mới đánh giá!");
+                            $("#tableReset").trigger('reset');
+                        } else if(res.data.themDanhGia == 2){
+                            toastr.warning("Bạn phải mua hàng để thực hiện chức năng này!");
+                        } else {
+                            toastr.error("Bạn chưa đăng nhập!");
+                        }
+                    })
+            });
+
+            function GetNow(){
+                var currentdate = new Date();
+                var datetime = currentdate.getDate() + "-"
+                        + (currentdate.getMonth()+1)  + "-"
+                        + currentdate.getFullYear();
+                        // + currentdate.getHours() + ":"
+                        // + currentdate.getMinutes() + ":"
+                        // + currentdate.getSeconds();
+                return datetime;
+            };
         });
    </script>
 @endsection
