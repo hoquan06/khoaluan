@@ -23,12 +23,13 @@ class DanhGiaController extends Controller
         if ($agent) {
             // Đã đăng nhập
             $sql = "SELECT khach_hangs.*
-                        FROM khach_hangs
-                        WHERE khach_hangs.id = {$agent->id} AND EXISTS (
-                            SELECT don_hangs.*
-                            FROM don_hangs
-                            WHERE don_hangs.agent_id = khach_hangs.id AND tinh_trang = 2
-                        )";
+                    FROM khach_hangs
+                    WHERE khach_hangs.id = {$agent->id} AND EXISTS (
+                                SELECT don_hangs.*
+                                FROM don_hangs
+                                INNER JOIN chi_tiet_don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
+                                WHERE chi_tiet_don_hangs.san_pham_id = {$request->san_pham_id} AND don_hangs.tinh_trang = 2 AND don_hangs.agent_id = khach_hangs.id
+        )";
             $danhGia = DB::select($sql);
 
             if ($danhGia) {
@@ -53,5 +54,10 @@ class DanhGiaController extends Controller
                 'themDanhGia'       => 3,
             ]);
         }
+    }
+
+    public function dsDanhGia()
+    {
+
     }
 }

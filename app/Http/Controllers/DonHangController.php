@@ -58,16 +58,6 @@ class DonHangController extends Controller
         return view("admin.pages.don_hang.view",compact('chi_tiet_don_hang'));
     }
 
-    // public function watch($id)
-    // {
-    //     $don_hang_kha_dung = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
-    //     ->select('don_hangs.*')
-    //     ->where('agent_id', $id)
-    //     ->get();
-    //     dd($don_hang_kha_dung);
-    //     return view("client.pages.thong_tin_ca_nhan.index",compact('don_hang_kha_dung'));
-    // }
-
     public function destroy($id)
     {
         $data = DonHang::find($id);

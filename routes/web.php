@@ -69,6 +69,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 
+    Route::get('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'dsDanhGia']);
+
     Route::prefix('thong-ke')->group(function () {
         Route::prefix('doanh-thu')->group(function () {
             Route::get('/ngay', [\App\Http\Controllers\ThongKeController::class, 'thongKeTheoNgay']);
