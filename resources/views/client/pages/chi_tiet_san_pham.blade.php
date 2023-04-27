@@ -372,6 +372,12 @@
                             toastr.error("Bạn chưa đăng nhập!");
                         }
                     })
+                    .catch((res) => {
+                        var danh_sach_loi = res.response.data.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    });
             });
 
             function GetNow(){

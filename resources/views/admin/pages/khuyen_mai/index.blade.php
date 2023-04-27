@@ -35,12 +35,12 @@
                             <label class="form-label" for="basic-default-name">Sản phẩm</label>
                             <select id="danh_muc_id" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
                                 @foreach($menuCon as $key => $value)
-                                <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                                    <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
                                 @endforeach
                             </select>
-                        </div>      
+                        </div>
                     <div class="text-center">
-                        <button class="mt-1 btn btn-primary" id="themMoi">Thêm Mới Khuyến Mãi</button>
+                        <button class="mt-1 btn btn-primary" type="button" id="themMoi">Thêm Mới Khuyến Mãi</button>
                     </div>
                 </form>
             </div>
@@ -57,7 +57,7 @@
                 }
             });
             $("#themMoi").click(function(e){
-                
+
                 e.preventDefault();
                 var payload = {
                     'ten_chuong_trinh'    : $("#ten_chuong_trinh").val(),
@@ -66,7 +66,7 @@
                     'thoi_gian_bat_dau'   : $("#thoi_gian_bat_dau").val(),
                     'thoi_gian_ket_thuc'  : $("#thoi_gian_ket_thuc").val(),
                 };
-                
+                var id = $("#danh_muc_id").val();
                 $.ajax({
                     url     : '/admin/khuyen-mai/index',
                     type    : 'post',

@@ -52,7 +52,7 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('khuyen-mai')->group(function () {
         Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']);
-        Route::post('/index/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
+        Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
     });
 
     Route::prefix('tai-khoan')->group(function () {

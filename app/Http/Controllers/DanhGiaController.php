@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DanhGiaRequest;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\KhachHang;
@@ -17,7 +18,7 @@ class DanhGiaController extends Controller
         return view('client.pages.chi_tiet_san_pham');
     }
 
-    public function store(Request $request)
+    public function store(DanhGiaRequest $request)
     {
         $agent = Auth::guard('khach_hang')->user();
         if ($agent) {
@@ -29,7 +30,7 @@ class DanhGiaController extends Controller
                                 FROM don_hangs
                                 INNER JOIN chi_tiet_don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
                                 WHERE chi_tiet_don_hangs.san_pham_id = {$request->san_pham_id} AND don_hangs.tinh_trang = 2 AND don_hangs.agent_id = khach_hangs.id
-        )";
+                                )";
             $danhGia = DB::select($sql);
 
             if ($danhGia) {
