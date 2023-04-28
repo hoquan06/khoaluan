@@ -38,8 +38,8 @@
                             <tbody>
                                 <template v-for="(value, key) in dsCart">
                                     <tr>
-                                        <td class="product-thumbnail"><a href="#"><img v-bind:src="value.hinh_anh" alt="product1"></a></td>
-                                        <td class="product-name" data-title="Product"><a href="#">@{{value.ten_san_pham}}</a></td>
+                                        <td class="product-thumbnail"><a><img v-bind:src="value.hinh_anh" alt="product1"></a></td>
+                                        <td class="product-name" data-title="Product"><a v-bind:href="'/san-pham/' + value.slug_san_pham + '-post' + value.san_pham_id">@{{value.ten_san_pham}}</a></td>
                                         <td class="product-price" data-title="Price">@{{numberFormat(value.don_gia)}}</td>
                                         <td class="product-quantity" data-title="Quantity"><div class="quantity">
                                         <input type="number" v-on:change="updateCart(value)" name="quantity" v-model="value.so_luong" min="1" title="Qty" class="qty" size="4">

@@ -51,13 +51,12 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="pr_detail">
                         <div class="product_description">
-                            <h4 class="product_title"><a href="#">{{ $sanPham->ten_san_pham }}</a></h4>
+                            <h4 class="product_title"><a >{{ $sanPham->ten_san_pham }}</a></h4>
                             <div class="product_price">
-                                <span class="price">{{ number_format($sanPham->gia_khuyen_mai, 0) }}</span>
-                                <del>{{ number_format($sanPham->gia_ban, 0) }}</del>
-                                <div class="on_sale">
-                                    <span>{{ number_format(($sanPham->gia_ban - $sanPham->gia_khuyen_mai) / $sanPham->gia_ban * 100) }}%</span>
-                                </div>
+                                <span class="price">{{ number_format($sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban, 0) }} đ</span>
+                                @if($sanPham->gia_khuyen_mai)
+                                    <del>{{ number_format($sanPham->gia_ban, 0) }} đ</del>
+                                @endif
                             </div>
                             <div class="rating_wrap">
                                     <div class="rating">
@@ -240,18 +239,20 @@
                                 </div>
                                 <div class="product_info">
                                     <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{$value->ten_san_pham}}</a></h6>
-                                    <div class="product_price">
-                                        <span class="price">{{number_format($value->gia_khuyen_mai, 0)}}</span>
-                                        <del>{{number_format($value->gia_ban, 0)}}</del>
-                                        <div class="on_sale">
+                                    <div class="product_price text-center">
+                                        <span class="price">{{number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0)}} đ</span>
+                                        @if ($value->gia_khuyen_mai)
+                                            <del>{{number_format($value->gia_ban, 0)}}</del>
+                                        @endif
+                                        {{-- <div class="on_sale">
                                             <span>{{number_format(($value->gia_ban - $value->gia_khuyen_mai)/$value->gia_ban * 100, 0)}}%</span>
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <div class="rating_wrap">
+                                    {{-- <div class="rating_wrap">
                                         <div class="rating">
                                             <div class="product" style="width:80%"></div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="pr_desc">
                                         <p>{{$value->mo_ta_ngan}}</p>
                                     </div>

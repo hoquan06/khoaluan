@@ -39,8 +39,8 @@
                             <tbody>
                                 <template v-for="(value, key) in list">
                                     <tr>
-                                        <td class="product-thumbnail"><a href="#"><img v-bind:src="value.hinh_anh" alt="product1"></a></td>
-                                        <td class="product-name" data-title="Product"><a href="#">@{{value.ten_san_pham}}</a></td>
+                                        <td class="product-thumbnail"><a><img v-bind:src="value.hinh_anh" alt="product1"></a></td>
+                                        <td class="product-name" data-title="Product"><a v-bind:href="'/san-pham/' + value.slug_san_pham + '-post' + value.san_pham_id">@{{value.ten_san_pham}}</a></td>
                                         <td class="product-price" data-title="Price">@{{numberFormat(value.don_gia)}}</td>
                                         <td class="product-stock-status" data-title="Stock Status"><span class="badge badge-pill badge-success">Còn hàng</span></td>
                                         <td class="product-add-to-cart" v-on:click="addToCart()" :data-id="value.san_pham_id"><a class="btn btn-fill-out" :data-id="value.san_pham_id"><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></td>

@@ -63,18 +63,20 @@
                                     </div>
                                     <div class="product_info">
                                         <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }}</span>
-                                            <del>{{ number_format($value->gia_ban, 0) }}</del>
-                                            <div class="on_sale">
+                                        <div class="product_price text-center">
+                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }} đ</span>
+                                            @if ($value->gia_khuyen_mai)
+                                                <del>{{ number_format($value->gia_ban, 0) }} đ</del>
+                                            @endif
+                                            {{-- <div class="on_sale">
                                                 <span>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) / $value->gia_ban * 100) }}%</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                        <div class="rating_wrap">
+                                        {{-- <div class="rating_wrap">
                                             <div class="rating">
                                                 <div class="product_rate" style="width:80%"></div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="pr_desc">
                                             <p>{{ $value->mo_ta_ngan }}</p>
                                         </div>

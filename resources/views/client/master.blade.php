@@ -66,8 +66,14 @@
                         if(res.login == 2){
                             toastr.success("Bạn đã đăng nhập thành công!!!");
                             setTimeout(() => {
-                                history.go(-1);
-                                window.location.reload();
+                                // Kiểm tra nếu đang ở trang đăng nhập thì redirect về trang chủ
+                                if(window.location.pathname == "/khach-hang/login"){
+                                    window.location.href = "/";
+                                }
+                                else{
+                                    // Nếu đang ở trang khác thì đứng im
+                                    window.location.reload();
+                                }
                             }, 1000);
                         } else if(res.login == 3){
                             toastr.warning("Tài khoản của bạn đã bị vô hiệu hóa!!!");

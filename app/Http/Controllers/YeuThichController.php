@@ -50,7 +50,7 @@ class YeuThichController extends Controller
         if($agent){
             $data = YeuThich::join('san_phams', 'yeu_thiches.san_pham_id', 'san_phams.id')
                             ->where('agent_id', $agent->id)
-                            ->select('yeu_thiches.*', 'san_phams.hinh_anh')
+                            ->select('yeu_thiches.*', 'san_phams.hinh_anh', 'san_phams.slug_san_pham')
                             ->get();
             return response()->json([
                 'yeuthich'      => $data,

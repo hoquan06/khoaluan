@@ -68,8 +68,8 @@
                                 <td>{{ $value->ten_chuong_trinh }}</td>
                                 <td>{{ $value->ten_danh_muc}}</td>
                                 <td>{{ number_format($value->muc_giam) }} VND</td>
-                                <td>{{ $value->thoi_gian_bat_dau }}</td>                      
-                                <td>{{ $value->thoi_gian_ket_thuc }}</td>                      
+                                <td>{{ $value->thoi_gian_bat_dau }}</td>
+                                <td>{{ $value->thoi_gian_ket_thuc }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -103,6 +103,7 @@
                     data    : payload,
                     success : function(res){
                         toastr.success("Thêm mới chương trình khuyến mãi thành công!!!");
+                        $("#formCreate").trigger('reset');
                     },
                     error   : function(res){;
                         var danh_sach_loi = res.responseJSON.errors;

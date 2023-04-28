@@ -21,19 +21,19 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="position-relative form-group">
                                 <label>Giá Bán(*)</label>
                                 <input id="gia_ban" placeholder="Nhập vào giá bán" type="number" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        {{-- <div class="col-md-5">
                             <div class="position-relative form-group">
                                 <label>Giá Khuyến Mãi</label>
                                 <input id="gia_khuyen_mai" placeholder="Nhập vào giá khuyến mãi" type="number" class="form-control">
                             </div>
-                        </div>
-                        <div class="col-md-2">
+                        </div> --}}
+                        <div class="col-md-4">
                             <label>Số lượng(*)</label>
                             <div class="input-group input-group-lg bootstrap-touchspin">
                                 <span class="input-group-btn bootstrap-touchspin-injected">
@@ -215,18 +215,18 @@
                 <input type="text" class="form-control slug_san_pham_edit" id="slug_san_pham_edit" placeholder="Nhập vào slug sản phẩm">
             </div>
             <div class="row mb-2">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="position-relative form-group">
                         <label>Giá Bán(*)</label>
                         <input id="gia_ban_edit" placeholder="Nhập vào giá bán" type="number" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-4">
+                {{-- <div class="col-md-4">
                     <div class="position-relative form-group">
                         <label>Giá Khuyến Mãi</label>
                         <input id="gia_khuyen_mai_edit" placeholder="Nhập vào giá khuyến mãi" type="number" class="form-control">
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-md-4">
                     <label>Số lượng(*)</label>
                     <div class="input-group input-group-lg bootstrap-touchspin">

@@ -24,18 +24,12 @@
                                     <div class="product_info">
                                         <h5 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{$value->ten_san_pham}}</a></h5>
                                         <div class="product_price">
-                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }}</span>
-                                            <del>{{number_format($value->gia_ban, 0)}}</del>
+                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }} đ</span>
+                                            <del>{{number_format($value->gia_ban, 0)}} đ</del>
                                         </div>
                                     </div>
-                                    <div class="deal_progress">
-                                        <span class="stock-sold">Already Sold: <strong>6</strong></span>
-                                        <span class="stock-available">Còn lại: <strong>{{$value->so_luong}}</strong></span>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" style="width:46%"> 46% </div>
-                                        </div>
-                                    </div>
-                                    <div class="countdown_time countdown_style4 mb-4" data-time="2021/10/02 12:30:15"></div>
+
+                                    <div class="countdown_time countdown_style4 mb-4" data-time="{{$value->thoi_gian_ket_thuc}}"></div>
                                 </div>
                             </div>
                         </div>
@@ -45,3 +39,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js"></script>
+<script>
+    $(function() {
+        $('.countdown_time').each(function() {
+            $(this).countdown($(this).data('time'), function(event) {
+                $(this).html(event.strftime('<div class="countdown_item"><span class="countdown_time_digit">%D</span><span class="countdown_time_unit">Days</span></div><div class="countdown_item"><span class="countdown_time_digit">%H</span><span class="countdown_time_unit">Hours</span></div><div class="countdown_item"><span class="countdown_time_digit">%M</span><span class="countdown_time_unit">Minutes</span></div><div class="countdown_item"><span class="countdown_time_digit">%S</span><span class="countdown_time_unit">Seconds</span></div>'));
+            });
+        });
+    });
+</script>

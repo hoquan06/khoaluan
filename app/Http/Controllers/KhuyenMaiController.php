@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\KhuyenMai;
 use App\Models\DanhMucSanPham;
 use App\Models\SanPham;
+use Carbon\Carbon;
 
 class KhuyenMaiController extends Controller
 {
@@ -34,7 +35,12 @@ class KhuyenMaiController extends Controller
 
             // Lặp qua từng sản phẩm và cập nhật giá khuyến mãi
             foreach ($sanPham as $value) {
-                $value->gia_khuyen_mai = $value->gia_ban - $khuyenMai->muc_giam;
+                // Kiểm tra nếu đang trong thời gian khuyến mãi
+                if (Carbon::now()->between($khuyenMai->thoi_gian_bat_dau, $khuyenMai->thoi_gian_ket_thuc)) {
+                    $value->gia_khuyen_mai = $value->gia_ban - $khuyenMai->muc_giam;
+                } else {
+                    $value->gia_khuyen_mai = 0;
+                }
                 $value->save();
             }
 
@@ -46,4 +52,5 @@ class KhuyenMaiController extends Controller
             return response()->json(["status" => false]);
         }
     }
+
 }

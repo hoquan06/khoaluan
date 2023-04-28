@@ -54,27 +54,26 @@
                                                     <li class="add-to-cart" data-toggle="modal" data-target="#myModal"><a><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                 @endif
                                                 @if (Auth::guard('khach_hang')->check())
-                                                                <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
-                                                            @else
-                                                                <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
-                                                            @endif
+                                                    <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
+                                                @else
+                                                    <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="product_info">
-                                        <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
-                                        <div class="product_price">
-                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }}</span>
-                                            <del>{{ number_format($value->gia_ban, 0) }}</del>
-                                            <div class="on_sale">
-                                                <span>{{ number_format(($value->gia_ban - $value->gia_khuyen_mai) / $value->gia_ban * 100) }}%</span>
-                                            </div>
+                                        <h6 class="product_title text-center"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
+                                        <div class="product_price text-center">
+                                            <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }} đ</span>
+                                            @if($value->gia_khuyen_mai)
+                                                <del>{{ number_format($value->gia_ban, 0) }} đ</del>
+                                            @endif
                                         </div>
-                                        <div class="rating_wrap">
+                                        {{-- <div class="rating_wrap">
                                             <div class="rating">
                                                 <div class="product_rate" style="width:80%"></div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div class="pr_desc">
                                             <p>{{ $value->mo_ta_ngan }}</p>
                                         </div>
@@ -93,10 +92,10 @@
                                                     <li class="add-to-cart addToCart" data-toggle="modal" data-target="#myModal"><a ><i class="icon-basket-loaded"></i> Thêm vào giỏ hàng</a></li>
                                                 @endif
                                                 @if (Auth::guard('khach_hang')->check())
-                                                                <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
-                                                            @else
-                                                                <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
-                                                            @endif
+                                                    <li><a><i data-id="{{$value->id}}" class="icon-heart favourite"></i></a></li>
+                                                @else
+                                                    <li><a><i data-id="{{$value->id}}" data-toggle="modal" data-target="#myModal" class="icon-heart favourite"></i></a></li>
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
