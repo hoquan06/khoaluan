@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-xl-3 d-none d-xl-block">
                 <div class="sale-banner">
-                    <a class="hover_effect1" href="#">
+                    <a class="hover_effect1">
                         <img src="\photos\shares\others\1.png" alt="shop_banner_img6">
                     </a>
                 </div>
