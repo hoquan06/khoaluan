@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="product_info">
-                                        <h6 class="product_title text-center"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
+                                        <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
                                         <div class="product_price text-center">
                                             <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }} đ</span>
                                             @if ($value->gia_khuyen_mai)

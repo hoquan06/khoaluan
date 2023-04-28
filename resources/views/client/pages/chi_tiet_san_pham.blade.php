@@ -242,7 +242,7 @@
                                     <div class="product_price text-center">
                                         <span class="price">{{number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0)}} đ</span>
                                         @if ($value->gia_khuyen_mai)
-                                            <del>{{number_format($value->gia_ban, 0)}}</del>
+                                            <del>{{number_format($value->gia_ban, 0)}} đ</del>
                                         @endif
                                         {{-- <div class="on_sale">
                                             <span>{{number_format(($value->gia_ban - $value->gia_khuyen_mai)/$value->gia_ban * 100, 0)}}%</span>
