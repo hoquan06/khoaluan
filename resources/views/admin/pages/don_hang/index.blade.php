@@ -115,20 +115,26 @@
                 var idDonHang = $(this).data('id');
                 var self = $(this);
                 $.ajax({
-                    url         : '/admin/don-hang/accept/' + idDonHang,
+                    url         : '/admin/don-hang/accept/' + idDonHang ,
                     type        : 'get',
                     success     : function(res){
                         if(res.doitrangthai == 1){
                             if(res.tinhtrang){
-                                self.html("Đang Giao Hàng");
+                                self.html("Duyệt");
                                 self.removeClass('btn-info');
                                 self.addClass('btn-primary');
                                 toastr.success("Đơn hàng đã được duyệt!!!");
                             }
                         } else if(res.doitrangthai == 2){
-                            toastr.error("Đơn hàng đã bị hủy!!!");
+                                self.html("Đang Giao Hàng");
+                                self.removeClass('btn-primary');
+                                self.addClass('btn-success');
+                                toastr.success("Đơn hàng đang được giao!!!");
                         } else if(res.doitrangthai == 3){
-                            toastr.success("Đơn hàng đã được giao thành công!!!");
+                                self.html("Đã Giao");
+                                self.removeClass('btn-success');
+                                self.addClass('btn-info');
+                                toastr.success("Đơn hàng đã được giao!!!");
                         } else{
                             toastr.warning("Đơn hàng đang được vận chuyển và không thể hoàn tác!!!");
                         }

@@ -53,4 +53,60 @@ class KhuyenMaiController extends Controller
         }
     }
 
+    public function delete($id)
+    {
+        $data = KhuyenMai::find($id);
+        if($data){
+            $data->delete();
+            return response()->json([
+                'status'       => true,
+            ]);
+        } else{
+            return response()->json([
+                'status'       => false,
+            ]);
+        }
+    }
+
+    public function getData()
+    {
+        $data = KhuyenMai::join('danh_muc_san_phams','khuyen_mais.danh_muc_id','danh_muc_san_phams.id')
+                        ->select("khuyen_mais.*", 'danh_muc_san_phams.ten_danh_muc')
+                        ->get();
+
+        return response()->json([
+            'khuyen_mai'         => $data,
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $data = KhuyenMai::find($id);
+        if($data){
+            return response()->json([
+                'edit'      => true,
+                'data'      => $data,
+            ]);
+        } else{
+            return response()->json([
+                'edit'        => false,
+            ]);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $data     = $request->all();
+        $khuyen_mai = KhuyenMai::find($request->id);
+        $khuyen_mai->update($data);
+        if($khuyen_mai){
+            return response()->json([
+                'update'      => true,
+            ]);
+        } else{
+            return response()->json([
+                'update'      => false,
+            ]);
+        }
+    }
 }

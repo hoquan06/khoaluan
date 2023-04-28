@@ -22,8 +22,8 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $value->ten_san_pham }}</td>
-                                    <td>{{ $value->gia_ban }} </td>
-                                    <td>{{ $value->gia_khuyen_mai }}</td>
+                                    <td>{{ number_format($value->gia_ban) }} VND</td>
+                                    <td>{{ number_format($value->gia_khuyen_mai) }} VND</td>
                                     <td> <img src="{{ $value->hinh_anh }}" style="height: 50px;"> </td>
                                     <td>{{ $value->luotban }}</td>
                                 </tr>

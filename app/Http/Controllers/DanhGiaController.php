@@ -65,4 +65,9 @@ class DanhGiaController extends Controller
                                 ->get();
         return view("admin.pages.danh_gia.index",compact('dsDanhGia'));
     }
+
+    public function thongKe()
+    {
+        
+    }
 }

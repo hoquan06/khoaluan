@@ -25,13 +25,13 @@ class DonHangController extends Controller
         $data = DonHang::find($id);
 
         if($data->tinh_trang == 0){
-            $data->tinh_trang = !$data->tinh_trang;
-            $data->save();
+            $data->tinh_trang == 1;
+            $data.save();
             return response()->json([
                 'doitrangthai'      => 1,
                 'tinhtrang'         => $data->tinh_trang,
             ]);
-        } else if($data->tinh_trang == -1){
+        } else if($data->tinh_trang == 1){
             return response()->json([
                 'doitrangthai'      => 2,
             ]);

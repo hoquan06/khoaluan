@@ -53,6 +53,10 @@ Route::prefix('admin')->group(function () {
     Route::prefix('khuyen-mai')->group(function () {
         Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
+        Route::get('/delete/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'delete']);
+        Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
+        Route::get('/edit/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'edit']);
+        Route::post('/update', [\App\Http\Controllers\KhuyenMaiController::class, 'update']);
     });
 
     Route::prefix('tai-khoan')->group(function () {
@@ -69,6 +73,7 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('/danh-gia/{id}', [\App\Http\Controllers\DanhGiaController::class, 'dsDanhGia']);
+    Route::get('/thong-ke-danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'thongKe']);
 
     Route::prefix('thong-ke')->group(function () {
         Route::prefix('doanh-thu')->group(function () {
