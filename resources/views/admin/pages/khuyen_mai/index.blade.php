@@ -165,15 +165,15 @@
                             noiDung += '<td>' + (key + 1) + '</td>';
                             noiDung += '<td>' + value.ten_chuong_trinh + '</td>';
                             noiDung += '<td>' + value.ten_danh_muc + '</td>';
-                            noiDung += '<td>' + value.muc_giam + ' VND </td>';
+                            noiDung += '<td>' + numberFormat(value.muc_giam) + '</td>';
                             noiDung += '<td>' + value.thoi_gian_bat_dau + '</td>';
                             noiDung += '<td>' + value.thoi_gian_ket_thuc + '</td>';
                             noiDung += '<td>';
                             noiDung += '<button class="btn btn-success edit me-1" data-idedit="' + value.id + '" data-bs-toggle="modal" data-bs-target="#editModal">Sửa</button>';
-                            noiDung += '<button class="btn btn-danger delete" data-iddelete="' + value.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';                    
+                            noiDung += '<button class="btn btn-danger delete" data-iddelete="' + value.id + '" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
                             noiDung += '</td>';
                             noiDung += '</tr>';
-                         
+
                         });
                         $("#tableKhuyenMai tbody").html(noiDung);
                     },
@@ -267,7 +267,7 @@
                     'id'                       : $("#id_edit").val(),
                 };
 
-                
+
                 $.ajax({
                     url         : '/admin/khuyen-mai/update',
                     type        : 'post',
@@ -289,6 +289,10 @@
                 });
             });
 
+            function numberFormat(number)
+            {
+                return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+            }
         });
     </script>
 @endsection

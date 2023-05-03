@@ -41,7 +41,7 @@
                                     </td>
                                 @elseif($value->tinh_trang == 1)
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao hàng</button>
+                                        <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao</button>
                                     </td>
                                 @else
                                     <td>
@@ -118,25 +118,22 @@
                     url         : '/admin/don-hang/accept/' + idDonHang ,
                     type        : 'get',
                     success     : function(res){
-                        if(res.doitrangthai == 1){
+                        if(res.doitrangthai == 0){
+                            toastr.error('Đơn hàng đã bị hủy!');
+                        } else if(res.doitrangthai == 1){
                             if(res.tinhtrang){
-                                self.html("Duyệt");
+                                self.html("Đang giao");
                                 self.removeClass('btn-info');
                                 self.addClass('btn-primary');
                                 toastr.success("Đơn hàng đã được duyệt!!!");
                             }
                         } else if(res.doitrangthai == 2){
-                                self.html("Đang Giao Hàng");
+                                self.html("Đã giao");
                                 self.removeClass('btn-primary');
                                 self.addClass('btn-success');
-                                toastr.success("Đơn hàng đang được giao!!!");
-                        } else if(res.doitrangthai == 3){
-                                self.html("Đã Giao");
-                                self.removeClass('btn-success');
-                                self.addClass('btn-info');
                                 toastr.success("Đơn hàng đã được giao!!!");
                         } else{
-                            toastr.warning("Đơn hàng đang được vận chuyển và không thể hoàn tác!!!");
+                            toastr.warning("Đơn hàng đã được giao!");
                         }
                     }
                 });

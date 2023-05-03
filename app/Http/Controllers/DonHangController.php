@@ -24,26 +24,40 @@ class DonHangController extends Controller
     {
         $data = DonHang::find($id);
 
-        if($data->tinh_trang == 0){
-            $data->tinh_trang == 1;
-            $data.save();
-            return response()->json([
-                'doitrangthai'      => 1,
-                'tinhtrang'         => $data->tinh_trang,
-            ]);
-        } else if($data->tinh_trang == 1){
-            return response()->json([
-                'doitrangthai'      => 2,
-            ]);
-        }else if($data->tinh_trang == 2){
-            return response()->json([
-                'doitrangthai'      => 3,
-            ]);
-        } else{
-            return response()->json([
-                'doitrangthai'      => 4,
-            ]);
+        if($data) {
+            if($data->tinh_trang == -1){
+                return response()->json([
+                    'doitrangthai'      => 0,
+                ]);
+            } else if($data->tinh_trang == 0){
+                $data->tinh_trang = 1;
+                $data->save();
+                return response()->json([
+                    'doitrangthai'      => 1,
+                    'tinhtrang'         => $data->tinh_trang,
+                ]);
+            } else if($data->tinh_trang == 1){
+                $data->tinh_trang = 2;
+                $data->save();
+                return response()->json([
+                    'doitrangthai'      => 2,
+                    'tinhtrang'         => $data->tinh_trang,
+                ]);
+            } else{
+                return response()->json([
+                    'doitrangthai'      => 3,
+                ]);
+            }
         }
+        // }else if($data->tinh_trang == 2){
+        //     return response()->json([
+        //         'doitrangthai'      => 3,
+        //     ]);
+        // } else{
+        //     return response()->json([
+        //         'doitrangthai'      => 4,
+        //     ]);
+        // }
     }
 
     public function view($id)
@@ -72,7 +86,6 @@ class DonHangController extends Controller
             ]);
         }
     }
-
     public function createDonHang()
     {
         $agent = Auth::guard('khach_hang')->user();
@@ -132,6 +145,76 @@ class DonHangController extends Controller
             ]);
         }
     }
+
+    // public function createDonHang()
+    // {
+    //     $agent = Auth::guard('khach_hang')->user();
+    //     if($agent){
+    //         //1. Lấy thông tin giỏ hàng
+    //         $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+    //                                  ->where('is_cart', 0)
+    //                                  ->get();
+    //         if(empty($gioHang) || count($gioHang) > 0){
+    //             //2.Tạo đơn hàng
+    //             $donHang = DonHang::create([
+    //                 'ma_don_hang'           => Str::uuid(),
+    //                 'tong_tien'             => 0,
+    //                 'tien_giam_gia'         => 0,
+    //                 'thuc_tra'              => 0,
+    //                 'agent_id'              => $agent->id,
+    //                 'loai_thanh_toan'       => 0, //=1 là banking , 0 thanh toán khi nhận hàng
+    //                 'dia_chi_giao_hang'     => $agent->dia_chi,
+    //             ]);
+    //             //3. Chuyển giỏ hàng thành đơn hàng
+    //             $tong_tien = 0;
+    //             $thuc_tra  = 0;
+    //             foreach($gioHang as $key => $value){
+    //                 $sanPham = SanPham::find($value->san_pham_id);
+    //                 if($sanPham){
+    //                     // Kiểm tra số lượng sản phẩm trong kho có đủ để mua hay không
+    //                     if ($sanPham->so_luong >= $value->so_luong) {
+    //                         $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+    //                         $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
+    //                         $thuc_tra += $value->so_luong * $giaBan; // số lượng * giá khuyến mãi
+
+    //                         // nếu ko có khuyến mãi thì tổng tiền = thực trả
+    //                         $sanPham->so_luong -= $value->so_luong;
+    //                         $value->is_cart = 1;
+    //                         $value->don_hang_id = $donHang->id;
+    //                         $value->save();
+    //                         $sanPham->save();
+    //                     } else {
+    //                         // Nếu số lượng sản phẩm trong kho không đủ, trả về thông báo lỗi
+    //                         return response()->json([
+    //                             'donhang' => 4,
+    //                             'message' => 'Sản phẩm ' . $sanPham->ten_san_pham . ' trong kho không đủ để thực hiện giao dịch.'
+    //                         ]);
+    //                     }
+    //                 } else{
+    //                     $value->delete();
+    //                 }
+    //             }
+
+    //             //Tính tổng tiền và thực trả
+    //             $donHang->tong_tien = $tong_tien;
+    //             $donHang->tien_giam_gia = $tong_tien - $thuc_tra;
+    //             $donHang->thuc_tra = $thuc_tra;
+    //             $donHang->save();
+
+    //             return response()->json([
+    //                 'donhang'       => 1,
+    //             ]);
+    //         } else{
+    //             return response()->json([
+    //                 'donhang'       => 2,
+    //             ]);
+    //         }
+    //     } else{
+    //         return response()->json([
+    //             'donhang'       => 3,
+    //         ]);
+    //     }
+    // }
 
     public function getData()
     {

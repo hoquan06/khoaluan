@@ -167,8 +167,8 @@
                 axios
                     .get('/khach-hang/tao-don-hang')
                     .then((res) => {
-                        if(res.data.donhang == 0){
-                            toastr.error("Số lượng sản phẩm bạn quá nhiều!");
+                        if(res.data.donhang == 4){
+                            toastr.error(res.data.message);
                         } else if(res.data.donhang == 1){
                             toastr.success("Mua hàng thành công!");
                             this.loadCart();
