@@ -134,7 +134,7 @@
                             <li class="nav-item">
                                 <a class="nav-link getIDSanPham" data-id="{{ $sanPham->id }}" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Đánh giá</a>
                             </li>
-                            <input type="text" id="idSp">
+                            <input type="text" id="idSp" hidden>
                         </ul>
                         <div class="tab-content shop_info_tab">
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
@@ -149,7 +149,7 @@
                                     <h5>Thêm đánh giá</h5>
                                     <form class="row mt-3" id="tableReset">
                                         <div class="form-group col-12">
-                                            <div class="star_rating selectVehicle">
+                                            <div class="star_rating getStar">
                                                 <span data-value="1"><i class="far fa-star"></i></span>
                                                 <span data-value="2"><i class="far fa-star"></i></span>
                                                 <span data-value="3"><i class="far fa-star"></i></span>
@@ -317,7 +317,7 @@
                 });
             });
 
-            $('.selectVehicle span').click(function() {
+            $('.getStar span').click(function() {
                 var starValue = $(this).data('value');
                 $("#soSaoChon").val(starValue);
             });
@@ -370,7 +370,6 @@
             function loadTable()
             {
                 var id = $("#idSp").val();
-                console.log(id);
                 $.ajax({
                     url             : '/khach-hang/danh-gia/data/' + id,
                     type            : 'get',
