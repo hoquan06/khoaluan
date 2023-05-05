@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="heading_tab_header">
                     <div class="heading_s2">
-                        <h4>Flash Sale</h4>
+                        <h4>Khuyến mãi HOT</h4>
                     </div>
                 </div>
             </div>

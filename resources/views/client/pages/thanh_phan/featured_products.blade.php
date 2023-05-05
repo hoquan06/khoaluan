@@ -112,7 +112,7 @@
                     <div class="col-12">
                         <div class="product_slider carousel_slider product_list owl-carousel owl-theme nav_style5" data-nav="true" data-dots="false" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "380":{"items": "1"}, "640":{"items": "2"}, "991":{"items": "1"}}'>
                             <div class="item">
-                                @foreach ($best_seller as $key => $value)
+                                @foreach ($spGiam as $key => $value)
                                     <div class="product_wrap">
                                         <div class="product_img">
                                             <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">

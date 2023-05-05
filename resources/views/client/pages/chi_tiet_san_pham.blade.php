@@ -132,49 +132,18 @@
                                 <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">Mô tả chi tiết</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Đánh giá</a>
+                                <a class="nav-link getIDSanPham" data-id="{{ $sanPham->id }}" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">Đánh giá</a>
                             </li>
+                            <input type="text" id="idSp">
                         </ul>
                         <div class="tab-content shop_info_tab">
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
                                 <p>{!! $sanPham->mo_ta_chi_tiet !!}</p>
                             </div>
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
-                                <div class="comments">
+                                <div class="comments" id="dsDanhGia">
                                     <h5 class="product_tab_title">Tất cả đánh giá</span></h5>
-                                    <ul class="list_none comment_list mt-4">
-                                        @foreach ($danhGia as $key=>$value)
-                                            <li>
-                                                {{-- <div class="comment_img">
-                                                    <img src="/assets_client/images/user1.jpg" alt="user1"/>
-                                                </div> --}}
-                                                <div class="comment_block">
-                                                    <div class="rating_wrap">
-                                                        <div class="rating">
-                                                            @if ($value->so_sao == 1)
-                                                                <div class="product_rate" style="width:20%"></div>
-                                                            @elseif ($value->so_sao == 2)
-                                                                <div class="product_rate" style="width:40%"></div>
-                                                            @elseif ($value->so_sao == 3)
-                                                                <div class="product_rate" style="width:60%"></div>
-                                                            @elseif ($value->so_sao == 4)
-                                                                <div class="product_rate" style="width:80%"></div>
-                                                            @else
-                                                                <div class="product_rate" style="width:100%"></div>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <p class="customer_meta">
-                                                        <span class="review_author">{{$value->ho_va_ten}}</span>
-                                                        <span class="comment-date">{{ ($value->created_at )}}</span>
-                                                    </p>
-                                                    <div class="description">
-                                                        <p>{{$value->noi_dung}}</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+
                                 </div>
                                 <div class="review_form field_form">
                                     <h5>Thêm đánh giá</h5>
@@ -193,7 +162,7 @@
                                             <textarea required="required" placeholder="Nhập vào đây ..." class="form-control" id="noi_dung" rows="4"></textarea>
                                         </div>
                                         <div class="form-group col-12">
-                                            <button data-id="{{$sanPham->id}}" type="button" class="btn btn-fill-out themDanhGia">Đánh giá</button>
+                                            <button data-id="{{$sanPham->id}}" type="button" class="btn btn-fill-out themDanhGia getIDSanPham">Đánh giá</button>
                                         </div>
                                     </form>
                                 </div>
@@ -391,6 +360,57 @@
                         // + currentdate.getSeconds();
                 return datetime;
             };
+            $(".getIDSanPham").click(function(e){
+                e.preventDefault();
+                var id = $(this).data("id");
+                $("#idSp").val(id);
+                loadTable();
+            });
+
+            function loadTable()
+            {
+                var id = $("#idSp").val();
+                console.log(id);
+                $.ajax({
+                    url             : '/khach-hang/danh-gia/data/' + id,
+                    type            : 'get',
+                    success         : function(res){
+                        var noiDung = '';
+                        $.each(res.list, function(key, value){
+                            var soSao = '';
+                            if(value.so_sao == 1){
+                                soSao = '<div class="product_rate" style="width:20%"></div>';
+                            } else if(value.so_sao == 2){
+                                soSao = '<div class="product_rate" style="width:40%"></div>';
+                            } else if(value.so_sao == 3){
+                                soSao = '<div class="product_rate" style="width:60%"></div>';
+                            } else if(value.so_sao == 4){
+                                soSao = '<div class="product_rate" style="width:80%"></div>';
+                            } else{
+                                soSao = '<div class="product_rate" style="width:100%"></div>';
+                            }
+                            noiDung += '<li>';
+                            noiDung += '<div class="comment_block">';
+                            noiDung += '<div class="rating_wrap">';
+                            noiDung += '<div class="rating">';
+                            noiDung += soSao;
+                            noiDung += '</div>';
+                            noiDung += '</div>';
+                            noiDung += '<p class="customer_meta">';
+                            noiDung += '<span class="review_author">' + value.ho_va_ten + '</span>';
+                            noiDung += '<span class="comment-date">' + GetNow(value.created_at) + '</span>';
+                            noiDung += '</p>';
+                            noiDung += '<div class="description">';
+                            noiDung += '<p>' + value.noi_dung + '</p>';
+                            noiDung += '</div>';
+                            noiDung += '</div>';
+                            noiDung += '</li>';
+                        });
+                        $("#dsDanhGia").html('<ul class="list_none comment_list mt-4">' + noiDung + '</ul>');
+                    }
+                });
+            }
+            loadTable();
         });
    </script>
 @endsection

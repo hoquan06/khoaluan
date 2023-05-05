@@ -168,7 +168,7 @@
                     .get('/khach-hang/tao-don-hang')
                     .then((res) => {
                         if(res.data.donhang == 4){
-                            toastr.error(res.data.message);
+                            toastr.error("hjh");
                         } else if(res.data.donhang == 1){
                             toastr.success("Mua hàng thành công!");
                             this.loadCart();

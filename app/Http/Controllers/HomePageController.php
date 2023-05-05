@@ -32,12 +32,16 @@ class HomePageController extends Controller
                 ORDER BY ty_le_giam DESC";
         $best_seller = DB::select($sql);
 
+        $sp_giam_gia = "SELECT * FROM `san_phams` WHERE `gia_khuyen_mai` > 0
+                        ORDER BY gia_khuyen_mai DESC";
+        $spGiam = DB::select($sp_giam_gia);
+
         $sp_moi = SanPham::orderByDesc('created_at')->get()->take(8);
         $sp_hang_dau = SanPham::orderByDesc('gia_ban')->get();
 
         $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
         $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
+        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller','spGiam', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
     }
 
     public function viewSanPham($id)
@@ -47,12 +51,9 @@ class HomePageController extends Controller
             $id = Str::substr($id, $viTri + 4);
         }
         $sanPham = SanPham::find($id);
-        $danhGia = DanhGia::join('khach_hangs', 'khach_hangs.id', 'danh_gias.agent_id')
-                          ->where('san_pham_id', $id)
-                          ->get();
         if($sanPham){
             $spLienQuan = SanPham::where('id_danh_muc', $sanPham->id_danh_muc)->get();
-            return view('client.pages.chi_tiet_san_pham', compact('sanPham', 'spLienQuan', 'danhGia'));
+            return view('client.pages.chi_tiet_san_pham', compact('sanPham', 'spLienQuan'));
         } else{
             return view('client.pages.404');
         }
@@ -118,8 +119,9 @@ class HomePageController extends Controller
 
     public function spGiamGia()
     {
-        $sql = "SELECT *, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam` FROM `san_phams` ORDER BY ty_le_giam DESC";
-        $best_seller = DB::select($sql);
-        return view('client.pages.view_ds_san_pham.giam_gia', compact('best_seller'));
+        $sp_giam_gia = "SELECT * FROM `san_phams` WHERE `gia_khuyen_mai` > 0
+                        ORDER BY gia_khuyen_mai DESC";
+        $spGiam = DB::select($sp_giam_gia);
+        return view('client.pages.view_ds_san_pham.giam_gia', compact('spGiam'));
     }
 }

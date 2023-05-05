@@ -55,11 +55,21 @@ class KhuyenMaiController extends Controller
 
     public function delete($id)
     {
-        $data = KhuyenMai::find($id);
-        if($data){
-            $data->delete();
+        $khuyenMai = KhuyenMai::find($id);
+        if($khuyenMai){
+            $khuyenMai->delete();
+
+            // Cập nhật giá sản phẩm nếu đợt khuyến mãi đã bị xóa hoặc hết hạn
+            $sanPham = SanPham::where('id_danh_muc', $khuyenMai->danh_muc_id)->get();
+            foreach ($sanPham as $value) {
+                if ($value->gia_khuyen_mai != 0 && $value->gia_khuyen_mai == $value->gia_ban - $khuyenMai->muc_giam) {
+                    $value->gia_khuyen_mai = 0;
+                    $value->save();
+                }
+            }
+
             return response()->json([
-                'status'       => true,
+                "status" => true
             ]);
         } else{
             return response()->json([

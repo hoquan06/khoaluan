@@ -126,6 +126,7 @@ Route::prefix('khach-hang')->group(function () {
 
     // Route::get('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'index']);
     Route::post('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'store']);
+    Route::get('/danh-gia/data/{id}', [\App\Http\Controllers\DanhGiaController::class, 'getData']);
 });
 
 Route::get('/', [\App\Http\Controllers\HomePageController::class, 'index']);

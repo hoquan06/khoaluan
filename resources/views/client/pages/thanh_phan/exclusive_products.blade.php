@@ -23,9 +23,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="arrival-tab" data-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="true">Hàng mới về</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" id="sellers-tab" data-toggle="tab" href="#sellers" role="tab" aria-controls="sellers" aria-selected="false">Khuyến mãi</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
+                            {{-- <div class="tab-pane fade" id="sellers" role="tabpanel" aria-labelledby="sellers-tab">
                                 <div class="product_slider carousel_slider owl-carousel owl-theme dot_style1" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "481":{"items": "2"}, "768":{"items": "3"}, "991":{"items": "4"}}'>
                                     @foreach ($best_seller as $key => $value)
                                         <div class="item">
@@ -120,7 +120,7 @@
                                         @endif
                                     @endforeach
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
