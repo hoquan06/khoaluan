@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double('tong_tien', 18, 0); //18 chữ số, thập phân
             $table->double('tien_giam_gia', 18, 0);
             $table->double('thuc_tra', 18, 0);
-            $table->integer('agent_id');
+            $table->bigInteger('agent_id');
             $table->integer('loai_thanh_toan');
             $table->string('dia_chi_giao_hang');
             $table->integer('tinh_trang')->default(0);

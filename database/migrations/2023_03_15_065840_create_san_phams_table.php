@@ -25,7 +25,7 @@ return new class extends Migration
             $table->longText('mo_ta_ngan');
             $table->longText('mo_ta_chi_tiet');
             $table->integer('tinh_trang');
-            $table->integer('id_danh_muc');
+            $table->bigInteger('id_danh_muc');
             $table->timestamps();
         });
     }

@@ -32,12 +32,13 @@ class ChiTietDonHangController extends Controller
                 $chiTietDonHang->save();
             } else{
                 ChiTietDonHang::create([
-                    'san_pham_id'       => $sanPham->id,
-                    'ten_san_pham'      => $sanPham->ten_san_pham,
-                    'so_luong'          => $request->so_luong,
-                    'don_gia'           => $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban,
-                    'is_cart'           => 0,
-                    'agent_id'          => $agent->id,
+                    'san_pham_id'           => $sanPham->id,
+                    'ten_san_pham'          => $sanPham->ten_san_pham,
+                    'so_luong'              => $request->so_luong,
+                    'don_gia'               => $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban,
+                    'is_cart'               => 0,
+                    // 'don_hang_id'           => 0,
+                    'agent_id'              => $agent->id,
                 ]);
             }
             return response()->json([

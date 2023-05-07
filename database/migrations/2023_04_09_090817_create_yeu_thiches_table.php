@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('yeu_thiches', function (Blueprint $table) {
             $table->id();
-            $table->integer('san_pham_id');
+            $table->bigInteger('san_pham_id');
             $table->string('ten_san_pham');
             $table->integer('so_luong')->default(1);
             $table->double('don_gia', 18, 0);
-            $table->integer('agent_id');
+            $table->bigInteger('agent_id');
             $table->timestamps();
         });
     }
