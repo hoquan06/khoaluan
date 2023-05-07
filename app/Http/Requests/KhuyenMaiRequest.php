@@ -23,9 +23,9 @@ class KhuyenMaiRequest extends FormRequest
     {
         return [
             'ten_chuong_trinh'   => 'required',
-            'muc_giam'           => 'required|min:10|numeric|before:today',
-            'thoi_gian_bat_dau'  => 'date|required',
-            'thoi_gian_ket_thuc' => 'date|required',
+            'muc_giam'           => 'required',
+            'thoi_gian_bat_dau'  => 'required|date|before:today|max:10',
+            'thoi_gian_ket_thuc' => 'required|date|before:today|max:10',
         ];
     }
 
@@ -37,7 +37,6 @@ class KhuyenMaiRequest extends FormRequest
             'numeric'           => ":attribute phải là số",
             'before'            => ':attribute không hợp lệ',
             'date'              => ':attribute không đúng định dạng',
-
         ];
     }
 

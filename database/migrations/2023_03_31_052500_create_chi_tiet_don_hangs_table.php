@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('chi_tiet_don_hangs', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('san_pham_id');
+            $table->bigInteger('san_pham_id')->unsigned();
             $table->string('ten_san_pham');
             $table->integer('so_luong')->default(1);
             $table->double('don_gia', 18, 0);
             $table->integer('is_cart')->default(1); //= 1 là cart, = 0 là đơn hàng
-            $table->bigInteger('don_hang_id')->nullable();
-            $table->bigInteger('agent_id');
+            $table->bigInteger('don_hang_id')->nullable()->unsigned();
+            $table->bigInteger('agent_id')->unsigned();
             $table->timestamps();
         });
     }
