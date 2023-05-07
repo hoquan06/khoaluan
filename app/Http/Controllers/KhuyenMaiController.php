@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\KhuyenMai;
 use App\Models\DanhMucSanPham;
+use App\Http\Requests\KhuyenMaiRequest;
 use App\Models\SanPham;
 use Carbon\Carbon;
 
@@ -22,8 +23,8 @@ class KhuyenMaiController extends Controller
                                 ->get();
         return view('admin.pages.khuyen_mai.index',compact("menuCha","dsKhuyenMai"));
     }
-
-    public function store(Request $request)
+    
+    public function store(KhuyenMaiRequest $request)
     {
         // Lấy tất cả sản phẩm trong danh mục cần khuyến mãi
         $sanPham = SanPham::where('id_danh_muc', $request->danh_muc_id)->get();

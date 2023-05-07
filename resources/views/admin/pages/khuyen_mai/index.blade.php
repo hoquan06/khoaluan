@@ -115,7 +115,7 @@
             </div>
             <div class="mb-1">
                 <label class="form-label" for="basic-default-name">Sản phẩm</label>
-                <select id="danh_muc_id" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                <select id="danh_muc_id_edit" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
                     @foreach($menuCon as $key => $value)
                         <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
                     @endforeach
@@ -242,7 +242,7 @@
                     success     : function(res){
                         if(res.edit){
                             $("#ten_chuong_trinh_edit").val(res.data.ten_chuong_trinh);
-                            $("#ten_danh_muc_edit").val(res.data.ten_danh_muc);
+                            $("#danh_muc_id_edit").val(res.data.danh_muc_id);
                             $("#muc_giam_edit").val(res.data.muc_giam);
                             $("#thoi_gian_bat_dau_edit").val(res.data.thoi_gian_bat_dau);
                             $("#thoi_gian_ket_thuc_edit").val(res.data.thoi_gian_ket_thuc);
@@ -260,7 +260,7 @@
             $("#update").click(function(){
                 var payload = {
                     'ten_chuong_trinh'         : $("#ten_chuong_trinh_edit").val(),
-                    'ten_danh_muc'             : $("#ten_danh_muc_edit").val(),
+                    'danh_muc_id'              : $("#danh_muc_id_edit").val(),
                     'muc_giam'                 : $("#muc_giam_edit").val(),
                     'thoi_gian_bat_dau'        : $("#thoi_gian_bat_dau_edit").val(),
                     'thoi_gian_ket_thuc'       : $("#thoi_gian_ket_thuc_edit").val(),

@@ -77,6 +77,6 @@ class DanhGiaController extends Controller
     }
     public function thongKe()
     {
-
+        return view("admin.pages.danh_gia.view");
     }
 }

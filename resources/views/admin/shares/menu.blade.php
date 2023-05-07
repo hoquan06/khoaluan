@@ -73,6 +73,8 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-chua-co-luot-mua"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm chưa có lượt mua</span></a>
             </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
+            </li>
         </ul>
     </div>
 </div>
