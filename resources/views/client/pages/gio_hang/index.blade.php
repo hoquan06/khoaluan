@@ -82,11 +82,20 @@
                                         <td class="cart_total_label">Cần thanh toán</td>
                                         <td class="cart_total_amount"><strong>@{{numberFormat(toTal())}}</strong></td>
                                     </tr>
+                                    <tr>
+                                        <td class="cart_total_label">Hình thức thanh toán</td>
+                                        <td>
+                                          <select name="payment-method" id="thanhToan">
+                                            <option value="0">Thanh toán khi nhận hàng</option>
+                                            <option value="1">Thanh toán qua Momo</option>
+                                          </select>
+                                        </td>
+                                      </tr>
+
                                 </tbody>
                             </table>
                         </div>
                         <a class="btn btn-fill-out" v-on:click="createBill()">Mua hàng</a>
-                        <a class="btn btn-fill-out">Đến trang thanh toán</a>
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -164,8 +173,12 @@
             },
 
             createBill(){
+                var hinhThucThanhToan = $("#thanhToan").val();
+                var payload = {
+                    'loai_thanh_toan'   : hinhThucThanhToan,
+                }
                 axios
-                    .get('/khach-hang/tao-don-hang')
+                    .post('/khach-hang/tao-don-hang', payload)
                     .then((res) => {
                         if(res.data.donhang == 4){
                             toastr.error(res.data.message);

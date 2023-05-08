@@ -23,7 +23,7 @@ class KhuyenMaiController extends Controller
                                 ->get();
         return view('admin.pages.khuyen_mai.index',compact("menuCha","dsKhuyenMai"));
     }
-    
+
     public function store(KhuyenMaiRequest $request)
     {
         // Lấy tất cả sản phẩm trong danh mục cần khuyến mãi
@@ -105,19 +105,61 @@ class KhuyenMaiController extends Controller
         }
     }
 
+    // public function update(Request $request)
+    // {
+    //     $data     = $request->all();
+    //     $khuyen_mai = KhuyenMai::find($request->id);
+    //     $khuyen_mai->update($data);
+    //     if($khuyen_mai){
+    //         return response()->json([
+    //             'update'      => true,
+    //         ]);
+    //     } else{
+    //         return response()->json([
+    //             'update'      => false,
+    //         ]);
+    //     }
+    // }
     public function update(Request $request)
     {
-        $data     = $request->all();
+        $data = $request->all();
         $khuyen_mai = KhuyenMai::find($request->id);
+
+        // Xóa giá khuyến mãi của các sản phẩm trong danh mục cũ
+        $sanPhamCu = SanPham::where('id_danh_muc', $khuyen_mai->danh_muc_id)->get();
+        foreach ($sanPhamCu as $value) {
+            $value->gia_khuyen_mai = 0;
+            $value->save();
+        }
+
         $khuyen_mai->update($data);
         if($khuyen_mai){
+            // Lấy tất cả sản phẩm trong danh mục mới
+            $sanPhamMoi = SanPham::where('id_danh_muc', $request->danh_muc_id)->get();
+
+            // Lặp qua từng sản phẩm và cập nhật giá khuyến mãi
+            foreach ($sanPhamMoi as $value) {
+                // Kiểm tra nếu đang trong thời gian khuyến mãi
+                if (Carbon::now()->between($khuyen_mai->thoi_gian_bat_dau, $khuyen_mai->thoi_gian_ket_thuc)) {
+                    $value->gia_khuyen_mai = $value->gia_ban - $khuyen_mai->muc_giam;
+                } else {
+                    $value->gia_khuyen_mai = 0;
+                }
+                $value->save();
+            }
+
+            // Xóa các đợt khuyến mãi cũ của danh mục này
+            KhuyenMai::where('danh_muc_id', $request->danh_muc_id)->where('id', '<>', $khuyen_mai->id)->delete();
+
             return response()->json([
-                'update'      => true,
+                'update' => true,
             ]);
-        } else{
+        } else {
             return response()->json([
-                'update'      => false,
+                'update' => false,
             ]);
         }
     }
+
+
 }

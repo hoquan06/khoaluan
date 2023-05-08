@@ -117,7 +117,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/edit/{id}', [\App\Http\Controllers\KhachHangController::class, 'edit']);
     Route::post('/update', [\App\Http\Controllers\KhachHangController::class, 'update']);
 
-    Route::get('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
+    Route::post('/tao-don-hang', [\App\Http\Controllers\DonHangController::class, 'createDonHang']);
     Route::get('/don-hang/data', [\App\Http\Controllers\DonHangController::class, 'getData']);
     Route::get('/don-hang/chi-tiet/{id}', [\App\Http\Controllers\DonHangController::class, 'viewOrder']);
     Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);

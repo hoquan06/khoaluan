@@ -86,7 +86,7 @@ class DonHangController extends Controller
             ]);
         }
     }
-    public function createDonHang()
+    public function createDonHang(Request $request)
     {
         $agent = Auth::guard('khach_hang')->user();
         if($agent){
@@ -102,9 +102,10 @@ class DonHangController extends Controller
                     'tien_giam_gia'         => 0,
                     'thuc_tra'              => 0,
                     'agent_id'              => $agent->id,
-                    'loai_thanh_toan'       => 0, //=1 là banking , 0 thanh toán khi nhận hàng
+                    'loai_thanh_toan'       => $request->loai_thanh_toan, //=1 là banking , 0 thanh toán khi nhận hàng
                     'dia_chi_giao_hang'     => $agent->dia_chi,
                 ]);
+
                 //3. Chuyển giỏ hàng thành đơn hàng
                 $tong_tien = 0;
                 $thuc_tra  = 0;
