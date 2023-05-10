@@ -335,6 +335,10 @@
                     .then((res) => {
                         if(res.data.themDanhGia == 1){
                             toastr.success("Đã thêm mới đánh giá!");
+                            // Reset số sao
+                            $(".getStar span").removeClass("selected");
+                            $("#soSaoChon").val("");
+                            //Reset nội dung
                             $("#tableReset").trigger('reset');
                         } else if(res.data.themDanhGia == 2){
                             toastr.warning("Bạn phải mua hàng để thực hiện chức năng này!");

@@ -47,7 +47,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <a href="/admin/don-hang/index" class="btn btn-danger">Đóng</a>
+                            <a class="btn btn-danger close">Đóng</a>
                         </div>
                     </div>
                 </div>
@@ -55,5 +55,20 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script>
+    $(document).ready(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
+        $(".close").click(function() {
+            window.history.back();
+        });
+
+    });
+</script>
 @endsection

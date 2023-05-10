@@ -23,7 +23,7 @@ class GioHangRequest extends FormRequest
     {
         return [
             'san_pham_id'           => 'required|exists:san_phams,id',
-            'so_luong'              => 'required|numeric|min:1',
+            'so_luong'              => 'required|integer|min:1|max:5',
         ];
     }
 
@@ -32,8 +32,9 @@ class GioHangRequest extends FormRequest
         return [
             'required'              => ':attribute không được để trống',
             'exists'                => ':attribute không tồn tại',
-            'numeric'               => ':attribute phải là số',
-            'min'                   => ':attribute phải lớn hơn 0',
+            'integer'               => ':attribute phải là số nguyên',
+            'min'                   => ':attribute phải ít nhất bằng 1',
+            'so_luong.max'          => 'Bạn chỉ được mua tối đa 5 sản phẩm',
         ];
     }
 

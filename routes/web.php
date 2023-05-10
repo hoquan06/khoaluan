@@ -66,7 +66,11 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::prefix('don-hang')->group(function () {
-        Route::get('/index', [\App\Http\Controllers\DonHangController::class, 'index']);
+        Route::get('/da-huy/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaHuy']); // tinh trang -1
+        Route::get('/cho-duyet/index', [\App\Http\Controllers\DonHangController::class, 'donHangChoDuyet']);// tinh trang 0
+        Route::get('/dang-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDangGiao']); // tinh trang 1
+        Route::get('/da-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaGiao']); // tinh trang 2
+
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);

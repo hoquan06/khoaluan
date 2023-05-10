@@ -49,7 +49,17 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/tai-khoan/index"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Tài khoản</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/don-hang/index"><i data-feather='shopping-cart'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather='trending-up'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đơn hàng</span></a>
+                <ul class="menu-content">
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/da-huy/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Edit">Đã Hủy</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/cho-duyet/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Chờ duyệt</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/dang-giao/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="Preview">Đang giao</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/da-giao/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Đã giao</span></a>
+                    </li>
+                </ul>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/danh-gia/index"><i data-feather='star'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đánh giá</span></a>
             </li>

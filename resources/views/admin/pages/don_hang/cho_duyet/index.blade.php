@@ -3,7 +3,7 @@
 @section('content')
 <div class="col-md-12">
         <div class="main-card mb-3 card">
-            <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Đơn Hàng</h5>
+            <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Đơn Hàng Chờ Duyệt</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
                     <thead>
                         <tr>
@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        @foreach($donHang as $key => $value)
+                        @foreach($don_hang_cho_duyet as $key => $value)
                             <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $value->ho_va_ten }}</td>
@@ -31,11 +31,7 @@
                                 @else
                                     <td>Chuyển khoản</td>
                                 @endif
-                                @if($value->tinh_trang == -1)
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-danger">Đã hủy</button>
-                                    </td>
-                                @elseif ($value->tinh_trang == 0)
+                                @if($value->tinh_trang == 0)
                                     <td>
                                         <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-info">Duyệt</button>
                                     </td>
@@ -43,16 +39,11 @@
                                     <td>
                                         <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao</button>
                                     </td>
-                                @else
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Đã giao</button>
-                                    </td>
                                 @endif
                                 <td>
                                     <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-info">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -125,7 +116,7 @@
                                 self.html("Đang giao");
                                 self.removeClass('btn-info');
                                 self.addClass('btn-primary');
-                                toastr.success("Đơn hàng đã được duyệt!!!");
+                                toastr.success("Đơn hàng đã được duyệt và giao cho nhà vận chuyển!!!");
                             }
                         } else if(res.doitrangthai == 2){
                                 self.html("Đã giao");

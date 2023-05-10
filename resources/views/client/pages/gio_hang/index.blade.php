@@ -42,7 +42,7 @@
                                         <td class="product-name" data-title="Product"><a v-bind:href="'/san-pham/' + value.slug_san_pham + '-post' + value.san_pham_id">@{{value.ten_san_pham}}</a></td>
                                         <td class="product-price" data-title="Price">@{{numberFormat(value.don_gia)}}</td>
                                         <td class="product-quantity" data-title="Quantity"><div class="quantity">
-                                        <input type="number" v-on:change="updateCart(value)" name="quantity" v-model="value.so_luong" min="1" title="Qty" class="qty" size="4">
+                                        <input type="number" v-on:change="updateCart(value)" name="quantity" v-model="value.so_luong" min="1" max="5" title="Qty" class="qty" size="4">
                                         </div></td>
                                         <td class="product-subtotal" data-title="Total">@{{numberFormat(value.so_luong * value.don_gia)}}</td>
                                         <td class="product-remove" data-title="Remove"><a><i :data-id="value.id" v-on:click='removeCart(value)' class="ti-close"></i></a></td>
@@ -127,6 +127,24 @@
                 return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
             },
             updateCart(row){
+                //Kiểm tra số lượng của sản phẩm
+                const soLuongGioHang = parseFloat(row.so_luong);
+                if (isNaN(soLuongGioHang) || !Number.isInteger(soLuongGioHang)) {
+                    toastr.error("Số lượng sản phẩm phải là số nguyên!");
+                    this.loadCart();
+                    return;
+                }
+
+                if(soLuongGioHang < 1){
+                    toastr.error("Số lượng sản phẩm phải lớn hơn hoặc bằng 1");
+                    this.loadCart();
+                    return;
+                } if(soLuongGioHang > 5){
+                    toastr.error("Bạn chỉ được mua tối đa 5 sản phấm");
+                    this.loadCart();
+                    return;
+                }
+
                 axios
                     .post('/khach-hang/gio-hang/update', row)
                     .then((res) => {
@@ -135,6 +153,12 @@
                             this.loadCart();
                         }
                     })
+                    .catch((res) => {
+                        var danh_sach_loi = res.response.data.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    });
             },
             removeCart(row){
                 var idRemove =   event.target.getAttribute('data-id');
