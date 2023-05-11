@@ -40,6 +40,7 @@ class ThongKeController extends Controller
                     AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
 
+
         return view('admin.pages.thong_ke.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ'));
     }
 

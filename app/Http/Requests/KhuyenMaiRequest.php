@@ -23,7 +23,7 @@ class KhuyenMaiRequest extends FormRequest
     {
         return [
             'ten_chuong_trinh'   => 'required',
-            'muc_giam'           => 'required|lt:san_phams, gia_ban',
+            'muc_giam'           => 'required',
             'thoi_gian_bat_dau'  => 'required|date|after_or_equal:today|max:10',
             'thoi_gian_ket_thuc' => 'required|date|after:thoi_gian_bat_dau|max:10',
         ];
@@ -39,7 +39,6 @@ class KhuyenMaiRequest extends FormRequest
             'after_or_equal'    => ':attribute phải lớn hơn ngày hôm nay',
             'after'             => ':attribute phải lớn hơn Thời gian bắt đầy',
             'date'              => ':attribute không đúng định dạng',
-            'muc_giam.lt'       => 'Mức giảm không được lớn hơn giá bán'
         ];
     }
 
