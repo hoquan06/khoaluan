@@ -89,6 +89,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/khach-hang-mua-nhieu', [\App\Http\Controllers\ThongKeController::class, 'khachHangMuaNhieu']);
         Route::get('/san-pham-ban-chay', [\App\Http\Controllers\ThongKeController::class, 'spBanChay']);
         Route::get('/san-pham-chua-co-luot-mua', [\App\Http\Controllers\ThongKeController::class, 'spChuaCoLuotMua']);
+        Route::get('/thay-doi-tinh-trang/{id}', [\App\Http\Controllers\ThongKeController::class, 'tinhTrang']);
     });
 });
 

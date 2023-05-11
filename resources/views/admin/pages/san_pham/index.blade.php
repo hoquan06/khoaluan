@@ -518,7 +518,7 @@
 
         $('body').on('click', '.doiTrangThai', function(){
             var idSanPham = $(this).data('id');
-            var sefl = $(this);
+            var self = $(this);
             $.ajax({
                 url             : '/admin/san-pham/doi-trang-thai/' + idSanPham,
                 type            : 'get',
@@ -526,13 +526,13 @@
                     if(res.doitrangthai){
                         toastr.success("Đổi trạng thái thành công!!!");
                         if(res.tinhtrang){
-                            sefl.html('Đang mở bán');
-                            sefl.removeClass('btn-danger');
-                            sefl.addClass('btn-primary');
+                            self.html('Đang mở bán');
+                            self.removeClass('btn-danger');
+                            self.addClass('btn-primary');
                         } else{
-                            sefl.html('Tạm ngưng');
-                            sefl.removeClass('btn-primary');
-                            sefl.addClass('btn-danger');
+                            self.html('Tạm ngưng');
+                            self.removeClass('btn-primary');
+                            self.addClass('btn-danger');
                         }
                     } else{
                         toastr.error("Sản phẩm không tồn tại!!!");

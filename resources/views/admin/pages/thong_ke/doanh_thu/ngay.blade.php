@@ -97,4 +97,31 @@
     </div>
     <!--/ Statistics Card -->
 </div>
+<div class="table-responsive card">
+    <div class="main-card mb-3 card">
+        <div class="card-body"><h5 class="card-title">Danh Sách Khách Hàng Mua Trong Ngày</h5>
+            <table class="mb-0 table table-bordered table-hover" id="tableSanPham">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap text-center">#</th>
+                        <th class="text-nowrap text-center">Tên Khách Hàng</th>
+                        <th class="text-nowrap text-center">Ngày Sinh</th>
+                        <th class="text-nowrap text-center">Số Điện Thoại</th>
+                        <th class="text-nowrap text-center">Địa Chỉ</th>
+                        <th class="text-nowrap text-center">SP Đã Mua</th>
+                        <th class="text-nowrap text-center">Tổng Tiền Đơn Hàng</th>
+                    </tr>
+                </thead>
+                <tbody class="text-nowrap text-center">
+                    @foreach($doanhThuNgay as $key => $value)
+                        <tr>
+                            <td>{{ $key + 1 }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @endsection
+
