@@ -116,6 +116,7 @@
                                 toastr.success("Đơn hàng đã được giao!!!");
                         } else{
                             toastr.warning("Đơn hàng đã được giao!");
+                            // toastr.warning("Đơn hàng đã được giao!");
                         }
                     }
                 });
