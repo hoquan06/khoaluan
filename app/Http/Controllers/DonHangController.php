@@ -13,13 +13,53 @@ use Illuminate\Support\Str;
 
 class DonHangController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $donHang = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+    //                       ->select('khach_hangs.*','don_hangs.*')
+    //                       ->get();
+    //     return view("admin.pages.don_hang.index",compact('donHang'));
+    // }
+    public function donHangDaHuy()
     {
-        $donHang = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
-                          ->select('khach_hangs.*','don_hangs.*')
-                          ->get();
-        return view("admin.pages.don_hang.index",compact('donHang'));
+        $don_hang_da_huy = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',-1)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.created_at')
+                            ->get();
+        return view("admin.pages.don_hang.da_huy.index",compact('don_hang_da_huy'));
     }
+
+    public function donHangChoDuyet()
+    {
+        $don_hang_cho_duyet = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',0)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.created_at')
+                            ->get();
+        return view("admin.pages.don_hang.cho_duyet.index",compact('don_hang_cho_duyet'));
+    }
+
+    public function donHangDangGiao()
+    {
+        $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',1)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.updated_at')
+                            ->get();
+        return view("admin.pages.don_hang.dang_giao.index",compact('don_hang_dang_giao'));
+    }
+
+    public function donHangDaGiao()
+    {
+        $don_hang_da_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',2)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.updated_at')
+                            ->get();
+        return view("admin.pages.don_hang.da_giao.index",compact('don_hang_da_giao'));
+    }
+
 
     public function accept($id)
     {

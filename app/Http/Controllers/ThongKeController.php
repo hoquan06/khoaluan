@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DonHang;
+use App\Models\SanPham;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,6 +39,7 @@ class ThongKeController extends Controller
                     WHERE chi_tiet_don_hangs.created_at LIKE '%$ngay%'
                     AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
+
 
         return view('admin.pages.thong_ke.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ'));
     }
@@ -165,10 +167,10 @@ class ThongKeController extends Controller
     public function spChuaCoLuotMua()
     {
         $sql = "SELECT san_phams.*
-                FROM `san_phams`
-                WHERE NOT EXISTS (SELECT chi_tiet_don_hangs.*
-                                  FROM chi_tiet_don_hangs JOIN don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
-                                  WHERE san_phams.id = chi_tiet_don_hangs.san_pham_id AND tinh_trang = 2)";
+        FROM `san_phams`
+        WHERE NOT EXISTS (SELECT chi_tiet_don_hangs.*, san_phams.*
+                          FROM chi_tiet_don_hangs JOIN don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
+                          WHERE san_phams.id = chi_tiet_don_hangs.san_pham_id AND tinh_trang = 2)";
         $spChuaBanDuoc = DB::select($sql);
         return view('admin.pages.thong_ke.san_pham_chua_co_luot_mua.index', compact('spChuaBanDuoc'));
     }
@@ -182,5 +184,22 @@ class ThongKeController extends Controller
                 ORDER BY soDon DESC";
         $khachHang = DB::select($sql);
         return view('admin.pages.thong_ke.khach_hang.index', compact('khachHang'));
+    }
+
+    public function tinhTrang($id)
+   {
+        $data = SanPham::find($id);
+        if($data){
+            $data->tinh_trang = !$data->tinh_trang;
+            $data->save();
+            return response()->json([
+                'doitrangthai'      => true,
+                'tinhtrang'         => $data->tinh_trang,
+            ]);
+        }else{
+            return response()->json([
+                'doitrangthai'      => false,
+            ]);
+        }
     }
 }
