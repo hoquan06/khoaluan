@@ -6,6 +6,7 @@ use App\Models\ChiTietDonHang;
 use App\Models\DonHang;
 use App\Models\KhachHang;
 use App\Models\SanPham;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -293,6 +294,110 @@ class DonHangController extends Controller
                     'nhanHang'      => false,
                 ]);
             }
+        }
+    }
+
+
+
+    public function thanhToanMomo(Request $request)
+    {
+        $agent = Auth::guard('khach_hang')->user();
+
+        $donHang = DonHang::create([
+            'ma_don_hang'           => Str::uuid(),
+            'tong_tien'             => 0,
+            'tien_giam_gia'         => 0,
+            'thuc_tra'              => 0,
+            'agent_id'              => $agent->id,
+            'loai_thanh_toan'       => $request->loai_thanh_toan, //=1 là banking , 0 thanh toán khi nhận hàng
+            'dia_chi_giao_hang'     => $agent->dia_chi,
+        ]);
+
+        $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+                                ->where('is_cart', 0)
+                                ->get();
+        if(empty($gioHang) || count($gioHang) > 0){
+            $thuc_tra  = 0;
+            foreach($gioHang as $key => $value){
+                $sanPham = SanPham::find($value->san_pham_id);
+                if($sanPham){
+                    $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
+                    $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
+                }
+            }
+
+            $jsonResult =  $this->ActionMomo($thuc_tra, $donHang);
+            return response()->json([
+                "status" => true,
+                "link"   => $jsonResult['payUrl'],
+            ]);
+        }
+    }
+
+    public function createTransaction($data)
+    {
+
+        Transaction::create([
+            "id_don_hang"           => $data['requestId'],
+            "id_khach_hang"         => $data['id_khach_hang'],
+            "ma_don_hang"           => $data['orderId'],
+            "transId"               => $data['transId'],
+            "ngay_thanh_toan"       => $data['responseTime'],
+            "so_tien"               => $data['amount'],
+            "message"               => $data['localMessage'],
+            "signature"             => $data['signature'],
+            "trang_thai"            => $data['message'] == "Success" ? 1 : 0,
+        ]);
+
+    }
+
+    public function ipnMomo(Request $request)
+    {
+        $data = $request->all();
+        $donHang = DonHang::find($request->requestId);
+        $agent                  = Auth::guard('khach_hang')->user();
+        $data['id_khach_hang']  = $agent->id;
+        if($request->message == "Success" && $request->errorCode == 0) {
+            $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+                                         ->where('is_cart', 0)
+                                         ->get();
+
+            $tong_tien = 0;
+            $thuc_tra  = 0;
+            foreach($gioHang as $key => $value){
+                $sanPham = SanPham::find($value->san_pham_id);
+                if($sanPham){
+                    $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
+                    $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
+                    $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
+
+                    // nếu ko có khuyến mãi thì tổng tiền = thực trả
+                    // $sanPham->so_luong -= $value->so_luong;
+                    $value->is_cart = 1;
+                    $value->don_hang_id = $donHang->id;
+                    $value->save();
+                    $sanPham->save();
+                } else{
+                    $value->delete();
+                }
+            }
+            //Tính tổng tiền và thực trả
+            $donHang->tong_tien = $tong_tien;
+            $donHang->tien_giam_gia = $tong_tien - $thuc_tra;
+            $donHang->thuc_tra = $thuc_tra;
+            // $donHang->tinh_trang = 1; // Đã thanh toán
+            $donHang->save();
+            // Tạo dữ liệu thanh toán
+            $this->createTransaction($data);
+
+            toastr()->success("Thanh Toán thành công!");
+            return redirect('/');
+        } else {
+            $donHang = DonHang::find($request->requestId);
+            $this->createTransaction($data);
+            $donHang->delete();
+            toastr()->error($request->localMessage);
+            return redirect('/khach-hang/gio-hang');
         }
     }
 }

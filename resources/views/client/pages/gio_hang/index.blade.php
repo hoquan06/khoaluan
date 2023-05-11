@@ -85,7 +85,7 @@
                                     <tr>
                                         <td class="cart_total_label">Hình thức thanh toán</td>
                                         <td>
-                                          <select name="payment-method" id="thanhToan">
+                                          <select name="payment-method" class="form-control" id="thanhToan">
                                             <option value="0">Thanh toán khi nhận hàng</option>
                                             <option value="1">Thanh toán qua Momo</option>
                                           </select>
@@ -172,25 +172,41 @@
                 return tong_tien;
             },
 
+            thanhToanMomo(payload) {
+                axios
+                    .post('/khach-hang/thanh-toan-momo', payload)
+                    .then((res) => {
+                        if(res.data.status) {
+                            window.location.replace(res.data.link);
+                        } else {
+                            toastr.error("Đã có lỗi khi thanh toán!");
+                        }
+                    });
+            },
+
             createBill(){
                 var hinhThucThanhToan = $("#thanhToan").val();
                 var payload = {
                     'loai_thanh_toan'   : hinhThucThanhToan,
                 }
-                axios
-                    .post('/khach-hang/tao-don-hang', payload)
-                    .then((res) => {
-                        if(res.data.donhang == 4){
-                            toastr.error(res.data.message);
-                        } else if(res.data.donhang == 1){
-                            toastr.success("Mua hàng thành công!");
-                            this.loadCart();
-                        } else if(res.data.donhang == 2){
-                            toastr.error("Giỏ hàng rỗng!");
-                        } else{
-                            toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
-                        }
-                    })
+                if (hinhThucThanhToan == 1) {
+                    this.thanhToanMomo(payload);
+                } else {
+                    axios
+                        .post('/khach-hang/tao-don-hang', payload)
+                        .then((res) => {
+                            if(res.data.donhang == 4){
+                                toastr.error(res.data.message);
+                            } else if(res.data.donhang == 1){
+                                toastr.success("Mua hàng thành công!");
+                                this.loadCart();
+                            } else if(res.data.donhang == 2){
+                                toastr.error("Giỏ hàng rỗng!");
+                            } else{
+                                toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
+                            }
+                        })
+                }
             }
         },
     });
