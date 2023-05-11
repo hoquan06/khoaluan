@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DonHangController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +77,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/accept/{id} ', [\App\Http\Controllers\DonHangController::class, 'accept']);
     });
 
+    Route::prefix('giao-dich')->group(function () {
+        Route::get('/index', [\App\Http\Controllers\GiaoDichController::class, 'index']);
+    });
+
     Route::get('/danh-gia/{id}', [\App\Http\Controllers\DanhGiaController::class, 'dsDanhGia']);
     Route::get('/thong-ke-danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'thongKe']);
 
@@ -91,6 +96,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/san-pham-chua-co-luot-mua', [\App\Http\Controllers\ThongKeController::class, 'spChuaCoLuotMua']);
     });
 });
+
 
 Route::prefix('khach-hang')->group(function () {
     Route::get('/register', [\App\Http\Controllers\KhachHangController::class, 'register']);
@@ -128,6 +134,12 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/don-hang/da-nhan-hang/{id}', [\App\Http\Controllers\DonHangController::class, 'orderCompleted']);
     Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
 
+    Route::post('/thanh-toan-momo', [\App\Http\Controllers\DonHangController::class, 'thanhToanMomo']);
+    Route::get('/momo/ipn', [DonHangController::class, 'ipnMomo']);
+    Route::get('/momo/notifi', [DonHangController::class, 'notifiMomo']);
+
+
+
     // Route::get('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'index']);
     Route::post('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'store']);
     Route::get('/danh-gia/data/{id}', [\App\Http\Controllers\DanhGiaController::class, 'getData']);
@@ -144,6 +156,8 @@ Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::clas
 Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
+
+
 
 
 

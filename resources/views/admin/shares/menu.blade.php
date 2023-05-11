@@ -61,6 +61,9 @@
                     </li>
                 </ul>
             </li>
+            {{-- Chi Tiết Giao Dịch --}}
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/giao-dich/index"><i data-feather='dollar-sign'></i><span class="menu-title text-truncate" data-i18n="Invoice">Giao Dịch</span></a>
+            </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/danh-gia/index"><i data-feather='star'></i><span class="menu-title text-truncate" data-i18n="Invoice">Đánh giá</span></a>
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Thống kê</span><i data-feather="more-horizontal"></i>
