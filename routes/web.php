@@ -158,6 +158,7 @@ Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::clas
 Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
+Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch1']);
 
 
 
