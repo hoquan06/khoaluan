@@ -27,7 +27,7 @@ class HomePageController extends Controller
 
         $ngay = date("Y-m-d");
         $sql = "SELECT san_phams.*, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam`, khuyen_mais.thoi_gian_ket_thuc as thoi_gian_ket_thuc
-                FROM (`danh_muc_san_phams` join san_phams on danh_muc_san_phams.id = san_phams.id_danh_muc) JOIN khuyen_mais on danh_muc_san_phams.id = khuyen_mais.danh_muc_id
+                FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
                 Where thoi_gian_ket_thuc >= '$ngay'
                 ORDER BY ty_le_giam DESC";
         $best_seller = DB::select($sql);

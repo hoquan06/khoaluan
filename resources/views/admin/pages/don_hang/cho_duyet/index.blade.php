@@ -33,7 +33,7 @@
                                 @endif
                                 @if($value->tinh_trang == 0)
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-info">Duyệt</button>
+                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-info">Duyệt và chuyển giao</button>
                                     </td>
                                 @elseif($value->tinh_trang == 1)
                                     <td>

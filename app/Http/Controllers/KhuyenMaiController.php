@@ -18,16 +18,27 @@ class KhuyenMaiController extends Controller
                                  ->where('tinh_trang', 1)
                                  ->get();
 
-        $dsKhuyenMai = KhuyenMai::join('danh_muc_san_phams','danh_muc_san_phams.id','khuyen_mais.danh_muc_id')
-                                ->select('khuyen_mais.*','danh_muc_san_phams.ten_danh_muc')
+        $dsKhuyenMai = KhuyenMai::join('san_phams','san_phams.id','khuyen_mais.san_pham_id')
+                                ->select('khuyen_mais.*','san_phams.ten_san_pham')
                                 ->get();
-        return view('admin.pages.khuyen_mai.index',compact("menuCha","dsKhuyenMai"));
+        $sanPham = SanPham::all();
+        return view('admin.pages.khuyen_mai.index',compact("menuCha",'dsKhuyenMai','sanPham'));
+    }
+
+    public function sanPhamKhuyenMai($id)
+    {
+        $sanPham = SanPham::where('id_danh_muc', $id)
+                                 ->orderBy('ten_san_pham', 'asc')
+                                 ->get();
+        return response()->json([
+            'sanPham'   => $sanPham,
+        ]);
     }
 
     public function store(KhuyenMaiRequest $request)
     {
         // Lấy tất cả sản phẩm trong danh mục cần khuyến mãi
-        $sanPham = SanPham::where('id_danh_muc', $request->danh_muc_id)->get();
+        $sanPham = SanPham::where('id', $request->san_pham_id)->get();
 
         if ($sanPham->count() > 0) {
             // Tạo mới đợt khuyến mãi
@@ -46,7 +57,9 @@ class KhuyenMaiController extends Controller
             }
 
             // Xóa các đợt khuyến mãi cũ của danh mục này
-            KhuyenMai::where('danh_muc_id', $request->danh_muc_id)->where('id', '<>', $khuyenMai->id)->delete();
+            KhuyenMai::where('san_pham_id', $request->san_pham_id)
+                     ->where('id', '<>', $khuyenMai->id)
+                     ->delete();
 
             return response()->json(["status" => true]);
         } else {
@@ -81,10 +94,9 @@ class KhuyenMaiController extends Controller
 
     public function getData()
     {
-        $data = KhuyenMai::join('danh_muc_san_phams','khuyen_mais.danh_muc_id','danh_muc_san_phams.id')
-                        ->select("khuyen_mais.*", 'danh_muc_san_phams.ten_danh_muc')
+        $data = KhuyenMai::join('san_phams','khuyen_mais.id','san_phams.id')
+                        ->select("khuyen_mais.*", 'san_phams.ten_san_pham')
                         ->get();
-
         return response()->json([
             'khuyen_mai'         => $data,
         ]);
