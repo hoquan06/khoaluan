@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SanPham;
 use Illuminate\Foundation\Http\FormRequest;
 
 class KhuyenMaiRequest extends FormRequest
@@ -24,6 +25,7 @@ class KhuyenMaiRequest extends FormRequest
         return [
             'ten_chuong_trinh'   => 'required',
             'muc_giam'           => 'required',
+            'san_pham_id'        => 'required',
             'thoi_gian_bat_dau'  => 'required|date|after_or_equal:today|max:10',
             'thoi_gian_ket_thuc' => 'required|date|after:thoi_gian_bat_dau|max:10',
         ];
@@ -32,13 +34,13 @@ class KhuyenMaiRequest extends FormRequest
     public function messages()
     {
         return [
-            'required'          => ":attribute không được để trống",
-            'min'               => ":attribute quá ngắn",
-            'numeric'           => ":attribute phải là số",
-            'before'            => ':attribute không hợp lệ',
-            'after_or_equal'    => ':attribute phải lớn hơn ngày hôm nay',
-            'after'             => ':attribute phải lớn hơn Thời gian bắt đầy',
-            'date'              => ':attribute không đúng định dạng',
+            'required'                  => ":attribute không được để trống",
+            'min'                       => ":attribute quá ngắn",
+            'numeric'                   => ":attribute phải là số",
+            'before'                    => ':attribute không hợp lệ',
+            'after_or_equal'            => ':attribute phải lớn hơn ngày hôm nay',
+            'after'                     => ':attribute phải lớn hơn Thời gian bắt đầu',
+            'date'                      => ':attribute không đúng định dạng',
         ];
     }
 
@@ -49,6 +51,7 @@ class KhuyenMaiRequest extends FormRequest
             'muc_giam'                   => 'Mức giảm',
             'thoi_gian_bat_dau'          => 'Thời gian bắt đầu',
             'thoi_gian_ket_thuc'         => 'Thời gian kết thúc',
+            'san_pham_id'                => 'Sản phẩm',
         ];
     }
 }

@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('khuyen-mai')->group(function () {
         Route::get('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'index']);
         Route::post('/index', [\App\Http\Controllers\KhuyenMaiController::class, 'store']);
+        Route::get('/san-pham-khuyen-mai/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'sanPhamKhuyenMai']);
         Route::get('/delete/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'delete']);
         Route::get('/data', [\App\Http\Controllers\KhuyenMaiController::class, 'getData']);
         Route::get('/edit/{id}', [\App\Http\Controllers\KhuyenMaiController::class, 'edit']);

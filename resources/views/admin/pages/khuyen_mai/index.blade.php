@@ -22,7 +22,7 @@
                         <div class="col-md-6 mb-2">
                             <div class="position-relative form-group">
                                 <label>Thời Gian Bắt Đầu(*)</label>
-                                <input id="thoi_gian_bat_dau" placeholder="Nhập vào thời gian bắt đầu" type="date" class="form-control">
+                                <input id="thoi_gian_bat_dau" placeholder="Nhập vào thời gian bắt đầu" type="date" name="year" maxlength="4" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
@@ -32,10 +32,20 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label class="form-label" for="basic-default-name">Sản phẩm</label>
-                            <select id="danh_muc_id" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                            <label class="form-label" for="basic-default-name">Danh mục</label>
+                            <select class="danh_muc_id select2 form-select select2-hidden-accessible">
+                                <option value="0">Chọn danh mục</option>
                                 @foreach($menuCon as $key => $value)
                                     <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label class="form-label" for="basic-default-name">Sản phẩm</label>
+                            <select id="san_pham_id"  class="select2 form-select select2-hidden-accessible">
+                                <option value="">Chọn sản phẩm</option>
+                                @foreach($sanPham as $key => $value)
+                                    <option value="{{ $value->id }}">{{ $value->ten_san_pham }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -63,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        <!-- @foreach($dsKhuyenMai as $key => $value)
+                        {{-- <!-- @foreach($dsKhuyenMai as $key => $value)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $value->ten_chuong_trinh }}</td>
@@ -76,7 +86,7 @@
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
                             </tr>
-                        @endforeach -->
+                        @endforeach --> --}}
                     </tbody>
                 </table>
             </div>
@@ -114,10 +124,19 @@
                 <input type="text" class="form-control ten_danh_muc" id="ten_chuong_trinh_edit" placeholder="Nhập vào tên danh mục">
             </div>
             <div class="mb-1">
-                <label class="form-label" for="basic-default-name">Sản phẩm</label>
-                <select id="danh_muc_id_edit" name="loai_chuong_trinh" class="select2 form-select select2-hidden-accessible">
+                <label class="form-label" for="basic-default-name">Danh mục</label>
+                <select  class="danh_muc_id select2 form-select select2-hidden-accessible">
+                    <option value="0">Chọn danh mục</option>
                     @foreach($menuCon as $key => $value)
                         <option value="{{ $value->id }}">{{ $value->ten_danh_muc }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-1">
+                <label class="form-label" for="basic-default-name">Sản phẩm</label>
+                <select id="san_pham_id_edit" class="select2 form-select select2-hidden-accessible">
+                    @foreach($sanPham as $key => $value)
+                        <option value="{{ $value->id }}">{{ $value->ten_san_pham }}</option>
                     @endforeach
                 </select>
             </div>
@@ -164,7 +183,7 @@
                             noiDung += '<tr>';
                             noiDung += '<td>' + (key + 1) + '</td>';
                             noiDung += '<td>' + value.ten_chuong_trinh + '</td>';
-                            noiDung += '<td>' + value.ten_danh_muc + '</td>';
+                            noiDung += '<td>' + value.ten_san_pham + '</td>';
                             noiDung += '<td>' + numberFormat(value.muc_giam) + '</td>';
                             noiDung += '<td>' + value.thoi_gian_bat_dau + '</td>';
                             noiDung += '<td>' + value.thoi_gian_ket_thuc + '</td>';
@@ -182,27 +201,53 @@
 
             loadTable();
 
-            $("#themMoi").click(function(e){
+            $('body').on('change', '.danh_muc_id', function(){
+                var id = $(this).val();
+                $.ajax({
+                    url         : '/admin/khuyen-mai/san-pham-khuyen-mai/' + id,
+                    type        : 'get',
+                    success     : function(res){
+                            $("#san_pham_id").empty();
+                            $.each(res.sanPham, function(key, value){
+                                $('#san_pham_id')
+                                    .append($("<option></option>") //để thêm element vào cuối danh sách các phần tử con của một element cha
+                                    .attr("value", value.id)// đặt giá trị của thuộc tính "value"
+                                    .text(value.ten_san_pham)); //đặt nội dung (text) của option bằng tên sản phẩm
 
+                                $('#san_pham_id_edit')
+                                    .append($("<option></option>") //để thêm element vào cuối danh sách các phần tử con của một element cha
+                                    .attr("value", value.id)// đặt giá trị của thuộc tính "value"
+                                    .text(value.ten_san_pham)); //đặt nội dung (text) của option bằng tên sản phẩm
+                            });
+                    },
+                });
+            });
+
+            $("#themMoi").click(function(e){
                 e.preventDefault();
                 var payload = {
                     'ten_chuong_trinh'    : $("#ten_chuong_trinh").val(),
                     'muc_giam'            : $("#muc_giam").val(),
-                    'danh_muc_id'         : $("#danh_muc_id").val(),
+                    'san_pham_id'         : $("#san_pham_id").val(),
                     'thoi_gian_bat_dau'   : $("#thoi_gian_bat_dau").val(),
                     'thoi_gian_ket_thuc'  : $("#thoi_gian_ket_thuc").val(),
                 };
 
-                var id = $("#danh_muc_id").val();
+                var id = $("#san_pham_id").val();
 
                 $.ajax({
                     url     : '/admin/khuyen-mai/index',
                     type    : 'post',
                     data    : payload,
                     success : function(res){
-                        toastr.success("Thêm mới chương trình khuyến mãi thành công!!!");
-                        loadTable();
-                        $("#formCreate").trigger('reset');
+                        if(res.status){
+                            toastr.success("Thêm mới chương trình khuyến mãi thành công!!!");
+                            // loadTable();
+                            $("#formCreate").trigger('reset');
+                            $("#san_pham_id").empty();
+                        } else{
+                            toastr.error("Không tìm thấy sản phẩm!");
+                        }
                     },
                     error   : function(res){;
                         var danh_sach_loi = res.responseJSON.errors;
@@ -242,7 +287,7 @@
                     success     : function(res){
                         if(res.edit){
                             $("#ten_chuong_trinh_edit").val(res.data.ten_chuong_trinh);
-                            $("#danh_muc_id_edit").val(res.data.danh_muc_id);
+                            $("#san_pham_id_edit").val(res.data.san_pham_id);
                             $("#muc_giam_edit").val(res.data.muc_giam);
                             $("#thoi_gian_bat_dau_edit").val(res.data.thoi_gian_bat_dau);
                             $("#thoi_gian_ket_thuc_edit").val(res.data.thoi_gian_ket_thuc);
