@@ -26,10 +26,9 @@ class HomePageController extends Controller
         $banner = Banner::latest()->first();
 
         $ngay = date("Y-m-d");
-        $sql = "SELECT san_phams.*, (`gia_ban` - `gia_khuyen_mai`) / `gia_ban` * 100 AS `ty_le_giam`, khuyen_mais.thoi_gian_ket_thuc as thoi_gian_ket_thuc
+        $sql = "SELECT san_phams.* , khuyen_mais.*
                 FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
-                Where thoi_gian_ket_thuc >= '$ngay'
-                ORDER BY ty_le_giam DESC";
+                Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
         $best_seller = DB::select($sql);
 
         $sp_giam_gia = "SELECT * FROM `san_phams` WHERE `gia_khuyen_mai` > 0

@@ -70,8 +70,6 @@ class KhuyenMaiController extends Controller
         } else{
             return response()->json(["status" => false]);
         }
-
-
     }
 
 
@@ -123,91 +121,33 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function update(UpdateKhuyenMaiRequest $request)
+    public function update(KhuyenMaiRequest $request)
     {
-        $data = $request->all();
-        $khuyen_mai = KhuyenMai::find($request->id);
+        // Lấy sản phẩm cần khuyến mãi
+        $sanPham = SanPham::where('id', $request->san_pham_id)->first();
 
-        // Xóa giá khuyến mãi của các sản phẩm trong sản phẩm cũ
-        $sanPhamCu = SanPham::where('id', $khuyen_mai->san_pham_id)->first();
-        $sanPhamCu->gia_khuyen_mai = 0;
-        $sanPhamCu->save();
-
-        $khuyen_mai->update($data);
-        if($khuyen_mai){
-            // Lấy tất cả sản phẩm trong sản phẩm mới
-            $sanPhamMoi = SanPham::where('id', $request->san_pham_id)->first();
-            // Lưu trữ giá khuyến mãi trước khi kiểm tra mức giảm
-            $gia_khuyen_mai_cu = $sanPhamMoi->gia_khuyen_mai;
-            // Kiểm tra mức giảm không vượt quá giá bán
-            if ($request->muc_giam >= $sanPhamMoi->gia_ban) {
-                // Khôi phục giá khuyến mãi trước đó nếu mức giảm lớn hơn hoặc bằng giá bán
-                $sanPhamMoi->gia_khuyen_mai = $gia_khuyen_mai_cu;
-                $sanPhamMoi->save();
-                return response()->json([
-                    "update" => 0,
-                    "message" => "Mức giảm không được lớn hơn hoặc bằng giá bán của sản phẩm này!"
-                ]);
-            }
-            // Kiểm tra nếu đang trong thời gian khuyến mãi
-            if (Carbon::now()->between($khuyen_mai->thoi_gian_bat_dau, $khuyen_mai->thoi_gian_ket_thuc)) {
-                $sanPhamMoi->gia_khuyen_mai = $sanPhamMoi->gia_ban - $khuyen_mai->muc_giam;
-            } else {
-                $sanPhamMoi->gia_khuyen_mai = 0;
-            }
-            $sanPhamMoi->save();
-
-            // Xóa các đợt khuyến mãi cũ của danh mục này
-            KhuyenMai::where('san_pham_id', $request->san_pham_id)->where('id', '<>', $khuyen_mai->id)->delete();
+        // Kiểm tra mức giảm không vượt quá giá bán
+        if ($request->muc_giam >= $sanPham->gia_ban) {
             return response()->json([
-                'update' => 1,
-            ]);
-        } else {
-            return response()->json([
-                'update' => false,
+                "update" => 0,
+                "message" => "Mức giảm đã lớn hơn giá bán của sản phẩm này!"
             ]);
         }
+
+        // Cập nhật thông tin đợt khuyến mãi
+        $data = $request->all();
+        $khuyenMai = KhuyenMai::find($request->id);
+        $khuyenMai->update($data);
+
+        // Cập nhật giá khuyến mãi cho sản phẩm
+        if (Carbon::now()->between($khuyenMai->thoi_gian_bat_dau, $khuyenMai->thoi_gian_ket_thuc)) {
+            $sanPham->gia_khuyen_mai = $sanPham->gia_ban - $khuyenMai->muc_giam;
+        } else {
+            $sanPham->gia_khuyen_mai = 0;
+        }
+        $sanPham->save();
+        return response()->json([
+            "update" => 1
+        ]);
     }
-    // public function update(UpdateKhuyenMaiRequest $request)
-    // {
-    //     $data = $request->all();
-    //     $khuyen_mai = KhuyenMai::find($request->id);
-
-    //     // Xóa giá khuyến mãi của các sản phẩm trong sản phẩm cũ
-    //     $sanPhamCu = SanPham::where('id', $khuyen_mai->san_pham_id)->first();
-    //     $sanPhamCu->gia_khuyen_mai = 0;
-    //     $sanPhamCu->save();
-
-    //     $khuyen_mai->update($data);
-    //     if($khuyen_mai){
-    //         // Lấy tất cả sản phẩm trong sản phẩm mới
-    //         $sanPhamMoi = SanPham::where('id', $request->san_pham_id)->first();
-    //         // Kiểm tra mức giảm không vượt quá giá bán
-    //         if ($request->muc_giam >= $sanPhamMoi->gia_ban) {
-    //             $sanPhamMoi->gia_khuyen_mai = $sanPhamCu->gia_khuyen_mai; // giữ nguyên giá trị ban đầu
-    //             $sanPhamMoi->save();
-    //             return response()->json([
-    //                 "update" => 0,
-    //                 "message" => "Mức giảm đã lớn hơn giá bán của sản phẩm này!"
-    //             ]);
-    //         }
-    //         // Kiểm tra nếu đang trong thời gian khuyến mãi
-    //         if (Carbon::now()->between($khuyen_mai->thoi_gian_bat_dau, $khuyen_mai->thoi_gian_ket_thuc)) {
-    //             $sanPhamMoi->gia_khuyen_mai = $sanPhamMoi->gia_ban - $khuyen_mai->muc_giam;
-    //         } else {
-    //             $sanPhamMoi->gia_khuyen_mai = 0;
-    //         }
-    //         $sanPhamMoi->save();
-
-    //         // Xóa các đợt khuyến mãi cũ của danh mục này
-    //         KhuyenMai::where('san_pham_id', $request->san_pham_id)->where('id', '<>', $khuyen_mai->id)->delete();
-    //         return response()->json([
-    //             'update' => 1,
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'update' => false,
-    //         ]);
-    //     }
-    // }
 }

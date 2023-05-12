@@ -22,7 +22,7 @@ class ThayDoiMatKhauRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password'              => 'required|min:2|max:50',
+            'password'              => 'required|min:2|max:50|different:password',
             're_password'           => 'required|same:password'
         ];
     }
@@ -34,6 +34,7 @@ class ThayDoiMatKhauRequest extends FormRequest
             'min'                   => ':attribute quá ngắn',
             'max'                   => ':attribute quá dài',
             'same'                  => ':attribute và mật khẩu không trùng khớp',
+            'password.different'    => 'Bạn đã nhập mật khẩu cũ',
         ];
     }
 

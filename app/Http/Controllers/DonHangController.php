@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DonHangRequest;
 use App\Models\ChiTietDonHang;
 use App\Models\DonHang;
 use App\Models\KhachHang;
@@ -183,7 +184,7 @@ class DonHangController extends Controller
     //     }
     // }
 
-    public function createDonHang()
+    public function createDonHang(DonHangRequest $request)
     {
         DB::beginTransaction();
         try {
@@ -202,7 +203,8 @@ class DonHangController extends Controller
                         'thuc_tra'              => 0,
                         'agent_id'              => $agent->id,
                         'loai_thanh_toan'       => 0, //=1 là banking , 0 thanh toán khi nhận hàng
-                        'dia_chi_giao_hang'     => $agent->dia_chi,
+                        'dia_chi_giao_hang'     => $request->dia_chi_nhan_hang,
+                        // 'dia_chi_giao_hang'     => $agent->dia_chi,
                     ]);
                     //3. Chuyển giỏ hàng thành đơn hàng
                     $check = true;
@@ -271,10 +273,12 @@ class DonHangController extends Controller
             //đơn khả dụng
             $data = DonHang::where('agent_id', $agent->id)
                            ->where('tinh_trang', '<>', '-1')
+                           ->orderByDesc('created_at')
                            ->get();
             //đơn hủy
             $donHuy = DonHang::where('agent_id', $agent->id)
                              ->where('tinh_trang', -1)
+                             ->orderByDesc('created_at')
                              ->get();
             return response()->json([
                 'donhang'       => $data,
