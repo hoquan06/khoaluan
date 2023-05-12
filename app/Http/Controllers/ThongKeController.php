@@ -25,6 +25,13 @@ class ThongKeController extends Controller
                 AND tinh_trang = 2";
         $doanhThuNgay = DB::select($sql);
 
+        $sqlNgay = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
+                    FROM don_hangs JOIN khach_hangs ON khach_hangs.id = don_hangs.agent_id 
+                    JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
+                    WHERE don_hangs.created_at LIKE '%$ngay%'
+                    AND tinh_trang = 2";
+        $thongTinTheoNgay = DB::select($sqlNgay);
+
         //Doanh thu ngày hôm qua
         $ngayhq = date("Y-m-d", strtotime("yesterday"));
         $sql1 = "SELECT SUM(thuc_tra) as doanh_thu
@@ -41,7 +48,7 @@ class ThongKeController extends Controller
         $slSanPham = DB::select($sl_sp);
 
 
-        return view('admin.pages.thong_ke.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ'));
+        return view('admin.pages.thong_ke.doanh_thu.ngay', compact('tongDoanhThu','doanhThuNgay', 'slSanPham', 'doanhThuNgayHQ','thongTinTheoNgay'));
     }
 
     public function thongKeTheoTuan()
@@ -72,6 +79,13 @@ class ThongKeController extends Controller
                 AND tinh_trang = 2";
         $doanhThuTuanTruoc = DB::select($sql1);
 
+        $sqlTuan = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
+                WHERE don_hangs.created_at between '$start' AND '$end'
+                AND tinh_trang = 2";
+        $thongTinTheoTuan = DB::select($sqlTuan);
+
         //Số lượng sp bán được
         $sl_sp = "SELECT COUNT(DISTINCT san_pham_id) as sl_sp
                     FROM chi_tiet_don_hangs JOIN don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
@@ -79,7 +93,7 @@ class ThongKeController extends Controller
                     AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
 
-        return view('admin.pages.thong_ke.doanh_thu.tuan', compact('tongDoanhThu', 'doanhThuTuan', 'doanhThuTuanTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.tuan', compact('tongDoanhThu', 'doanhThuTuan', 'doanhThuTuanTruoc', 'slSanPham','thongTinTheoTuan'));
     }
 
     public function thongKeTheoThang()
@@ -100,6 +114,13 @@ class ThongKeController extends Controller
                 AND tinh_trang = 2";
         $doanhThuThang = DB::select($sql);
 
+        $sqlThang = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
+                WHERE don_hangs.created_at  between '$start' AND '$end'
+                AND tinh_trang = 2";
+        $thongTinTheoThang = DB::select($sqlThang);
+
         //Doanh thu tháng trước
         $startLastMonth =  date("Y-m-d", strtotime("first day of last month"));
         $endLastMonth =  date("Y-m-d",strtotime("first day of this month"));
@@ -116,7 +137,7 @@ class ThongKeController extends Controller
                   WHERE chi_tiet_don_hangs.created_at between '$start' AND '$end'
                   AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
-        return view('admin.pages.thong_ke.doanh_thu.thang', compact('tongDoanhThu', 'doanhThuThang', 'doanhThuThangTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.thang', compact('tongDoanhThu', 'doanhThuThang', 'doanhThuThangTruoc', 'slSanPham','thongTinTheoThang'));
     }
 
     public function thongKeTheoNam()
@@ -143,13 +164,20 @@ class ThongKeController extends Controller
                  AND tinh_trang = 2";
         $doanhThuNamTruoc = DB::select($sql1);
 
+        $sqlNam = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
+                WHERE don_hangs.created_at LIKE '%$year%'
+                AND tinh_trang = 2";
+        $thongTinTheoNam = DB::select($sqlNam);
+
          //Số lượng sp bán được
-         $sl_sp = "SELECT COUNT(DISTINCT san_pham_id) as sl_sp
+        $sl_sp = "SELECT COUNT(DISTINCT san_pham_id) as sl_sp
                    FROM chi_tiet_don_hangs JOIN don_hangs ON don_hangs.id = chi_tiet_don_hangs.don_hang_id
                    WHERE chi_tiet_don_hangs.created_at LIKE '%$year%'
                    AND tinh_trang = 2";
         $slSanPham = DB::select($sl_sp);
-        return view('admin.pages.thong_ke.doanh_thu.nam', compact('tongDoanhThu', 'doanhThuNam', 'doanhThuNamTruoc', 'slSanPham'));
+        return view('admin.pages.thong_ke.doanh_thu.nam', compact('tongDoanhThu', 'doanhThuNam', 'doanhThuNamTruoc', 'slSanPham','thongTinTheoNam'));
     }
 
     public function spBanChay()
