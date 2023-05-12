@@ -65,7 +65,7 @@
                         <tr>
                             <th class="text-nowrap text-center">#</th>
                             <th class="text-nowrap text-center">Tên Chương Trình</th>
-                            <th class="text-nowrap text-center">Loại Sản Phẩm</th>
+                            <th class="text-nowrap text-center">Sản Phẩm</th>
                             <th class="text-nowrap text-center">Mức Giảm</th>
                             <th class="text-nowrap text-center">Thời gian bắt đầu</th>
                             <th class="text-nowrap text-center">Thời gian kết thúc</th>
@@ -208,6 +208,7 @@
                     type        : 'get',
                     success     : function(res){
                             $("#san_pham_id").empty();
+                            $("#san_pham_id_edit").empty();
                             $.each(res.sanPham, function(key, value){
                                 $('#san_pham_id')
                                     .append($("<option></option>") //để thêm element vào cuối danh sách các phần tử con của một element cha
@@ -240,9 +241,11 @@
                     type    : 'post',
                     data    : payload,
                     success : function(res){
-                        if(res.status){
+                        if(res.status == 0){
+                            toastr.error(res.message);
+                        }else if(res.status == 1){
                             toastr.success("Thêm mới chương trình khuyến mãi thành công!!!");
-                            // loadTable();
+                            loadTable();
                             $("#formCreate").trigger('reset');
                             $("#san_pham_id").empty();
                         } else{
@@ -305,22 +308,24 @@
             $("#update").click(function(){
                 var payload = {
                     'ten_chuong_trinh'         : $("#ten_chuong_trinh_edit").val(),
-                    'danh_muc_id'              : $("#danh_muc_id_edit").val(),
+                    'san_pham_id'              : $("#san_pham_id_edit").val(),
                     'muc_giam'                 : $("#muc_giam_edit").val(),
                     'thoi_gian_bat_dau'        : $("#thoi_gian_bat_dau_edit").val(),
                     'thoi_gian_ket_thuc'       : $("#thoi_gian_ket_thuc_edit").val(),
                     'id'                       : $("#id_edit").val(),
                 };
-
-
                 $.ajax({
                     url         : '/admin/khuyen-mai/update',
                     type        : 'post',
                     data        : payload,
                     success     : function(res){
-                        if(res.update){
-                            toastr.success("Đã cập nhật khuyễn mãi thành công!!!");
+                        if(res.update == 0){
+                            toastr.error(res.message);
+                        }else if(res.update == 1){
+                            toastr.success("Đã cập nhật khuyến mãi thành công!!!");
                             loadTable();
+                            $("#san_pham_id").empty();
+                            $(".danh_muc_id").val();
                             $("#holder").attr('src', '');
                             $("#close").click();
                         }

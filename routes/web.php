@@ -140,8 +140,6 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/momo/ipn', [DonHangController::class, 'ipnMomo']);
     Route::get('/momo/notifi', [DonHangController::class, 'notifiMomo']);
 
-
-
     // Route::get('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'index']);
     Route::post('/danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'store']);
     Route::get('/danh-gia/data/{id}', [\App\Http\Controllers\DanhGiaController::class, 'getData']);
@@ -158,7 +156,6 @@ Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::clas
 Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
-Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch1']);
 
 
 

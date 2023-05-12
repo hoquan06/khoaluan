@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\SanPham;
 use Illuminate\Foundation\Http\FormRequest;
 
-class KhuyenMaiRequest extends FormRequest
+class UpdateKhuyenMaiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,9 @@ class KhuyenMaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ten_chuong_trinh'   => 'required',
+            'ten_chuong_trinh'   => 'required|unique:khuyen_mais,ten_chuong_trinh, '. $this->id,
             'muc_giam'           => 'required|numeric|min:0',
-            'san_pham_id'        => 'required',
+            'san_pham_id'        => 'required|exists:san_phams,id',
             'thoi_gian_bat_dau'  => 'required|date|after_or_equal:today|max:10',
             'thoi_gian_ket_thuc' => 'required|date|after:thoi_gian_bat_dau|max:10',
         ];
