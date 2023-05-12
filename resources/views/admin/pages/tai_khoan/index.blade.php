@@ -116,11 +116,14 @@
                     url         : '/admin/tai-khoan/delete/' + id,
                     type        : 'get',
                     success     : function(res){
-                        if(res.xoa){
-                            toastr.success("Xóa tài khoản thành công!!!");
+                        if(res.xoa == 0){
+                            toastr.error(res.message);
+                        }
+                        else if(res.xoa == 1){
+                            toastr.success(res.message);
                             row.remove();
                         } else{
-                            toastr.error("Tài khoản không tồn tại!!!");
+                            toastr.error(res.message);
                         }
                     },
                 });

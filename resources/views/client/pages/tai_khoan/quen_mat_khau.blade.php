@@ -28,7 +28,7 @@
                             <div class="heading_s1">
                                 <h3>Quên mật khẩu</h3>
                             </div>
-                            <form action='/' method="post">
+                            <form action='/' method="post" id="create">
                                 <div class="form-group">
                                     <input type="email" id="email" required="" class="form-control" placeholder="Nhập email của bạn">
                                 </div>
@@ -61,6 +61,7 @@
                     .post('/khach-hang/quen-mat-khau', payload)
                     .then((res) => {
                         if(res.data.reset){
+                            $("#email").val('');
                             toastr.success("Chúng tôi đã gửi mã xác nhận vào email của bạn!");
                         }
                     })

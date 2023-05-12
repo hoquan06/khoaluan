@@ -83,6 +83,12 @@
                                         <td class="cart_total_amount"><strong>@{{numberFormat(toTal())}}</strong></td>
                                     </tr>
                                     <tr>
+                                        <td class="cart_total_label">Địa chỉ nhận hàng</td>
+                                        <td>
+                                            <input type="text" id="dia_chi_nhan_hang" class="form-control" placeholder="Nhập địa chỉ nhận hàng">
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="cart_total_label">Hình thức thanh toán</td>
                                         <td>
                                           <select name="payment-method" class="form-control" id="thanhToan">
@@ -90,7 +96,7 @@
                                             <option value="1">Thanh toán qua Momo</option>
                                           </select>
                                         </td>
-                                      </tr>
+                                    </tr>
 
                                 </tbody>
                             </table>
@@ -210,27 +216,30 @@
 
             createBill(){
                 var hinhThucThanhToan = $("#thanhToan").val();
+                var diaChi = $("#dia_chi_nhan_hang").val();
                 var payload = {
                     'loai_thanh_toan'   : hinhThucThanhToan,
+                    'dia_chi_nhan_hang' : diaChi
                 }
-                if (hinhThucThanhToan == 1) {
-                    this.thanhToanMomo(payload);
-                } else {
-                    axios
-                        .post('/khach-hang/tao-don-hang', payload)
-                        .then((res) => {
-                            if(res.data.donhang == 4){
-                                toastr.error(res.data.message);
-                            } else if(res.data.donhang == 1){
-                                toastr.success("Mua hàng thành công!");
-                                this.loadCart();
-                            } else if(res.data.donhang == 2){
-                                toastr.error("Giỏ hàng rỗng!");
-                            } else{
-                                toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
-                            }
-                        })
-                }
+                console.log(payload);
+                // if (hinhThucThanhToan == 1) {
+                //     this.thanhToanMomo(payload);
+                // } else {
+                //     axios
+                //         .post('/khach-hang/tao-don-hang', payload)
+                //         .then((res) => {
+                //             if(res.data.donhang == 4){
+                //                 toastr.error(res.data.message);
+                //             } else if(res.data.donhang == 1){
+                //                 toastr.success("Mua hàng thành công!");
+                //                 this.loadCart();
+                //             } else if(res.data.donhang == 2){
+                //                 toastr.error("Giỏ hàng rỗng!");
+                //             } else{
+                //                 toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
+                //             }
+                //         })
+                // }
             }
         },
     });
