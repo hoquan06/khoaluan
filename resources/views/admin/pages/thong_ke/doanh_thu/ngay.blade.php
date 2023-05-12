@@ -109,13 +109,19 @@
                         <th class="text-nowrap text-center">Số Điện Thoại</th>
                         <th class="text-nowrap text-center">Địa Chỉ</th>
                         <th class="text-nowrap text-center">SP Đã Mua</th>
-                        <th class="text-nowrap text-center">Tổng Tiền Đơn Hàng</th>
+                        <th class="text-nowrap text-center">Giá Trị Sản Phẩm</th>
                     </tr>
                 </thead>
                 <tbody class="text-nowrap text-center">
-                    @foreach($doanhThuNgay as $key => $value)
+                    @foreach($thongTinTheoNgay as $key => $value)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            <td>{{ $value->ho_va_ten }}</td>
+                            <td>{{ $value->ngay_sinh }}</td>
+                            <td>{{ $value->so_dien_thoai }}</td>
+                            <td>{{ $value->dia_chi }}</td>
+                            <td>{{ $value->ten_san_pham }}</td>
+                            <td>{{ number_format($value->don_gia) }} VND</td>
                         </tr>
                     @endforeach
                 </tbody>
