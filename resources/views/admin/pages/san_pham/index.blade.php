@@ -192,7 +192,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa danh mục</button>
+          <button type="button" id="acceptDelete" data-bs-dismiss="modal" class="btn btn-danger">Xóa sản phẩm</button>
         </div>
       </div>
     </div>
