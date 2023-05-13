@@ -4,7 +4,7 @@
 <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Đơn Hàng Đang Giao</h5>
-                <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
+                <table class="mb-0 table table-bordered table-hover" id="tableDonHang">
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        @foreach($don_hang_dang_giao as $key => $value)
+                        <!-- @foreach($don_hang_dang_giao as $key => $value)
                             <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $value->ho_va_ten }}</td>
@@ -33,7 +33,7 @@
                                 @endif
                                 @if($value->tinh_trang == 1)
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao</button>
+                                            Đang Giao
                                     </td>
                                 @else
                                     <td>
@@ -43,10 +43,12 @@
                                 <td>
                                     <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-info">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                                    <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai"> Xác nhận</button>
+                                    <button data-id="{{ $value->id }}" class="btn btn-danger doiTrangThai">Giao thất bại</button>
                                 </td>
 
                             </tr>
-                        @endforeach
+                        @endforeach -->
                     </tbody>
                 </table>
             </div>
@@ -79,6 +81,48 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            function getDataDangGiao(){
+                $.ajax({
+                    url             : '/admin/don-hang/cho-duyet/getDataDangGiao',
+                    type            : 'get',
+                    success         : function(res){
+                        var noiDung = '';
+                        $.each(res.donHangDangGiao, function(key, value){
+                            var loaiThanhToan = '';
+                            if(value.loai_thanh_toan == 0) {
+                                loaiThanhToan = '<td>Thanh toán khi nhận hàng</td>';
+                            } else {
+                                loaiThanhToan = '<td>Chuyển khoản</td>';
+                            }
+
+                            var tinhTrang = '';
+                            if(value.tinh_trang == 0) {
+                                tinhTrang = '<td> Đang Chờ Duyệt</td>';
+                            } else {
+                                tinhTrang = '<td>Đang Giao</td>'
+                            }
+                            noiDung += '<tr>';
+                            noiDung += '<td>' + (key + 1) + '</td>';
+                            noiDung += '<td>' + value.ho_va_ten + '</td>';
+                            noiDung += '<td>' + value.ma_don_hang + '</td>';
+                            noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
+                            noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
+                            noiDung +=  loaiThanhToan;      
+                            noiDung +=  tinhTrang;      
+                            noiDung += '<td>';
+                            noiDung += '<a href="/admin/don-hang/view/' + value.id +'" class="btn btn-info me-1">Xem</a>';
+                            noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
+                            noiDung += '<button data-id="' + value.id +'" class="btn btn-primary me-1 doiTrangThai"> Xác nhận</button>';
+                            noiDung += '<button data-id="'+ value.id +'" class="btn btn-danger doiTrangThai">Giao thất bại</button>';
+                            noiDung += '</td>';  
+                            noiDung += '</tr>';  
+                        });
+                        $("#tableDonHang tbody").html(noiDung);
+                    },
+                });
+            }
+            getDataDangGiao();
 
             var row = '';
             $('body').on('click', '.delete', function(){
@@ -114,15 +158,11 @@
                             toastr.error('Đơn hàng đã bị hủy!');
                         } else if(res.doitrangthai == 1){
                             if(res.tinhtrang){
-                                self.html("Đang giao");
-                                self.removeClass('btn-info');
-                                self.addClass('btn-primary');
+                                getDataDangGiao();
                                 toastr.success("Đơn hàng đã được duyệt!!!");
                             }
                         } else if(res.doitrangthai == 2){
-                                self.html("Đã giao");
-                                self.removeClass('btn-primary');
-                                self.addClass('btn-success');
+                                getDataDangGiao();
                                 toastr.success("Đơn hàng đã được giao!!!");
                         } else{
                             toastr.warning("Đơn hàng đã được giao!");

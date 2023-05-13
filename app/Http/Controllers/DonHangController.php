@@ -35,6 +35,20 @@ class DonHangController extends Controller
         return view("admin.pages.don_hang.cho_duyet.index",compact('don_hang_cho_duyet'));
     }
 
+    
+    public function getDataChoDuyet()
+    {
+        $don_hang_cho_duyet = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',0)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.created_at')
+                            ->get();
+        return response()->json([
+            'donHangChoDuyet'  => $don_hang_cho_duyet,
+        ]);
+    }
+
+
     public function donHangDangGiao()
     {
         $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
@@ -43,6 +57,18 @@ class DonHangController extends Controller
                             ->orderByDesc('don_hangs.updated_at')
                             ->get();
         return view("admin.pages.don_hang.dang_giao.index",compact('don_hang_dang_giao'));
+    }
+
+    public function getDataDangGiao()
+    {
+        $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+        ->where('tinh_trang',1)
+        ->select('khach_hangs.*','don_hangs.*')
+        ->orderByDesc('don_hangs.updated_at')
+        ->get();
+        return response()->json([
+            'donHangDangGiao'  => $don_hang_dang_giao,
+        ]);
     }
 
     public function donHangDaGiao()
@@ -122,66 +148,6 @@ class DonHangController extends Controller
             ]);
         }
     }
-    // public function createDonHang(Request $request)
-    // {
-    //     $agent = Auth::guard('khach_hang')->user();
-    //     if($agent){
-    //         //1. Lấy thông tin giỏ hàng
-    //         $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
-    //                                  ->where('is_cart', 0)
-    //                                  ->get();
-    //         if(empty($gioHang) || count($gioHang) > 0){
-    //             //2.Tạo đơn hàng
-    //             $donHang = DonHang::create([
-    //                 'ma_don_hang'           => Str::uuid(),
-    //                 'tong_tien'             => 0,
-    //                 'tien_giam_gia'         => 0,
-    //                 'thuc_tra'              => 0,
-    //                 'agent_id'              => $agent->id,
-    //                 'loai_thanh_toan'       => $request->loai_thanh_toan, //=1 là banking , 0 thanh toán khi nhận hàng
-    //                 'dia_chi_giao_hang'     => $agent->dia_chi,
-    //             ]);
-
-    //             //3. Chuyển giỏ hàng thành đơn hàng
-    //             $tong_tien = 0;
-    //             $thuc_tra  = 0;
-    //             foreach($gioHang as $key => $value){
-    //                 $sanPham = SanPham::find($value->san_pham_id);
-    //                 if($sanPham){
-    //                     $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
-    //                     $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
-    //                     $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
-
-    //                     // nếu ko có khuyến mãi thì tổng tiền = thực trả
-    //                     // $sanPham->so_luong -= $value->so_luong;
-    //                     $value->is_cart = 1;
-    //                     $value->don_hang_id = $donHang->id;
-    //                     $value->save();
-    //                     $sanPham->save();
-    //                 } else{
-    //                     $value->delete();
-    //                 }
-    //             }
-    //             //Tính tổng tiền và thực trả
-    //             $donHang->tong_tien = $tong_tien;
-    //             $donHang->tien_giam_gia = $tong_tien - $thuc_tra;
-    //             $donHang->thuc_tra = $thuc_tra;
-    //             $donHang->save();
-
-    //             return response()->json([
-    //                 'donhang'       => 1,
-    //             ]);
-    //         } else{
-    //             return response()->json([
-    //                 'donhang'       => 2,
-    //             ]);
-    //         }
-    //     } else{
-    //         return response()->json([
-    //             'donhang'       => 3,
-    //         ]);
-    //     }
-    // }
 
     public function createDonHang()
     {
@@ -435,7 +401,7 @@ class DonHangController extends Controller
             $this->createTransaction($data);
 
             toastr()->success("Thanh Toán thành công!");
-            return redirect('/');
+            return redirect('/khach-hang/don-hang/thanh-cong');
         } else {
             $donHang = DonHang::find($request->requestId);
             $this->createTransaction($data);
@@ -443,5 +409,10 @@ class DonHangController extends Controller
             toastr()->error($request->localMessage);
             return redirect('/khach-hang/gio-hang');
         }
+    }
+
+    public function success()
+    {
+        return view('client.pages.mua_thanh_cong.success');
     }
 }

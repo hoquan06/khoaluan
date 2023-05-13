@@ -224,6 +224,8 @@
                             } else if(res.data.donhang == 1){
                                 toastr.success("Mua hàng thành công!");
                                 this.loadCart();
+                                window.location.href = "/khach-hang/don-hang/thanh-cong";
+                                
                             } else if(res.data.donhang == 2){
                                 toastr.error("Giỏ hàng rỗng!");
                             } else{

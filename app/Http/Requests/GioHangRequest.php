@@ -22,14 +22,14 @@ class GioHangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'san_pham_id'           => 'required|exists:san_phams,id',
+            // 'san_pham_id'           => 'required|exists:san_phams,id',
             'so_luong'              => 'required|integer|min:1|max:5',
         ];
     }
 
     public function messages()
     {
-        return [
+        return [    
             'required'              => ':attribute không được để trống',
             'exists'                => ':attribute không tồn tại',
             'integer'               => ':attribute phải là số nguyên',
