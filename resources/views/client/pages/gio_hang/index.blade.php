@@ -208,10 +208,22 @@
                     .then((res) => {
                         if(res.data.status) {
                             window.location.replace(res.data.link);
+                        } else if(res.data.donhang == 2){
+                            toastr.error(res.data.message);
+                        } else if(res.data.donhang == 3){
+                            toastr.error(res.data.message);
+                        } else if(res.data.donhang == 4){
+                            toastr.error(res.data.message);
                         } else {
                             toastr.error("Đã có lỗi khi thanh toán!");
                         }
-                    });
+                    })
+                    .catch((res) => {
+                        var danh_sach_loi = res.response.data.errors;
+                        $.each(danh_sach_loi, function(key, value){
+                            toastr.error(value[0]);
+                        });
+                    })
             },
 
             createBill(){
@@ -221,25 +233,29 @@
                     'loai_thanh_toan'   : hinhThucThanhToan,
                     'dia_chi_nhan_hang' : diaChi
                 }
-                console.log(payload);
-                // if (hinhThucThanhToan == 1) {
-                //     this.thanhToanMomo(payload);
-                // } else {
-                //     axios
-                //         .post('/khach-hang/tao-don-hang', payload)
-                //         .then((res) => {
-                //             if(res.data.donhang == 4){
-                //                 toastr.error(res.data.message);
-                //             } else if(res.data.donhang == 1){
-                //                 toastr.success("Mua hàng thành công!");
-                //                 this.loadCart();
-                //             } else if(res.data.donhang == 2){
-                //                 toastr.error("Giỏ hàng rỗng!");
-                //             } else{
-                //                 toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
-                //             }
-                //         })
-                // }
+
+                if (hinhThucThanhToan == 1) {
+                    this.thanhToanMomo(payload);
+                } else {
+                    axios
+                        .post('/khach-hang/tao-don-hang', payload)
+                        .then((res) => {
+                            if(res.data.donhang == 4){
+                                toastr.error(res.data.message);
+                            } else if(res.data.donhang == 5){
+                                toastr.error(res.data.message);
+                            } else if(res.data.donhang == 6){
+                                toastr.error(res.data.message);
+                            } else if(res.data.donhang == 1){
+                                toastr.success("Mua hàng thành công!");
+                                this.loadCart();
+                            } else if(res.data.donhang == 2){
+                                toastr.error("Giỏ hàng rỗng!");
+                            } else{
+                                toastr.warning("Vui lòng đăng nhập để mua sản phẩm!");
+                            }
+                        })
+                }
             }
         },
     });

@@ -14,30 +14,6 @@ class TaiKhoanController extends Controller
         return view('admin.pages.tai_khoan.index',compact('data'));
     }
 
-    // public function destroy($id)
-    // {
-    //     $data = KhachHang::find($id);
-    //     if ($data) {
-    //         $check = KhachHang::join('don_hangs', 'khach_hangs.id', 'don_hangs.agent_id')
-    //             ->where('tinh_trang', '>', 0)
-    //             ->pluck('khach_hangs.id'); // Lấy danh sách id khách hàng trong $check
-
-    //         if ($check->contains($id)) {
-    //             $data->delete();
-    //             return response()->json([
-    //                 'xoa' => true,
-    //             ]);
-    //         } else {
-    //             return response()->json([
-    //                 'xoa' => false,
-    //             ]);
-    //         }
-    //     } else {
-    //         return response()->json([
-    //             'xoa' => false,
-    //         ]);
-    //     }
-    // }
     public function destroy($id)
     {
         $data = KhachHang::find($id);
@@ -64,7 +40,6 @@ class TaiKhoanController extends Controller
             ]);
         }
     }
-
 
     public function lock($id)
     {
