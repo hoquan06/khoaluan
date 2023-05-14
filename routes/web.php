@@ -113,6 +113,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::post('/login', [\App\Http\Controllers\KhachHangController::class, 'loginAction']);
     Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
     Route::get('/logout', [\App\Http\Controllers\KhachHangController::class, 'logout']);
+    Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
 
     Route::get('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'resetPassword']);
     Route::post('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'actionResetPassword']);
@@ -143,7 +144,6 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/don-hang/thanh-cong', [\App\Http\Controllers\DonHangController::class, 'success']);
 
-    Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
 
 
     Route::post('/thanh-toan-momo', [\App\Http\Controllers\DonHangController::class, 'thanhToanMomo']);

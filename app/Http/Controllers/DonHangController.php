@@ -149,7 +149,7 @@ class DonHangController extends Controller
         }
     }
 
-    public function createDonHang()
+    public function createDonHang(Request $request)
     {
         DB::beginTransaction();
         try {
@@ -227,6 +227,153 @@ class DonHangController extends Controller
             }
         } catch(Exception $e){
             DB::rollBack();
+        }
+    }
+
+    public function thanhToanMomo(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $agent = Auth::guard('khach_hang')->user();
+            if($agent){
+                $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+                                        ->where('is_cart', 0)
+                                        ->get();
+                if(empty($gioHang) || count($gioHang) > 0){
+                    if(empty($request->dia_chi_nhan_hang)){
+                        return response()->json([
+                            'donhang' => 3,
+                            'message' => 'Vui lòng nhập địa chỉ nhận hàng.'
+                        ]);
+                    } else if(strlen($request->dia_chi_nhan_hang) < 10){
+                        return response()->json([
+                            'donhang' => 4,
+                            'message' => 'Địa chỉ nhận hàng phải có ít nhất 10 ký tự.'
+                        ]);
+                    }
+                    $donHang = DonHang::create([
+                        'ma_don_hang'           => Str::uuid(),
+                        'tong_tien'             => 0,
+                        'tien_giam_gia'         => 0,
+                        'thuc_tra'              => 0,
+                        'agent_id'              => $agent->id,
+                        'loai_thanh_toan'       => $request->loai_thanh_toan, //=1 là banking , 0 thanh toán khi nhận hàng
+                        'dia_chi_giao_hang'     => $request->dia_chi_nhan_hang,
+                    ]);
+                    $thuc_tra  = 0;
+                    $check = true;
+                    foreach($gioHang as $key => $value){
+                        $sanPham = SanPham::find($value->san_pham_id);
+                        if($sanPham){
+                            // Kiểm tra số lượng sản phẩm trong kho có đủ để mua hay không
+                            if ($sanPham->so_luong >= $value->so_luong) {
+                                $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                                $thuc_tra += $value->so_luong * $giaBan; // số lượng * giá khuyến mãi
+                                $value->save();
+                                $sanPham->save();
+                            } else {
+                                // Nếu số lượng sản phẩm trong kho không đủ, trả về thông báo lỗi
+                                return response()->json([
+                                    'donhang' => 2,
+                                    'message' => 'Sản phẩm ' . $sanPham->ten_san_pham . ' trong kho không đủ để thực hiện giao dịch.'
+                                ]);
+                            }
+                        } else{
+                            $value->delete();
+                        }
+                    }
+                    if($check){
+                        Db::commit();
+                    } else{
+                        DB::rollBack();
+                    }
+                    $jsonResult =  $this->ActionMomo($thuc_tra, $donHang);
+                    return response()->json([
+                        "status" => true,
+                        "link"   => $jsonResult['payUrl'],
+                    ]);
+                }
+
+            }
+        } catch(Exception $e){
+            DB::rollBack();
+        }
+
+    }
+
+    public function createTransaction($data)
+    {
+
+        Transaction::create([
+            "id_don_hang"           => $data['requestId'],
+            "id_khach_hang"         => $data['id_khach_hang'],
+            "ma_don_hang"           => $data['orderId'],
+            "transId"               => $data['transId'],
+            "ngay_thanh_toan"       => $data['responseTime'],
+            "so_tien"               => $data['amount'],
+            "message"               => $data['localMessage'],
+            "signature"             => $data['signature'],
+            "trang_thai"            => $data['message'] == "Success" ? 1 : 0,
+        ]);
+
+    }
+
+    public function ipnMomo(Request $request)
+    {
+        $data = $request->all();
+        $donHang = DonHang::find($request->requestId);
+        $agent   = Auth::guard('khach_hang')->user();
+        $data['id_khach_hang']  = $agent->id;
+        if($request->message == "Success" && $request->errorCode == 0) {
+            $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
+                                         ->where('is_cart', 0)
+                                         ->get();
+
+            $tong_tien = 0;
+            $thuc_tra  = 0;
+            foreach($gioHang as $key => $value){
+                $sanPham = SanPham::find($value->san_pham_id);
+                if($sanPham){
+                    // Kiểm tra số lượng sản phẩm trong kho có đủ để mua hay không
+                    if ($sanPham->so_luong >= $value->so_luong) {
+                        $giaBan = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban;
+                        $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
+                        $thuc_tra += $value->so_luong * $giaBan; // số lượng * giá khuyến mãi
+
+                        // nếu ko có khuyến mãi thì tổng tiền = thực trả
+                        $sanPham->so_luong -= $value->so_luong;
+                        $value->is_cart = 1;
+                        $value->don_hang_id = $donHang->id;
+                        $value->save();
+                        $sanPham->save();
+                    } else {
+                        // Nếu số lượng sản phẩm trong kho không đủ, trả về thông báo lỗi
+                        return response()->json([
+                            'donhang' => 4,
+                            'message' => 'Sản phẩm ' . $sanPham->ten_san_pham . ' trong kho không đủ để thực hiện giao dịch.'
+                        ]);
+                    }
+                } else{
+                    $value->delete();
+                }
+            }
+            //Tính tổng tiền và thực trả
+            $donHang->tong_tien = $tong_tien;
+            $donHang->tien_giam_gia = $tong_tien - $thuc_tra;
+            $donHang->thuc_tra = $thuc_tra;
+            // $donHang->tinh_trang = 1; // Đã thanh toán
+            $donHang->save();
+            // Tạo dữ liệu thanh toán
+            $this->createTransaction($data);
+
+            toastr()->success("Thanh Toán thành công!");
+            return redirect('/');
+        } else {
+            $donHang = DonHang::find($request->requestId);
+            $this->createTransaction($data);
+            $donHang->delete();
+            toastr()->error($request->localMessage);
+            return redirect('/khach-hang/gio-hang');
         }
     }
 
@@ -309,107 +456,7 @@ class DonHangController extends Controller
         }
     }
 
-    public function thanhToanMomo(Request $request)
-    {
-        $agent = Auth::guard('khach_hang')->user();
 
-        $donHang = DonHang::create([
-            'ma_don_hang'           => Str::uuid(),
-            'tong_tien'             => 0,
-            'tien_giam_gia'         => 0,
-            'thuc_tra'              => 0,
-            'agent_id'              => $agent->id,
-            'loai_thanh_toan'       => $request->loai_thanh_toan, //=1 là banking , 0 thanh toán khi nhận hàng
-            'dia_chi_giao_hang'     => $agent->dia_chi,
-        ]);
-
-        $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
-                                ->where('is_cart', 0)
-                                ->get();
-        if(empty($gioHang) || count($gioHang) > 0){
-            $thuc_tra  = 0;
-            foreach($gioHang as $key => $value){
-                $sanPham = SanPham::find($value->san_pham_id);
-                if($sanPham){
-                    $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
-                    $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
-                }
-            }
-
-            $jsonResult =  $this->ActionMomo($thuc_tra, $donHang);
-            return response()->json([
-                "status" => true,
-                "link"   => $jsonResult['payUrl'],
-            ]);
-        }
-    }
-
-    public function createTransaction($data)
-    {
-
-        Transaction::create([
-            "id_don_hang"           => $data['requestId'],
-            "id_khach_hang"         => $data['id_khach_hang'],
-            "ma_don_hang"           => $data['orderId'],
-            "transId"               => $data['transId'],
-            "ngay_thanh_toan"       => $data['responseTime'],
-            "so_tien"               => $data['amount'],
-            "message"               => $data['localMessage'],
-            "signature"             => $data['signature'],
-            "trang_thai"            => $data['message'] == "Success" ? 1 : 0,
-        ]);
-
-    }
-
-    public function ipnMomo(Request $request)
-    {
-        $data = $request->all();
-        $donHang = DonHang::find($request->requestId);
-        $agent                  = Auth::guard('khach_hang')->user();
-        $data['id_khach_hang']  = $agent->id;
-        if($request->message == "Success" && $request->errorCode == 0) {
-            $gioHang = ChiTietDonHang::where('agent_id', $agent->id)
-                                         ->where('is_cart', 0)
-                                         ->get();
-
-            $tong_tien = 0;
-            $thuc_tra  = 0;
-            foreach($gioHang as $key => $value){
-                $sanPham = SanPham::find($value->san_pham_id);
-                if($sanPham){
-                    $giaBan     = $sanPham->gia_khuyen_mai ? $sanPham->gia_khuyen_mai : $sanPham->gia_ban; //
-                    $tong_tien += $value->so_luong * $sanPham->gia_ban; // số lượng * giá bán gốc
-                    $thuc_tra  += $value->so_luong * $giaBan;  // số lượng * giá khuyến mãi
-
-                    // nếu ko có khuyến mãi thì tổng tiền = thực trả
-                    // $sanPham->so_luong -= $value->so_luong;
-                    $value->is_cart = 1;
-                    $value->don_hang_id = $donHang->id;
-                    $value->save();
-                    $sanPham->save();
-                } else{
-                    $value->delete();
-                }
-            }
-            //Tính tổng tiền và thực trả
-            $donHang->tong_tien = $tong_tien;
-            $donHang->tien_giam_gia = $tong_tien - $thuc_tra;
-            $donHang->thuc_tra = $thuc_tra;
-            // $donHang->tinh_trang = 1; // Đã thanh toán
-            $donHang->save();
-            // Tạo dữ liệu thanh toán
-            $this->createTransaction($data);
-
-            toastr()->success("Thanh Toán thành công!");
-            return redirect('/khach-hang/don-hang/thanh-cong');
-        } else {
-            $donHang = DonHang::find($request->requestId);
-            $this->createTransaction($data);
-            $donHang->delete();
-            toastr()->error($request->localMessage);
-            return redirect('/khach-hang/gio-hang');
-        }
-    }
 
     public function success()
     {
