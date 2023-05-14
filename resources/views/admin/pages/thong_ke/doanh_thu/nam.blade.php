@@ -31,7 +31,7 @@
             </div>
             <div class="card-body statistics-body">
                 <div class="row">
-                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0 text-center">
+                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0 text-center hideShowKhachHang">
                         <div class="media">
                             <div class="avatar bg-light-info mr-2">
                                 <div class="avatar-content">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm- text-center">
+                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm- text-center hideShowKhachHang">
                         <div class="media">
                             <div class="avatar bg-light-danger mr-2">
                                 <div class="avatar-content">
@@ -97,7 +97,7 @@
     </div>
     <!--/ Statistics Card -->
 </div>
-<div class="table-responsive card">
+<div class="table-responsive card" id="tableKhachHang">
     <div class="main-card mb-3 card">
         <div class="card-body"><h5 class="card-title">Danh Sách Khách Hàng Mua Trong Năm</h5>
             <table class="mb-0 table table-bordered table-hover" id="tableSanPham">
@@ -129,4 +129,13 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+<script>
+    $(document).ready(function(){
+        $(".hideShowKhachHang").click(function(){
+            $("#tableKhachHang").toggle();
+        });
+    });
+</script>
 @endsection

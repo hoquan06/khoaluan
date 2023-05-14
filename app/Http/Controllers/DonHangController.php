@@ -411,7 +411,7 @@ class DonHangController extends Controller
             $this->createTransaction($data);
 
             toastr()->success("Thanh Toán thành công!");
-            return redirect('/');
+            return redirect('/khach-hang/don-hang/thanh-cong');
         } else {
             $donHang = DonHang::find($request->requestId);
             $this->createTransaction($data);
@@ -500,5 +500,10 @@ class DonHangController extends Controller
                 ]);
             }
         }
+    }
+
+    public function success()
+    {
+        return view('client.pages.thanh_cong.index');
     }
 }

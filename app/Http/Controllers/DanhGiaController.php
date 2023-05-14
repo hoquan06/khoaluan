@@ -62,7 +62,9 @@ class DanhGiaController extends Controller
             $dsDanhGia = DanhGia::join('khach_hangs','khach_hangs.id','danh_gias.agent_id')
                                 ->join('san_phams','san_phams.id','danh_gias.san_pham_id')
                                 ->select('san_phams.ten_san_pham','danh_gias.so_sao','danh_gias.noi_dung','khach_hangs.ho_va_ten')
+                                ->orderByDesc('danh_gias.created_at')
                                 ->get();
+
         return view("admin.pages.danh_gia.index",compact('dsDanhGia'));
     }
 
@@ -77,6 +79,36 @@ class DanhGiaController extends Controller
     }
     public function thongKe()
     {
-        return view("admin.pages.danh_gia.view");
+        $sql = "SELECT san_phams.ten_san_pham, san_phams.hinh_anh, san_phams.gia_ban , COUNT(so_sao) as ti_le_sao FROM `danh_gias` JOIN san_phams on san_phams.id = danh_gias.san_pham_id WHERE so_sao = 5 GROUP BY san_phams.ten_san_pham,san_phams.hinh_anh, san_phams.gia_ban";
+        $data = DB::select($sql);
+        return view("admin.pages.danh_gia.view",compact('data'));
     }
+
+    public function thongKe2()
+    {
+        $sql = "SELECT san_phams.id, san_phams.ten_san_pham, san_phams.hinh_anh, san_phams.gia_ban, san_phams.tinh_trang  , COUNT(so_sao) as ti_le_sao FROM `danh_gias` JOIN san_phams on san_phams.id = danh_gias.san_pham_id WHERE so_sao = 1 GROUP BY san_phams.id,san_phams.ten_san_pham,san_phams.hinh_anh, san_phams.gia_ban, san_phams.tinh_trang  ";
+        $data = DB::select($sql);
+        return view("admin.pages.danh_gia.view2",compact('data'));
+    }
+
+    // public function doiTrangThai($id)
+    // {
+    //     $data = "SELECT san_phams.id, san_phams.ten_san_pham, san_phams.hinh_anh, san_phams.gia_ban, san_phams.tinh_trang  , COUNT(so_sao) as ti_le_sao FROM `danh_gias` JOIN san_phams on san_phams.id = danh_gias.san_pham_id WHERE so_sao = 1 GROUP BY san_phams.id,san_phams.ten_san_pham,san_phams.hinh_anh, san_phams.gia_ban, san_phams.tinh_trang  ";
+    //     if($data){
+    //         $sanPham = SanPham::find($request->id);
+    //         if($sanPham){
+    //             $data->tinh_trang = !$data->tinh_trang;
+    //             $data->save();
+    //             return response()->json([
+    //                 'doitrangthai'      => true,
+    //                 'tinhtrang'         => $data->tinh_trang,
+    //             ]);
+    //         }
+           
+    //     }else{
+    //         return response()->json([
+    //             'doitrangthai'      => false,
+    //         ]);
+    //     }
+    // }
 }

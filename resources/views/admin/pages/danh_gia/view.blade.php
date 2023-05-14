@@ -8,12 +8,23 @@
                     <tr>
                         <th class="text-nowrap text-center">#</th>
                         <th class="text-nowrap text-center">Tên Sản Phẩm</th>
-                        <th class="text-nowrap text-center">Số lần được đánh giá 5*</th>
-                        <th class="text-nowrap text-center">Số lần được đánh giá 4*</th>
+                        <th class="text-nowrap text-center">Giá Bán</th>
+                        <th class="text-nowrap text-center">Hình Ảnh</th>
+                        <th class="text-nowrap text-center">Lượt đánh giá 5*</th>
                     </tr>
                 </thead>
                 <tbody class="text-nowrap text-center">
-
+                        @foreach($data as $key => $value)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $value->ten_san_pham }}</td>
+                                <td>{{ number_format($value->gia_ban) }} VND</td>
+                                <td>
+                                    <img src="{{ $value->hinh_anh }}" style="height: 50px;">
+                                </td>
+                                <td>{{ $value->ti_le_sao }}</td>
+                            </tr>
+                        @endforeach
                 </tbody>
             </table>
         </div>

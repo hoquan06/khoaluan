@@ -88,6 +88,8 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
             </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia/2"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
+            </li>
         </ul>
     </div>
 </div>
