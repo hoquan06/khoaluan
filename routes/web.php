@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::prefix('admin')->group(function () {
     Route::prefix('danh-muc-san-pham')->group(function () {
         Route::get('/index', [\App\Http\Controllers\DanhMucSanPhamController::class, 'index']);
@@ -70,7 +69,13 @@ Route::prefix('admin')->group(function () {
     Route::prefix('don-hang')->group(function () {
         Route::get('/da-huy/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaHuy']); // tinh trang -1
         Route::get('/cho-duyet/index', [\App\Http\Controllers\DonHangController::class, 'donHangChoDuyet']);// tinh trang 0
+
+        Route::get('/cho-duyet/getDataChoDuyet', [\App\Http\Controllers\DonHangController::class, 'getDataChoDuyet']);
+
         Route::get('/dang-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDangGiao']); // tinh trang 1
+
+        Route::get('/cho-duyet/getDataDangGiao', [\App\Http\Controllers\DonHangController::class, 'getDataDangGiao']);
+
         Route::get('/da-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaGiao']); // tinh trang 2
 
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
@@ -98,7 +103,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/thay-doi-tinh-trang/{id}', [\App\Http\Controllers\ThongKeController::class, 'tinhTrang']);
     });
 });
-
 
 Route::prefix('khach-hang')->group(function () {
     Route::get('/register', [\App\Http\Controllers\KhachHangController::class, 'register']);
@@ -136,6 +140,9 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/don-hang/huy/{id}', [\App\Http\Controllers\DonHangController::class, 'cancelOrder']);
     Route::get('/don-hang/da-nhan-hang/{id}', [\App\Http\Controllers\DonHangController::class, 'orderCompleted']);
 
+    Route::get('/don-hang/thanh-cong', [\App\Http\Controllers\DonHangController::class, 'success']);
+
+
     Route::post('/thanh-toan-momo', [\App\Http\Controllers\DonHangController::class, 'thanhToanMomo']);
     Route::get('/momo/ipn', [DonHangController::class, 'ipnMomo']);
     Route::get('/momo/notifi', [DonHangController::class, 'notifiMomo']);
@@ -156,6 +163,7 @@ Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::clas
 Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
+
 
 
 

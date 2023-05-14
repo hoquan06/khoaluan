@@ -45,7 +45,7 @@
                                     </td>
                                 @else
                                     <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Đã giao</button>
+                                        Đã Giao
                                     </td>
                                 @endif
                                 <td>
