@@ -33,7 +33,7 @@
                             <div class="card-body text-start">
                                 <span>Tên Khách Hàng : <b>{{ $value->ho_va_ten }}</b></span>
                                 <br/>
-                                <span>Địa Chỉ : <b>{{ $value->dia_chi }}</b></span>
+                                <span>Địa Chỉ : <b>{{ $value->dia_chi_giao_hang }}</b></span>
                                 <br/>
                                 <span>Số Điện Thoại: <b>{{ $value->so_dien_thoai }}</b></span>
                                 <br/>
