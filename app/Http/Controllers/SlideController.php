@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\SlideRequest;
 
 use Illuminate\Http\Request;
 use App\Models\Slide;
@@ -13,7 +14,7 @@ class SlideController extends Controller
         return view('admin.pages.slide.index',compact('slide'));
     }
 
-    public function store(Request $request) 
+    public function store(SlideRequest $request) 
     {
         $data = $request->all();
         Slide::create($data);

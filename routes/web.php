@@ -88,7 +88,12 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('/danh-gia/{id}', [\App\Http\Controllers\DanhGiaController::class, 'dsDanhGia']);
+
     Route::get('/thong-ke-danh-gia', [\App\Http\Controllers\DanhGiaController::class, 'thongKe']);
+
+    Route::get('/thong-ke-danh-gia/2', [\App\Http\Controllers\DanhGiaController::class, 'thongKe2']);
+
+    // Route::get('/thong-ke-danh-gia/doi-trang-thai/{id}', [\App\Http\Controllers\DanhGiaController::class, 'doiTrangThai']);
 
     Route::prefix('thong-ke')->group(function () {
         Route::prefix('doanh-thu')->group(function () {
