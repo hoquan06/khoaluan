@@ -36,6 +36,18 @@ class DonHangController extends Controller
         return view("admin.pages.don_hang.cho_duyet.index",compact('don_hang_cho_duyet'));
     }
 
+    public function getDataChoDuyet()
+    {
+        $don_hang_cho_duyet = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                            ->where('tinh_trang',0)
+                            ->select('khach_hangs.*','don_hangs.*')
+                            ->orderByDesc('don_hangs.created_at')
+                            ->get();
+        return response()->json([
+            'donHangChoDuyet'  => $don_hang_cho_duyet,
+        ]);
+    }
+
     public function donHangDangGiao()
     {
         $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
@@ -45,6 +57,19 @@ class DonHangController extends Controller
                             ->get();
         return view("admin.pages.don_hang.dang_giao.index",compact('don_hang_dang_giao'));
     }
+
+    public function getDataDangGiao()
+    {
+        $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+        ->where('tinh_trang',1)
+        ->select('khach_hangs.*','don_hangs.*')
+        ->orderByDesc('don_hangs.updated_at')
+        ->get();
+        return response()->json([
+            'donHangDangGiao'  => $don_hang_dang_giao,
+        ]);
+    }
+
 
     public function donHangDaGiao()
     {
