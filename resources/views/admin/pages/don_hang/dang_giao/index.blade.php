@@ -13,7 +13,7 @@
                             <th class="text-center">Địa Chỉ Giao Hàng</th>
                             <th class="text-center">Giá Trị Đơn Hàng</th>
                             <th class="text-center">Loại Thanh Toán</th>
-                            <th class="text-center">Tình Trạng</th>
+                            <th class="text-center">Trạng Thái</th>
                             <th class="text-center">Thao Tác</th>
 
                         </tr>
@@ -97,9 +97,7 @@
                             }
 
                             var tinhTrang = '';
-                            if(value.tinh_trang == 0) {
-                                tinhTrang = '<td> Đang Chờ Duyệt</td>';
-                            } else {
+                            if(value.tinh_trang == 1) {
                                 tinhTrang = '<td>Đang Giao</td>'
                             }
                             noiDung += '<tr>';
@@ -107,7 +105,7 @@
                             noiDung += '<td>' + value.ho_va_ten + '</td>';
                             noiDung += '<td>' + value.ma_don_hang + '</td>';
                             noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
-                            noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
+                            noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
                             noiDung +=  loaiThanhToan;
                             noiDung +=  tinhTrang;
                             noiDung += '<td>';
@@ -140,10 +138,12 @@
                         if(res.xoa == 0){
                             toastr.error(res.message)
                         } else if(res.xoa == 1){
-                            toastr.success("Xóa đơn hàng thành công!!!");
-                            row.remove();
+                            toastr.error(res.message);
+                        } else if(res.xoa == 2){
+                            toastr.success(res.message);
+                            getDataChoDuyet();
                         } else{
-                            toastr.error("Đơn hàng không tồn tại!!!");
+                            toastr.error(res.message);
                         }
                     },
                 });
@@ -186,6 +186,9 @@
                     }
                 });
             });
+            function numberFormat(number) {
+                return new Intl.NumberFormat('vi-VI', { style: 'currency', currency: 'VND' }).format(number);
+            }
         });
     </script>
 @endsection

@@ -18,17 +18,12 @@ class DonHangController extends Controller
 {
     public function donHangDaHuy()
     {
-        return view("admin.pages.don_hang.da_huy.index");
-    }
-    public function getDataHuy(){
         $don_hang_da_huy = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
                                     ->where('tinh_trang',-1)
                                     ->select('khach_hangs.*','don_hangs.*')
                                     ->orderByDesc('don_hangs.created_at')
                                     ->get();
-        return response()->json([
-            'status'        => $don_hang_da_huy,
-        ]);
+        return view("admin.pages.don_hang.da_huy.index", compact('don_hang_da_huy'));
     }
 
     public function donHangChoDuyet()
@@ -78,18 +73,12 @@ class DonHangController extends Controller
 
     public function donHangDaGiao()
     {
-        return view("admin.pages.don_hang.da_giao.index");
-    }
-    public function getDataDaGiao()
-    {
         $don_hang_da_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
                                     ->where('tinh_trang',2)
                                     ->select('khach_hangs.*','don_hangs.*')
                                     ->orderByDesc('don_hangs.updated_at')
                                     ->get();
-        return response()->json([
-            'status'        => $don_hang_da_giao,
-        ]);
+        return view("admin.pages.don_hang.da_giao.index", compact('don_hang_da_giao'));
     }
 
     public function giaoThatBai($id)
@@ -116,19 +105,12 @@ class DonHangController extends Controller
 
     public function donThatBai()
     {
-        return view('admin.pages.don_hang.that_bai.index');
-    }
-
-    public function getDataGiaoThatBai()
-    {
         $data = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
                         ->where('tinh_trang', 3)
                         ->select('khach_hangs.*','don_hangs.*')
                         ->orderByDesc('don_hangs.updated_at')
                         ->get();
-        return response()->json([
-            'status'        => $data,
-        ]);
+        return view('admin.pages.don_hang.that_bai.index', compact('data'));
     }
 
     public function accept($id)
@@ -187,26 +169,28 @@ class DonHangController extends Controller
     {
         $data = DonHang::find($id);
         if($data){
-            if($data->loai_thanh_toan == 1 && $data->tinh_trang != 2){
+            if($data->loai_thanh_toan == 1 && $data->tinh_trang == 0){
                 return response()->json([
                     'xoa'       => 0,
-                    'message'   => 'Xóa không thành công do đơn hàng đã được thanh toán!'
+                    'message'   => 'Xóa không thành công do đơn hàng thanh toán chuyển khoản!'
                 ]);
             } else if($data->tinh_trang == 1){
                 return response()->json([
-                    'xoa'       => 0,
+                    'xoa'       => 1,
                     'message'   => 'Xóa không thành công do đơn hàng đang được vận chuyển!'
+
                 ]);
             } else{
                 $data->delete();
                 return response()->json([
-                    'xoa'       => 1,
+                    'xoa'       => 2,
+                    'message'   => 'Đã xóa đơn hàng thành công!'
                 ]);
             }
-            dd($data->toArray());
         } else{
             return response()->json([
                 'xoa'       => false,
+                'message'   => 'Đã xóa không tồn tại!'
             ]);
         }
     }

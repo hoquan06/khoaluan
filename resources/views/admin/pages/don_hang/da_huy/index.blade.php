@@ -13,48 +13,33 @@
                             <th class="text-center">Địa Chỉ Giao Hàng</th>
                             <th class="text-center">Giá Trị Đơn Hàng</th>
                             <th class="text-center">Loại Thanh Toán</th>
-                            <th class="text-center">Tình Trạng</th>
+                            <th class="text-center">Trạng thái</th>
                             <th class="text-center">Thao Tác</th>
 
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        {{-- @foreach($don_hang_da_huy as $key => $value)
+                        @foreach($don_hang_da_huy as $key => $value)
                             <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $value->ho_va_ten }}</td>
                             <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>
                             <td>{{ $value->dia_chi_giao_hang }}</td>
-                            <td>{{ number_format($value->thuc_tra) }} VND</td>
+                            <td>{{ number_format($value->thuc_tra) }} đ</td>
                                 @if($value->loai_thanh_toan == 0)
                                     <td>Thanh toán khi nhận hàng</td>
                                 @else
                                     <td>Chuyển khoản</td>
                                 @endif
                                 @if($value->tinh_trang == -1)
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-danger">Đã hủy</button>
-                                    </td>
-                                @elseif ($value->tinh_trang == 0)
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-info">Duyệt</button>
-                                    </td>
-                                @elseif($value->tinh_trang == 1)
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="btn btn-primary doiTrangThai">Đang giao</button>
-                                    </td>
-                                @else
-                                    <td>
-                                        <button data-id="{{ $value->id }}" class="doiTrangThai btn btn-success">Đã giao</button>
-                                    </td>
+                                    <td>Đã hủy</td>
                                 @endif
                                 <td>
                                     <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-info">Xem</a>
                                     <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
                                 </td>
-
                             </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -88,44 +73,6 @@
                 }
             });
 
-            function loadTable(){
-                $.ajax({
-                    url             : '/admin/don-hang/da-huy/data',
-                    type            : 'get',
-                    success         : function(res){
-                        var noiDung = '';
-                        $.each(res.status, function(key, value){
-                            var loaiThanhToan = '';
-                            if(value.loai_thanh_toan == 0) {
-                                loaiThanhToan = '<td>Thanh toán khi nhận hàng</td>';
-                            } else {
-                                loaiThanhToan = '<td>Chuyển khoản</td>';
-                            }
-
-                            var tinhTrang = '';
-                            if(value.tinh_trang == -1) {
-                                tinhTrang = '<td> Đã hủy </td>';
-                            }
-                            noiDung += '<tr>';
-                            noiDung += '<td>' + (key + 1) + '</td>';
-                            noiDung += '<td>' + value.ho_va_ten + '</td>';
-                            noiDung += '<td>' + value.ma_don_hang + '</td>';
-                            noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
-                            noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
-                            noiDung +=  loaiThanhToan;
-                            noiDung +=  tinhTrang;
-                            noiDung += '<td>';
-                            noiDung += '<a href="/admin/don-hang/view/' + value.id  + '" class="btn btn-info me-1">Xem</a>';
-                            noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
-                            noiDung += '</td>';
-                            noiDung += '</tr>';
-                        });
-                        $("#tableDonHang tbody").html(noiDung);
-                    },
-                });
-            }
-            loadTable();
-
             var row = '';
             $('body').on('click', '.delete', function(){
                 var getId = $(this).data('iddelete');
@@ -139,41 +86,17 @@
                     url         : '/admin/don-hang/delete/' + id,
                     type        : 'get',
                     success     : function(res){
-                        if(res.xoa){
-                            toastr.success("Xóa đơn hàng thành công!!!");
+                        if(res.xoa == 0){
+                            toastr.error(res.message);
+                        } else if(res.xoa == 1){
+                            toastr.error(res.message);
+                        } else if(res.xoa == 2){
+                            toastr.success(res.message);
                             row.remove();
                         } else{
-                            toastr.error("Đơn hàng không tồn tại!!!");
+                            toastr.error(res.message);
                         }
                     },
-                });
-            });
-
-            $('body').on('click', '.doiTrangThai', function(){
-                var idDonHang = $(this).data('id');
-                var self = $(this);
-                $.ajax({
-                    url         : '/admin/don-hang/accept/' + idDonHang ,
-                    type        : 'get',
-                    success     : function(res){
-                        if(res.doitrangthai == 0){
-                            toastr.error('Đơn hàng đã bị hủy!');
-                        } else if(res.doitrangthai == 1){
-                            if(res.tinhtrang){
-                                self.html("Đang giao");
-                                self.removeClass('btn-info');
-                                self.addClass('btn-primary');
-                                toastr.success("Đơn hàng đã được duyệt!!!");
-                            }
-                        } else if(res.doitrangthai == 2){
-                                self.html("Đã giao");
-                                self.removeClass('btn-primary');
-                                self.addClass('btn-success');
-                                toastr.success("Đơn hàng đã được giao!!!");
-                        } else{
-                            toastr.warning("Đơn hàng đã được giao!");
-                        }
-                    }
                 });
             });
         });
