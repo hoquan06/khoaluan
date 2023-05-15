@@ -108,15 +108,15 @@
                             noiDung += '<td>' + value.ma_don_hang + '</td>';
                             noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
                             noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
-                            noiDung +=  loaiThanhToan;      
-                            noiDung +=  tinhTrang;      
+                            noiDung +=  loaiThanhToan;
+                            noiDung +=  tinhTrang;
                             noiDung += '<td>';
                             noiDung += '<a href="/admin/don-hang/view/' + value.id +'" class="btn btn-info me-1">Xem</a>';
                             noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
                             noiDung += '<button data-id="' + value.id +'" class="btn btn-primary me-1 doiTrangThai"> Xác nhận</button>';
-                            noiDung += '<button data-id="'+ value.id +'" class="btn btn-danger doiTrangThai">Giao thất bại</button>';
-                            noiDung += '</td>';  
-                            noiDung += '</tr>';  
+                            noiDung += '<button data-id="'+ value.id +'" class="btn btn-danger giaoThatBai">Giao thất bại</button>';
+                            noiDung += '</td>';
+                            noiDung += '</tr>';
                         });
                         $("#tableDonHang tbody").html(noiDung);
                     },
@@ -137,7 +137,9 @@
                     url         : '/admin/don-hang/delete/' + id,
                     type        : 'get',
                     success     : function(res){
-                        if(res.xoa){
+                        if(res.xoa == 0){
+                            toastr.error(res.message)
+                        } else if(res.xoa == 1){
                             toastr.success("Xóa đơn hàng thành công!!!");
                             row.remove();
                         } else{
@@ -166,6 +168,20 @@
                                 toastr.success("Đơn hàng đã được giao!!!");
                         } else{
                             toastr.warning("Đơn hàng đã được giao!");
+                        }
+                    }
+                });
+            });
+
+            $('body').on('click', '.giaoThatBai', function(){
+                var id = $(this).data('id');
+                $.ajax({
+                    url             : '/admin/don-hang/that-bai/' + id,
+                    type            : 'get',
+                    success         : function(res){
+                        if(res.status){
+                            toastr.success('Cập nhật đơn hàng thành công');
+                            getDataDangGiao();
                         }
                     }
                 });

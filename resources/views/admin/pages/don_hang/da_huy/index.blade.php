@@ -4,7 +4,7 @@
 <div class="col-md-12">
         <div class="main-card mb-3 card">
             <div class="card-body text-center table-responsive"><h5 class="card-title">Danh Sách Đơn Hàng Đã Hủy</h5>
-                <table class="mb-0 table table-bordered table-hover" id="tableDanhMuc">
+                <table class="mb-0 table table-bordered table-hover" id="tableDonHang">
                     <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -19,7 +19,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-nowrap text-center">
-                        @foreach($don_hang_da_huy as $key => $value)
+                        {{-- @foreach($don_hang_da_huy as $key => $value)
                             <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $value->ho_va_ten }}</td>
@@ -54,7 +54,7 @@
                                 </td>
 
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
             </div>
@@ -87,6 +87,44 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            function loadTable(){
+                $.ajax({
+                    url             : '/admin/don-hang/da-huy/data',
+                    type            : 'get',
+                    success         : function(res){
+                        var noiDung = '';
+                        $.each(res.status, function(key, value){
+                            var loaiThanhToan = '';
+                            if(value.loai_thanh_toan == 0) {
+                                loaiThanhToan = '<td>Thanh toán khi nhận hàng</td>';
+                            } else {
+                                loaiThanhToan = '<td>Chuyển khoản</td>';
+                            }
+
+                            var tinhTrang = '';
+                            if(value.tinh_trang == -1) {
+                                tinhTrang = '<td> Đã hủy </td>';
+                            }
+                            noiDung += '<tr>';
+                            noiDung += '<td>' + (key + 1) + '</td>';
+                            noiDung += '<td>' + value.ho_va_ten + '</td>';
+                            noiDung += '<td>' + value.ma_don_hang + '</td>';
+                            noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
+                            noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
+                            noiDung +=  loaiThanhToan;
+                            noiDung +=  tinhTrang;
+                            noiDung += '<td>';
+                            noiDung += '<a href="/admin/don-hang/view/' + value.id  + '" class="btn btn-info me-1">Xem</a>';
+                            noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
+                            noiDung += '</td>';
+                            noiDung += '</tr>';
+                        });
+                        $("#tableDonHang tbody").html(noiDung);
+                    },
+                });
+            }
+            loadTable();
 
             var row = '';
             $('body').on('click', '.delete', function(){

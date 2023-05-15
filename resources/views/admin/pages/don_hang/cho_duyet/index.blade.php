@@ -106,14 +106,14 @@
                             noiDung += '<td>' + value.ma_don_hang + '</td>';
                             noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
                             noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
-                            noiDung +=  loaiThanhToan;      
-                            noiDung +=  tinhTrang;      
+                            noiDung +=  loaiThanhToan;
+                            noiDung +=  tinhTrang;
                             noiDung += '<td>';
-                            noiDung += '<a href="/admin/don-hang/view/' + value.id  + '" class="btn btn-info me-1">Xem</a>'; 
+                            noiDung += '<a href="/admin/don-hang/view/' + value.id  + '" class="btn btn-info me-1">Xem</a>';
                             noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
                             noiDung += '<button data-id=" '+ value.id + '" class="doiTrangThai btn btn-info">Duyệt và chuyển giao</button>';
-                            noiDung += '</td>';  
-                            noiDung += '</tr>';  
+                            noiDung += '</td>';
+                            noiDung += '</tr>';
                         });
                         $("#tableDonHang tbody").html(noiDung);
                     },
@@ -134,7 +134,9 @@
                     url         : '/admin/don-hang/delete/' + id,
                     type        : 'get',
                     success     : function(res){
-                        if(res.xoa){
+                        if(res.xoa == 0){
+                            toastr.error(res.message)
+                        } else if(res.xoa == 1){
                             toastr.success("Xóa đơn hàng thành công!!!");
                             row.remove();
                         } else{
@@ -159,7 +161,7 @@
                                 toastr.success("Đơn hàng đã được duyệt và giao cho nhà vận chuyển!!!");
                             }
                         } else if(res.doitrangthai == 2){
-                                toastr.success("Đơn hàng đã được giao!!!"); 
+                                toastr.success("Đơn hàng đã được giao!!!");
                                 getDataChoDuyet();
                         } else{
                                 toastr.warning("Đơn hàng đã được giao!");

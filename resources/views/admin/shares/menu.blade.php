@@ -59,6 +59,8 @@
                     </li>
                     <li><a class="d-flex align-items-center" href="/admin/don-hang/da-giao/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Đã giao</span></a>
                     </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/that-bai/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Giao thất bại</span></a>
+                    </li>
                 </ul>
             </li>
             {{-- Chi Tiết Giao Dịch --}}

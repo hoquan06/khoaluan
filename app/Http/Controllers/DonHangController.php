@@ -18,12 +18,17 @@ class DonHangController extends Controller
 {
     public function donHangDaHuy()
     {
+        return view("admin.pages.don_hang.da_huy.index");
+    }
+    public function getDataHuy(){
         $don_hang_da_huy = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
-                            ->where('tinh_trang',-1)
-                            ->select('khach_hangs.*','don_hangs.*')
-                            ->orderByDesc('don_hangs.created_at')
-                            ->get();
-        return view("admin.pages.don_hang.da_huy.index",compact('don_hang_da_huy'));
+                                    ->where('tinh_trang',-1)
+                                    ->select('khach_hangs.*','don_hangs.*')
+                                    ->orderByDesc('don_hangs.created_at')
+                                    ->get();
+        return response()->json([
+            'status'        => $don_hang_da_huy,
+        ]);
     }
 
     public function donHangChoDuyet()
@@ -61,10 +66,10 @@ class DonHangController extends Controller
     public function getDataDangGiao()
     {
         $don_hang_dang_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
-        ->where('tinh_trang',1)
-        ->select('khach_hangs.*','don_hangs.*')
-        ->orderByDesc('don_hangs.updated_at')
-        ->get();
+                                    ->where('tinh_trang', 1)
+                                    ->select('khach_hangs.*','don_hangs.*')
+                                    ->orderByDesc('don_hangs.updated_at')
+                                    ->get();
         return response()->json([
             'donHangDangGiao'  => $don_hang_dang_giao,
         ]);
@@ -73,14 +78,58 @@ class DonHangController extends Controller
 
     public function donHangDaGiao()
     {
+        return view("admin.pages.don_hang.da_giao.index");
+    }
+    public function getDataDaGiao()
+    {
         $don_hang_da_giao = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
-                            ->where('tinh_trang',2)
-                            ->select('khach_hangs.*','don_hangs.*')
-                            ->orderByDesc('don_hangs.updated_at')
-                            ->get();
-        return view("admin.pages.don_hang.da_giao.index",compact('don_hang_da_giao'));
+                                    ->where('tinh_trang',2)
+                                    ->select('khach_hangs.*','don_hangs.*')
+                                    ->orderByDesc('don_hangs.updated_at')
+                                    ->get();
+        return response()->json([
+            'status'        => $don_hang_da_giao,
+        ]);
     }
 
+    public function giaoThatBai($id)
+    {
+        $donHang = DonHang::find($id);
+        if($donHang){
+            if($donHang->tinh_trang == 1){
+                $donHang->tinh_trang = 3;
+                $donHang->save();
+                return response()->json([
+                    'status'    => 1,
+                ]);
+            } else{
+                return response()->json([
+                    'status'    => 2,
+                ]);
+            }
+        } else{
+            return response()->json([
+                'status'    => false,
+            ]);
+        }
+    }
+
+    public function donThatBai()
+    {
+        return view('admin.pages.don_hang.that_bai.index');
+    }
+
+    public function getDataGiaoThatBai()
+    {
+        $data = DonHang::join('khach_hangs','khach_hangs.id','don_hangs.agent_id')
+                        ->where('tinh_trang', 3)
+                        ->select('khach_hangs.*','don_hangs.*')
+                        ->orderByDesc('don_hangs.updated_at')
+                        ->get();
+        return response()->json([
+            'status'        => $data,
+        ]);
+    }
 
     public function accept($id)
     {
@@ -138,10 +187,23 @@ class DonHangController extends Controller
     {
         $data = DonHang::find($id);
         if($data){
-            $data->delete();
-            return response()->json([
-                'xoa'       => true,
-            ]);
+            if($data->loai_thanh_toan == 1 && $data->tinh_trang != 2){
+                return response()->json([
+                    'xoa'       => 0,
+                    'message'   => 'Xóa không thành công do đơn hàng đã được thanh toán!'
+                ]);
+            } else if($data->tinh_trang == 1){
+                return response()->json([
+                    'xoa'       => 0,
+                    'message'   => 'Xóa không thành công do đơn hàng đang được vận chuyển!'
+                ]);
+            } else{
+                $data->delete();
+                return response()->json([
+                    'xoa'       => 1,
+                ]);
+            }
+            dd($data->toArray());
         } else{
             return response()->json([
                 'xoa'       => false,
