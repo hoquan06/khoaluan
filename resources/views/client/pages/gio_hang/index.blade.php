@@ -247,8 +247,8 @@
                             } else if(res.data.donhang == 6){
                                 toastr.error(res.data.message);
                             } else if(res.data.donhang == 1){
-                                toastr.success("Mua hàng thành công!");
-                                window.location.replace('/khach-hang/don-hang/thanh-cong')
+                                $("#dia_chi_nhan_hang").val('');
+                                window.location.replace('/khach-hang/don-hang/thanh-cong');
                                 this.loadCart();
                             } else if(res.data.donhang == 2){
                                 toastr.error("Giỏ hàng rỗng!");
