@@ -18,7 +18,28 @@
                     </tr>
                 </thead>
                 <tbody class="text-nowrap text-center">
+                    @foreach($data as $key => $value)
+                        <tr>
+                        <td>{{ $key + 1 }}</td>
+                        <td>{{ $value->ho_va_ten }}</td>
+                        <td>{{ Str::length($value->ma_don_hang) > 14 ? Str::substr($value->ma_don_hang, 0, 14) . '...' :  $value->ma_don_hang}} </td>
+                        <td>{{ $value->dia_chi_giao_hang }}</td>
+                        <td>{{ number_format($value->thuc_tra) }} đ</td>
+                            @if($value->loai_thanh_toan == 0)
+                                <td>Thanh toán khi nhận hàng</td>
+                            @else
+                                <td>Chuyển khoản</td>
+                            @endif
+                            @if($value->tinh_trang == 3)
+                                <td>Giao không thành công</td>
+                            @endif
+                            <td>
+                                <a href="/admin/don-hang/view/{{ $value->id }}" class="btn btn-info">Xem</a>
+                                <button class="btn btn-danger delete" data-iddelete="{{ $value->id }}"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>
+                            </td>
 
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -52,44 +73,6 @@
             }
         });
 
-        function loadTable(){
-            $.ajax({
-                url             : '/admin/don-hang/that-bai/getDataGiaoThatBai',
-                type            : 'get',
-                success         : function(res){
-                    var noiDung = '';
-                    $.each(res.status, function(key, value){
-                        var loaiThanhToan = '';
-                        if(value.loai_thanh_toan == 0) {
-                            loaiThanhToan = '<td>Thanh toán khi nhận hàng</td>';
-                        } else {
-                            loaiThanhToan = '<td>Chuyển khoản</td>';
-                        }
-
-                        var tinhTrang = '';
-                        if(value.tinh_trang == 3) {
-                            tinhTrang = '<td> Giao không thành công </td>';
-                        }
-                        noiDung += '<tr>';
-                        noiDung += '<td>' + (key + 1) + '</td>';
-                        noiDung += '<td>' + value.ho_va_ten + '</td>';
-                        noiDung += '<td>' + value.ma_don_hang + '</td>';
-                        noiDung += '<td>' + value.dia_chi_giao_hang + '</td>';
-                        noiDung += '<td>' + (value.thuc_tra) + ' VND</td>';
-                        noiDung +=  loaiThanhToan;
-                        noiDung +=  tinhTrang;
-                        noiDung += '<td>';
-                        noiDung += '<a href="/admin/don-hang/view/' + value.id  + '" class="btn btn-info me-1">Xem</a>';
-                        noiDung += '<button class="btn btn-danger delete me-1" data-iddelete="'+ value.id +'"  data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa</button>';
-                        noiDung += '</td>';
-                        noiDung += '</tr>';
-                    });
-                    $("#tableDonHang tbody").html(noiDung);
-                },
-            });
-        }
-        loadTable();
-
         var row = '';
         $('body').on('click', '.delete', function(){
             var getId = $(this).data('iddelete');
@@ -106,10 +89,12 @@
                     if(res.xoa == 0){
                         toastr.error(res.message)
                     } else if(res.xoa == 1){
-                        toastr.success("Xóa đơn hàng thành công!!!");
+                        toastr.error(res.message);
+                    } else if(res.xoa == 2){
+                        toastr.success(res.message);
                         row.remove();
                     } else{
-                        toastr.error("Đơn hàng không tồn tại!!!");
+                        toastr.error(res.message);
                     }
                 },
             });

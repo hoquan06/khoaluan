@@ -68,7 +68,6 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('don-hang')->group(function () {
         Route::get('/da-huy/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaHuy']); // tinh trang -1
-        Route::get('/da-huy/data', [\App\Http\Controllers\DonHangController::class, 'getDataHuy']);
 
         Route::get('/cho-duyet/index', [\App\Http\Controllers\DonHangController::class, 'donHangChoDuyet']);// tinh trang 0
         Route::get('/cho-duyet/getDataChoDuyet', [\App\Http\Controllers\DonHangController::class, 'getDataChoDuyet']);
@@ -77,10 +76,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/cho-duyet/getDataDangGiao', [\App\Http\Controllers\DonHangController::class, 'getDataDangGiao']);
 
         Route::get('/da-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaGiao']); // tinh trang 2
-        Route::get('/da-giao/data', [\App\Http\Controllers\DonHangController::class, 'getDataDaGiao']);
 
         Route::get('/that-bai/index', [\App\Http\Controllers\DonHangController::class, 'donThatBai']); // tinh trang 3
-        Route::get('/that-bai/getDataGiaoThatBai', [\App\Http\Controllers\DonHangController::class, 'getDataGiaoThatBai']);
 
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);
