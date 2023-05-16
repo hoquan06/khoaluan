@@ -149,7 +149,7 @@ Route::prefix('khach-hang')->group(function () {
 
     Route::get('/don-hang/thanh-cong', [\App\Http\Controllers\DonHangController::class, 'success']);
 
-
+    // thanh toán momo
     Route::post('/thanh-toan-momo', [\App\Http\Controllers\DonHangController::class, 'thanhToanMomo']);
     Route::get('/momo/ipn', [DonHangController::class, 'ipnMomo']);
     Route::get('/momo/notifi', [DonHangController::class, 'notifiMomo']);

@@ -73,14 +73,14 @@
                                     <li><i class="linearicons-bag-dollar"></i> Thanh toán trực tiếp khi nhận hàng</li>
                                 </ul>
                             </div>
-                            <div class="pr_switch_wrap">
+                            <!-- <div class="pr_switch_wrap">
                                 <span class="switch_lable">Màu sắc</span>
                                 <div class="product_color_switch">
                                     <span class="active" data-color="#87554B"></span>
                                     <span data-color="#333333"></span>
                                     <span data-color="#DA323F"></span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <hr />
                         <div class="cart_extra">
@@ -225,13 +225,13 @@
                                     <div class="pr_desc">
                                         <p>{{$value->mo_ta_ngan}}</p>
                                     </div>
-                                    <div class="pr_switch_wrap">
+                                    <!-- <div class="pr_switch_wrap">
                                         <div class="product_color_switch">
                                             <span class="active" data-color="#87554B"></span>
                                             <span data-color="#333333"></span>
                                             <span data-color="#DA323F"></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
