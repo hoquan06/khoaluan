@@ -46,7 +46,7 @@
                     error       : function(res){
                         var danh_sach_loi = res.responseJSON.errors;
                         $.each(danh_sach_loi, function(key, value){
-                            toastr.error(value[0]);
+                            toastr.error(value[0]);     
                         });
                     }
                 });
