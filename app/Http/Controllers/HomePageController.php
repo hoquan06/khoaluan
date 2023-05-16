@@ -26,13 +26,14 @@ class HomePageController extends Controller
         $banner = Banner::latest()->first();
 
         $ngay = date("Y-m-d");
-        $sql = "SELECT san_phams.* , khuyen_mais.*
-                FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
-                Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
-        $best_seller = DB::select($sql);
+        // $sql = "SELECT san_phams.* , khuyen_mais.*
+        //         FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
+        //         Where '$ngay' < thoi_gian_ket_thuc and '$ngay' > thoi_gian_bat_dau";
+        // $best_seller = DB::select($sql);
 
-        $sp_giam_gia = "SELECT * FROM `san_phams` WHERE `gia_khuyen_mai` > 0
-                        ORDER BY gia_khuyen_mai DESC";
+        $sp_giam_gia = "SELECT san_phams.* , khuyen_mais.*
+                 FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
+                Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
         $spGiam = DB::select($sp_giam_gia);
 
         $sp_moi = SanPham::orderByDesc('created_at')->get()->take(8);
@@ -40,7 +41,7 @@ class HomePageController extends Controller
 
         $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
         $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.home', compact('menuCha', 'menuCon', 'best_seller','spGiam', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
+        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
     }
 
     public function viewSanPham($id)

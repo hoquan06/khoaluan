@@ -82,15 +82,15 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/khach-hang-mua-nhieu"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Khách hàng mua nhiều nhất</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/khach-hang-mua-nhieu"><i data-feather='users'></i><span class="menu-title text-truncate" data-i18n="Invoice">Khách hàng mua nhiều</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-ban-chay"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy nhất</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-ban-chay"><i data-feather='award'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm bán chạy</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-chua-co-luot-mua"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm chưa có lượt mua</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-chua-co-luot-mua"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm tồn</span></a>
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia/2"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
+            {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia/2"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">SP được đánh giá cao</span></a> --}}
             </li>
         </ul>
     </div>
