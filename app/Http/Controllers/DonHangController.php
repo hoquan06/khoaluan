@@ -213,7 +213,7 @@ class DonHangController extends Controller
                     } else if(strlen($request->dia_chi_nhan_hang) < 10){
                         return response()->json([
                             'donhang' => 6,
-                            'message' => 'Địa chỉ nhận hàng phải có ít nhất 10 ký tự.'
+                            'message' => 'Vui lòng nhập địa chỉ cụ thể để dễ dàng nhận hàng.'
                         ]);
                     }
                     //2.Tạo đơn hàng
@@ -338,7 +338,7 @@ class DonHangController extends Controller
                     } else if(strlen($request->dia_chi_nhan_hang) < 10){
                         return response()->json([
                             'donhang' => 4,
-                            'message' => 'Địa chỉ nhận hàng phải có ít nhất 10 ký tự.'
+                            'message' => 'Vui lòng nhập địa chỉ cụ thể để dễ dàng nhận hàng.'
                         ]);
                     }
                     $donHang = DonHang::create([

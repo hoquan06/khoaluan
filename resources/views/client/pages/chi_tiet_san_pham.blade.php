@@ -256,7 +256,7 @@
             </div>
             <div class="modal-body text-center">
                 <div class="alert alert-success text-center" role="alert">
-                    Bạn phải đăng nhập để sử dụng tính năng này!!!
+                    Mời bạn đăng nhập để sử dụng tính năng này!
                 </div>
                 <form method="post">
                     <div class="form-group">
@@ -305,7 +305,7 @@
                         if(res.giohang){
                             toastr.success("Đã thêm vào giỏ hàng!");
                         } else{
-                            toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                            toastr.error("Vui lòng đăng nhập để sử dụng tính năng này!");
                         }
                     },
                     error           : function(res){
@@ -341,7 +341,7 @@
                             //Reset nội dung
                             $("#tableReset").trigger('reset');
                         } else if(res.data.themDanhGia == 2){
-                            toastr.warning("Bạn phải mua hàng để thực hiện chức năng này!");
+                            toastr.warning("Bạn hãy mua hàng trước khi thực hiện tính năng này!");
                         } else {
                             toastr.error("Bạn chưa đăng nhập!");
                         }

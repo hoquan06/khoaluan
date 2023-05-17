@@ -119,6 +119,7 @@ Route::prefix('khach-hang')->group(function () {
     Route::get('/active/{hash}', [\App\Http\Controllers\KhachHangController::class, 'active']);
     Route::get('/logout', [\App\Http\Controllers\KhachHangController::class, 'logout']);
     Route::post('/thay-doi-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'changePassword']);
+    Route::get('/dieu-khoan-dich-vu', [\App\Http\Controllers\KhachHangController::class, 'dieuKhoanDichVu']);
 
     Route::get('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'resetPassword']);
     Route::post('/quen-mat-khau', [\App\Http\Controllers\KhachHangController::class, 'actionResetPassword']);
