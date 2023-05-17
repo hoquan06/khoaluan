@@ -226,4 +226,9 @@ class KhachHangController extends Controller
             ]);
         }
     }
+
+    public function dieuKhoanDichVu()
+    {
+        return view('client.pages.dieu_khoan_dich_vu.index');
+    }
 }

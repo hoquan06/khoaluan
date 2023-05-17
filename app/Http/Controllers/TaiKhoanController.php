@@ -30,13 +30,13 @@ class TaiKhoanController extends Controller
                 $data->delete();
                 return response()->json([
                     'xoa' => 1,
-                    'message' => 'Xóa khách hàng thành công'
+                    'message' => 'Xóa tài khoản khách hàng thành công!'
                 ]);
             }
         } else {
             return response()->json([
                 'xoa' => false,
-                'message' => 'Khách hàng không tồn tại'
+                'message' => 'Khách hàng không tồn tại!'
             ]);
         }
     }

@@ -62,7 +62,7 @@
                     .then((res) => {
                         if(res.data.reset){
                             $("#email").val('');
-                            toastr.success("Chúng tôi đã gửi mã xác nhận vào email của bạn!");
+                            toastr.success("Chúng tôi đã gửi mã xác nhận tới địa chỉ email của bạn!");
                         }
                     })
                     .catch((res) => {

@@ -104,7 +104,7 @@
                             if(res.data.giohang){
                                 toastr.success("Đã thêm vào giỏ hàng!");
                             } else{
-                                toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                                toastr.error("Vui lòng đăng nhập để sử dụng tính năng này!");
                             }
                         });
                 }

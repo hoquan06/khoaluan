@@ -122,7 +122,7 @@
             </div>
             <div class="modal-body text-center">
                 <div class="alert alert-success text-center" role="alert">
-                    Bạn phải đăng nhập để sử dụng tính năng này!!!
+                Mời bạn đăng nhập để sử dụng tính năng này!
                 </div>
                 <form method="post">
                     <div class="form-group">
