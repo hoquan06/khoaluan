@@ -26,8 +26,8 @@ class KhuyenMaiRequest extends FormRequest
             'ten_chuong_trinh'   => 'required',
             'muc_giam'           => 'required|numeric|min:0',
             'san_pham_id'        => 'required',
-            'thoi_gian_bat_dau'  => 'required|date|after_or_equal:today|max:10',
-            'thoi_gian_ket_thuc' => 'required|date|after:thoi_gian_bat_dau|max:10',
+            'thoi_gian_bat_dau'  => 'date_format:Y-m-d|after_or_equal:today',
+            'thoi_gian_ket_thuc' => 'date_format:Y-m-d|after:thoi_gian_bat_dau',
         ];
     }
 
@@ -40,7 +40,7 @@ class KhuyenMaiRequest extends FormRequest
             'before'                    => ':attribute không hợp lệ',
             'after_or_equal'            => ':attribute phải lớn hơn ngày hôm nay',
             'after'                     => ':attribute phải lớn hơn Thời gian bắt đầu',
-            'date'                      => ':attribute không đúng định dạng',
+            'date_format'               => ':attribute không đúng định dạng',
         ];
     }
 
