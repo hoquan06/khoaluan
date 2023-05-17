@@ -24,7 +24,7 @@ class DangKyRequest extends FormRequest
     {
         return [
             'ho_va_ten'             => 'required|min:4|max:50',
-            'ngay_sinh'             => 'required|date|before:today|max:10',
+            'ngay_sinh'             => 'date_format:Y-m-d|before:today',
             'so_dien_thoai'         => 'required|digits:10|unique:khach_hangs,so_dien_thoai',
             'email'                 => 'required|email|unique:khach_hangs,email',
             'password'              => 'required|min:2|max:50',
@@ -41,7 +41,7 @@ class DangKyRequest extends FormRequest
             'required'                       => ':attribute không được để trống',
             'min'                            => ':attribute quá ngắn',
             'max'                            => ':attribute quá dài',
-            'date'                           => ':attribute không đúng định dạng',
+            'date_format'                    => ':attribute không đúng định dạng',
             'before'                         => ':attribute không hợp lệ',
             'digits'                         => ':attribute phải là 10 số',
             'unique'                         => ':attribute đã tồn tại',

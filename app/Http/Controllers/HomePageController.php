@@ -21,7 +21,14 @@ class HomePageController extends Controller
         $menuCon = DanhMucSanPham::where('id_danh_muc_cha', '<>', 0)
                                  ->where('tinh_trang', 1)
                                  ->get();
-
+        foreach($menuCha as $valueCha){
+            $valueCha->tmp = $valueCha->id;
+            foreach($menuCon as $valueCon){
+                if($valueCon->id_danh_muc_cha == $valueCha->id){
+                    $valueCha->tmp = $valueCha->tmp . ',' . $valueCon->id;
+                }
+            }
+        }
         $slide = Slide::latest()->first();
         $banner = Banner::latest()->first();
 
@@ -30,6 +37,8 @@ class HomePageController extends Controller
         //         FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
         //         Where '$ngay' < thoi_gian_ket_thuc and '$ngay' > thoi_gian_bat_dau";
         // $best_seller = DB::select($sql);
+
+        $allSanPham = SanPham::all();
 
         $sp_giam_gia = "SELECT san_phams.* , khuyen_mais.*
                  FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
@@ -41,7 +50,8 @@ class HomePageController extends Controller
 
         $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
         $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
+
+        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
     }
 
     public function viewSanPham($id)
