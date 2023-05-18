@@ -6,7 +6,7 @@
         <div class="row align-items-center">
         	<div class="col-md-6">
                 <div class="page-title">
-            		<h1>Danh sách sản phẩm được giảm giá</h1>
+            		<h1>Danh sách sản phẩm đang khuyến mãi</h1>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row shop_container grid">
-                        @foreach ($spGiam as $key => $value)
+                        @foreach ($khuyenmai as $key => $value)
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <div class="product_img">

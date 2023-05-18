@@ -25,8 +25,8 @@ class UpdateKhuyenMaiRequest extends FormRequest
             'ten_chuong_trinh'   => 'required|unique:khuyen_mais,ten_chuong_trinh, '. $this->id,
             'muc_giam'           => 'required|numeric|min:0',
             'san_pham_id'        => 'required|exists:san_phams,id',
-            'thoi_gian_bat_dau'  => 'required|date|after_or_equal:today|max:10',
-            'thoi_gian_ket_thuc' => 'required|date|after:thoi_gian_bat_dau|max:10',
+            'thoi_gian_bat_dau'  => 'date_format:Y-m-d',
+            'thoi_gian_ket_thuc' => 'date_format:Y-m-d|after:thoi_gian_bat_dau',
         ];
     }
 
@@ -40,6 +40,7 @@ class UpdateKhuyenMaiRequest extends FormRequest
             'after_or_equal'            => ':attribute phải lớn hơn ngày hôm nay',
             'after'                     => ':attribute phải lớn hơn Thời gian bắt đầu',
             'date'                      => ':attribute không đúng định dạng',
+            'date_format'               => ':attribute không đúng định dạng',
         ];
     }
 

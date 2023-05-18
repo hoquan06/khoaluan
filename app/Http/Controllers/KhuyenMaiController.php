@@ -121,7 +121,7 @@ class KhuyenMaiController extends Controller
         }
     }
 
-    public function update(KhuyenMaiRequest $request)
+    public function update(UpdateKhuyenMaiRequest $request)
     {
         // Lấy sản phẩm cần khuyến mãi
         $sanPham = SanPham::where('id', $request->san_pham_id)->first();

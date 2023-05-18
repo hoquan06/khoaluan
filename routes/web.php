@@ -165,10 +165,10 @@ Route::get('/san-pham/{id}', [\App\Http\Controllers\HomePageController::class, '
 Route::get('/danh-muc/{id}', [\App\Http\Controllers\HomePageController::class, 'viewDanhMuc']);
 Route::post('/tim-kiem', [\App\Http\Controllers\HomePageController::class, 'search']);
 
-Route::get('/san-pham-thinh-hanh', [\App\Http\Controllers\HomePageController::class, 'spThinhHanh']);
-Route::get('/san-pham-noi-bat', [\App\Http\Controllers\HomePageController::class, 'spNoiBat']);
+Route::get('/san-pham-danh-gia-cao', [\App\Http\Controllers\HomePageController::class, 'spDanhGiaCao']);
+Route::get('/san-pham-moi-ra-mat', [\App\Http\Controllers\HomePageController::class, 'spMoiRaMat']);
 Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::class, 'spHangDau']);
-Route::get('/san-pham-giam-gia', [\App\Http\Controllers\HomePageController::class, 'spGiamGia']);
+Route::get('/san-pham-khuyen-mai', [\App\Http\Controllers\HomePageController::class, 'spKhuyenMai']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
 

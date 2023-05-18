@@ -54,8 +54,7 @@
                                     <div class="chek-form">
                                         <div class="custome-checkbox">
                                             <input class="form-check-input" type="checkbox" name="checkbox" id="agree" value="">
-                                            <label class="form-check-label" for="agree"><span>Tôi đồng ý với <a href="">điều khoản & dịch vụ.</a></span></label><br/>
-                                            <a href="/khach-hang/dieu-khoan-dich-vu">Xem điều khoản dịch vụ</a>
+                                            <label class="form-check-label" for="agree"><span>Tôi đồng ý với <a href="/khach-hang/dieu-khoan-dich-vu">điều khoản & dịch vụ.</a></span></label><br/>
                                         </div>
                                     </div>
                                 </div>

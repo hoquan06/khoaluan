@@ -17,7 +17,7 @@
     <div class="login_register_wrap section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-xl-12 col-md-12">             
+                <div class="col-xl-12 col-md-12">
                     <div class="login_wrap">
                         <div class="padding_eight_all bg-white">
                             <div class="heading_s1">
@@ -26,7 +26,7 @@
                                 <p>– Thanh toán phí dịch vụ theo thỏa thuận</p>
                                 <p>– Tuân thủ quy định của pháp luật</p>
                                 <p>– Các tranh chấp xảy ra nếu có do hai bên thỏa thuận giải quyết trên cơ sở hợp tác và thỏa thuận.</p>
-                                <p>Nếu Bạn có bất kỳ câu hỏi nào về Điều khoản Sử dụng này, về hoạt động của các Dịch vụ, hoặc sự kết nối của Bạn với chúng tôi, vui lòng liên hệ với chúng tôi qua email: smarttech@gmail.com. Tất cả các vấn đề hoặc mâu thuẫn sẽ được giải quyết nhanh chóng và hợp lý</p>
+                                <p>Nếu Bạn có bất kỳ câu hỏi nào về Điều khoản Sử dụng này, về hoạt động của các Dịch vụ, hoặc sự kết nối của Bạn với chúng tôi, vui lòng liên hệ với chúng tôi qua email: smarttech@gmail.com. Tất cả các vấn đề hoặc mâu thuẫn sẽ được giải quyết nhanh chóng và hợp lý.</p>
                             </div>
                         </div>
                     </div>

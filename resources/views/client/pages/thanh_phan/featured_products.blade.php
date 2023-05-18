@@ -6,10 +6,10 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Sản phẩm nổi bật</h4>
+                                <h4>Mới ra mắt</h4>
                             </div>
                             <div class="view_all">
-                                <a href="/san-pham-noi-bat" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-moi-ra-mat" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>
@@ -18,7 +18,7 @@
                     <div class="col-12">
                         <div class="product_slider carousel_slider product_list owl-carousel owl-theme nav_style5" data-nav="true" data-dots="false" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "380":{"items": "1"}, "640":{"items": "2"}, "991":{"items": "1"}}'>
                             <div class="item">
-                                @foreach ($spThinhHanh as $key => $value)
+                                @foreach ($sp_moi as $key => $value)
                                     <div class="product_wrap">
                                         <div class="product_img">
                                             <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">
@@ -53,10 +53,10 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Sản phẩm hàng đầu</h4>
+                                <h4>Được đánh giá cao</h4>
                             </div>
                             <div class="view_all">
-                                <a href="/san-pham-hang-dau" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-danh-gia-cao" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="col-12">
                         <div class="product_slider carousel_slider product_list owl-carousel owl-theme nav_style5" data-nav="true" data-dots="false" data-loop="true" data-margin="20" data-responsive='{"0":{"items": "1"}, "380":{"items": "1"}, "640":{"items": "2"}, "991":{"items": "1"}}'>
                             <div class="item">
-                                @foreach ($sp_hang_dau as $key => $value)
+                                @foreach ($spDanhGiaCao as $key => $value)
                                     <div class="product_wrap">
                                         <div class="product_img">
                                             <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">
@@ -100,10 +100,10 @@
                     <div class="col-12">
                         <div class="heading_tab_header">
                             <div class="heading_s2">
-                                <h4>Đang giảm giá</h4>
+                                <h4>Đang khuyến mãi</h4>
                             </div>
                             <div class="view_all">
-                                <a href="/san-pham-giam-gia" class="text_default"><span>Xem tất cả</span></a>
+                                <a href="/san-pham-khuyen-mai" class="text_default"><span>Xem tất cả</span></a>
                             </div>
                         </div>
                     </div>

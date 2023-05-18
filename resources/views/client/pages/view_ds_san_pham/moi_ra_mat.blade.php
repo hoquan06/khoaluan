@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="row shop_container grid">
-                        @foreach ($spThinhHanh as $key => $value)
+                        @foreach ($spMoi as $key => $value)
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <div class="product_img">
