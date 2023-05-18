@@ -4,15 +4,18 @@
             <div class="col-md-12">
                 <div class="heading_tab_header">
                     <div class="heading_s2">
-                        <h4>Khuyến mãi HOT</h4>
+                        <h4>Đang khuyến mãi<img src="" alt=""></h4>
                     </div>
+                </div>
+                <div class="view_all text-right">
+                    <a href="/san-pham-thinh-hanh" class="text_default"><i class="linearicons-power"></i> <span>Xem tất cả</span></a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="product_slider carousel_slider owl-carousel owl-theme nav_style3" data-loop="true" data-dots="false" data-nav="true" data-margin="30" data-responsive='{"0":{"items": "1"}, "650":{"items": "2"}, "1199":{"items": "2"}}'>
-                    @foreach ($best_seller as $key => $value)
+                    @foreach ($khuyenmai as $key => $value)
                         <div class="item">
                             <div class="deal_wrap">
                                 <div class="product_img">
@@ -29,7 +32,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="countdown_time countdown_style4 mb-4" data-time="{{$value->thoi_gian_ket_thuc}}"></div>
+
+                                    <span class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ Str::length($value->mo_ta_ngan) > 100 ? Str::substr($value->mo_ta_ngan, 0, 100) . '...' :  $value->mo_ta_ngan}}</a></span>
+                                    <div>
+                                        <span class="stock-available">Còn lại: <strong>{{$value->so_luong}}</strong></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

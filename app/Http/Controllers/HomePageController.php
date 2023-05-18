@@ -33,10 +33,10 @@ class HomePageController extends Controller
         $banner = Banner::latest()->first();
 
         $ngay = date("Y-m-d");
-        // $sql = "SELECT san_phams.* , khuyen_mais.*
-        //         FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
-        //         Where '$ngay' < thoi_gian_ket_thuc and '$ngay' > thoi_gian_bat_dau";
-        // $best_seller = DB::select($sql);
+        $sql = "SELECT san_phams.* , khuyen_mais.thoi_gian_bat_dau, khuyen_mais.thoi_gian_ket_thuc
+                FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
+                Where '$ngay' < thoi_gian_ket_thuc and '$ngay' >= thoi_gian_bat_dau";
+        $khuyenmai = DB::select($sql);
 
         $allSanPham = SanPham::all();
 
@@ -45,13 +45,16 @@ class HomePageController extends Controller
                 Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
         $spGiam = DB::select($sp_giam_gia);
 
-        $sp_moi = SanPham::orderByDesc('created_at')->get()->take(8);
+        $sp_moi = SanPham::orderByDesc('created_at')->get()->take(20);
         $sp_hang_dau = SanPham::orderByDesc('gia_ban')->get();
 
-        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
-        $spThinhHanh = DB::select($sp_thinh_hanh);
+        $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id
+        WHERE so_sao > 3
+        GROUP BY san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet
+        ORDER BY sosao DESC";
+        $spDanhGiaCao = DB::select($sp);
 
-        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide', 'banner', 'sp_moi', 'sp_hang_dau', 'spThinhHanh'));
+        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide','khuyenmai', 'banner', 'sp_moi', 'sp_hang_dau', 'spDanhGiaCao'));
     }
 
     public function viewSanPham($id)
@@ -107,18 +110,22 @@ class HomePageController extends Controller
         return view('client.pages.ds_san_pham_search', compact('danhSach'));
     }
 
-    public function spThinhHanh()
+    public function spDanhGiaCao()
     {
-        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
-        $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.view_ds_san_pham.thinh_hanh', compact('spThinhHanh'));
+        $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id
+                WHERE so_sao > 3
+                GROUP BY san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet
+                ORDER BY sosao DESC";
+        $spDanhGiaCao = DB::select($sp);
+        return view('client.pages.view_ds_san_pham.danh_gia_cao', compact('spDanhGiaCao'));
     }
 
-    public function spNoiBat()
+    public function spMoiRaMat()
     {
-        $sp_thinh_hanh = "SELECT *, (gia_ban > 10000000) FROM `san_phams`";
-        $spThinhHanh = DB::select($sp_thinh_hanh);
-        return view('client.pages.view_ds_san_pham.noi_bat', compact('spThinhHanh'));
+        // $sp_thinh_hanh = "SELECT * FROM `san_phams` ORDER by created_at DESC";
+        // $spThinhHanh = DB::select($sp_thinh_hanh);
+        $spMoi = SanPham::orderByDesc('created_at')->get()->take(20);
+        return view('client.pages.view_ds_san_pham.moi_ra_mat', compact('spMoi'));
     }
 
     public function spHangDau()
@@ -127,11 +134,13 @@ class HomePageController extends Controller
         return view('client.pages.view_ds_san_pham.hang_dau', compact('sp_hang_dau'));
     }
 
-    public function spGiamGia()
+    public function spKhuyenMai()
     {
-        $sp_giam_gia = "SELECT * FROM `san_phams` WHERE `gia_khuyen_mai` > 0
-                        ORDER BY gia_khuyen_mai DESC";
-        $spGiam = DB::select($sp_giam_gia);
-        return view('client.pages.view_ds_san_pham.giam_gia', compact('spGiam'));
+        $ngay = date("Y-m-d");
+        $sql = "SELECT san_phams.* , khuyen_mais.thoi_gian_bat_dau, khuyen_mais.thoi_gian_ket_thuc
+                FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
+                Where '$ngay' < thoi_gian_ket_thuc and '$ngay' >= thoi_gian_bat_dau";
+        $khuyenmai = DB::select($sql);
+        return view('client.pages.view_ds_san_pham.giam_gia', compact('khuyenmai'));
     }
 }
