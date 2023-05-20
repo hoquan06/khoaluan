@@ -127,6 +127,8 @@
                                                 @if($value->gia_khuyen_mai)
                                                     <del>{{ number_format($value->gia_ban, 0) }} đ</del>
                                                 @endif
+                                                <br>
+                                                <span class="price"> Còn lại : {{$value->so_luong}}</span>
                                             </div>
                                             <div class="pr_desc">
                                                 <p>{{$value->mo_ta_ngan}}</p>

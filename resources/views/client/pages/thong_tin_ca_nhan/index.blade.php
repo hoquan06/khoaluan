@@ -71,6 +71,7 @@
                                                 <th>Ngày đặt</th>
                                                 <th>Tình trạng</th>
                                                 <th>Thực trả</th>
+                                                <th>Loại thanh toán</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
@@ -82,6 +83,7 @@
                                                     <td v-if="tinh_trang == 0">Chờ xác nhận</td>
                                                     <td v-else-if="tinh_trang == 1">Đang chuẩn bị hàng</td>
                                                     <td>@{{numberFormat(value.thuc_tra)}}</td>
+                                                    <td>@{{value.loai_thanh_toan}}</td>
                                                     <td>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Xem</a>
                                                         <a href="#" class="btn btn-fill-out btn-sm">Hủy</a>
@@ -89,7 +91,7 @@
                                                     </td>
                                                 </tr>
                                             </template> --}}
-                                        </tbody>
+                                        </tbody>    
                                     </table>
                                 </div>
                             </div>
@@ -109,6 +111,7 @@
                                                 <th>Ngày đặt</th>
                                                 <th>Tình trạng</th>
                                                 <th>Tổng tiền</th>
+                                                <th>Loại thanh toán</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
@@ -317,11 +320,18 @@
                         } else{
                             tinhTrang = 'Đã nhận hàng';
                         }
+                        var loaiThanhToan = '';
+                        if(value.loai_thanh_toan == 1) {
+                            loaiThanhToan = 'Chuyển khoản';
+                        } else {
+                            loaiThanhToan = 'Khi nhận hàng';
+                        }
                         noiDung += '<tr>',
                         noiDung += '<td>' + (key + 1) + '</td>';
                         noiDung += '<td>' + GetNow(value.created_at) + '</td>';
                         noiDung += '<td>' + tinhTrang + '</td>';
                         noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDung += '<td>' + loaiThanhToan + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
                         if(value.tinh_trang == 0 || value.tinh_trang == 1){
@@ -340,11 +350,18 @@
                         if(value.tinh_trang == -1){
                             var tinhTrang = 'Đã hủy';
                         }
+                        var loaiThanhToan = '';
+                        if(value.loai_thanh_toan == 1) {
+                            loaiThanhToan = 'Chuyển khoản';
+                        } else {
+                            loaiThanhToan = 'Khi nhận hàng';
+                        }
                         noiDungHuy += '<tr>';
                         noiDungHuy += '<td>' + (key+1) + '</td>';
                         noiDungHuy += '<td>' + GetNow(value.created_at) + '</td>';
                         noiDungHuy += '<td>' + tinhTrang + '</td>';
                         noiDungHuy += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDungHuy += '<td>' + loaiThanhToan + '</td>';
                         noiDungHuy += '<td>';
                         noiDungHuy += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
                         noiDungHuy += '</td>';

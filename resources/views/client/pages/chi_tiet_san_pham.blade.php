@@ -225,6 +225,8 @@
                                     <div class="pr_desc">
                                         <p>{{$value->mo_ta_ngan}}</p>
                                     </div>
+                                    <br>
+                                        <span class="price"> Còn lại : {{$value->so_luong}}</span>
                                     <!-- <div class="pr_switch_wrap">
                                         <div class="product_color_switch">
                                             <span class="active" data-color="#87554B"></span>
