@@ -10,6 +10,7 @@
     <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
     @include('client.shares.bot')
     @yield('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -46,7 +47,7 @@
                     error       : function(res){
                         var danh_sach_loi = res.responseJSON.errors;
                         $.each(danh_sach_loi, function(key, value){
-                            toastr.error(value[0]);     
+                            toastr.error(value[0]);
                         });
                     }
                 });
@@ -127,15 +128,18 @@
                     'san_pham_id'   : san_pham_id,
                     'so_luong'      : 1
                 };
+                var self = $(this);
                 axios
                     .post('/khach-hang/yeu-thich', payload)
                     .then((res) => {
                         if(res.data.yeuthich == 1){
                             toastr.success("Đã xóa khỏi danh sách yêu thích!");
+                            self.removeClass('active');
                         } else if(res.data.yeuthich == 2){
                             toastr.success("Đã thêm vào danh sách yêu thích!");
+                            self.addClass('active');
                         } else{
-                            toastr.error("Vui lòng đăng nhập để sử dụng tính năng này!");
+                            toastr.error("Mời bạn đăng nhập để sử dụng tính năng này!");
                         }
                     });
             });

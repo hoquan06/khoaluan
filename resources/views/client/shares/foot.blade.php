@@ -48,13 +48,13 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
-                	<div class="widget">
+                	{{-- <div class="widget">
                     	<h6 class="widget_title">Tải ngay tại</h6>
                         <ul class="app_list">
                             <li><a href="#"><img src="/assets_client/images/f1.png" alt="f1"/></a></li>
                             <li><a href="#"><img src="/assets_client/images/f2.png" alt="f2"/></a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                 	<div class="widget">
                     	<h6 class="widget_title">Trang mạng xã hội</h6>
                         <ul class="social_icons">
