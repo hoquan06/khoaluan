@@ -4,17 +4,17 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-8">
                 	<div class="header_topbar_info">
-                    	<div class="header_offer">
+                    	<div class="">
                     		<span>Miễn phí giao hàng toàn quốc</span>
                         </div>
-                        <div class="download_wrap">
+                        {{-- <div class="download_wrap">
                             <span class="mr-3">Tải ngay</span>
                             <ul class="icon_list text-center text-lg-left">
                                 <li><a href="#"><i class="fab fa-apple"></i></a></li>
                                 <li><a href="#"><i class="fab fa-android"></i></a></li>
                                 <li><a href="#"><i class="fab fa-windows"></i></a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-4">

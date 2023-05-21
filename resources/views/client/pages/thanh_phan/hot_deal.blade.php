@@ -8,7 +8,7 @@
                     </div>
                 </div>
                 <div class="view_all text-right">
-                    <a href="/san-pham-thinh-hanh" class="text_default"><i class="linearicons-power"></i> <span>Xem tất cả</span></a>
+                    <a href="/san-pham-khuyen-mai" class="text_default"><i class="linearicons-power"></i> <span>Xem tất cả</span></a>
                 </div>
             </div>
         </div>
@@ -31,8 +31,6 @@
                                             <del>{{number_format($value->gia_ban, 0)}} đ</del>
                                         </div>
                                     </div>
-
-
                                     <span class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ Str::length($value->mo_ta_ngan) > 100 ? Str::substr($value->mo_ta_ngan, 0, 100) . '...' :  $value->mo_ta_ngan}}</a></span>
                                     <div>
                                         <span class="stock-available">Còn lại: <strong>{{$value->so_luong}}</strong></span>

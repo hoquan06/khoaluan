@@ -46,7 +46,7 @@ class HomePageController extends Controller
         $spGiam = DB::select($sp_giam_gia);
 
         $sp_moi = SanPham::orderByDesc('created_at')->get()->take(20);
-        $sp_hang_dau = SanPham::orderByDesc('gia_ban')->get();
+
 
         $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id
         WHERE so_sao > 3
@@ -54,7 +54,7 @@ class HomePageController extends Controller
         ORDER BY sosao DESC";
         $spDanhGiaCao = DB::select($sp);
 
-        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide','khuyenmai', 'banner', 'sp_moi', 'sp_hang_dau', 'spDanhGiaCao'));
+        return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide','khuyenmai', 'banner', 'sp_moi', 'spDanhGiaCao'));
     }
 
     public function viewSanPham($id)

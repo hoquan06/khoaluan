@@ -167,7 +167,6 @@ Route::post('/tim-kiem', [\App\Http\Controllers\HomePageController::class, 'sear
 
 Route::get('/san-pham-danh-gia-cao', [\App\Http\Controllers\HomePageController::class, 'spDanhGiaCao']);
 Route::get('/san-pham-moi-ra-mat', [\App\Http\Controllers\HomePageController::class, 'spMoiRaMat']);
-Route::get('/san-pham-hang-dau', [\App\Http\Controllers\HomePageController::class, 'spHangDau']);
 Route::get('/san-pham-khuyen-mai', [\App\Http\Controllers\HomePageController::class, 'spKhuyenMai']);
 
 Route::get('/watch/{id}', [\App\Http\Controllers\DonHangController::class, 'watch']);
