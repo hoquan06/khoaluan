@@ -47,7 +47,7 @@ class DangKyRequest extends FormRequest
             'unique'                         => ':attribute đã tồn tại',
             'email'                          => ':attribute không đúng định dạng',
             'same'                           => ':attribute và mật khẩu không trùng khớp',
-            'agree.accepted'                 => 'Bạn phải đồng ý điều khoản!',
+            'agree.accepted'                 => 'Mời bạn đồng ý điều khoản!',
             // 'g-recaptcha-response.accepted'  => 'Vui lòng xác minh rằng bạn không phải là người máy'
         ];
     }
