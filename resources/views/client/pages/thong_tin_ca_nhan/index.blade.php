@@ -71,6 +71,7 @@
                                                 <th>Ngày đặt</th>
                                                 <th>Tình trạng</th>
                                                 <th>Thực trả</th>
+                                                <th>Loại thanh toán</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
@@ -109,6 +110,7 @@
                                                 <th>Ngày đặt</th>
                                                 <th>Tình trạng</th>
                                                 <th>Tổng tiền</th>
+                                                <th>Loại thanh toán</th>
                                                 <th>Thao tác</th>
                                             </tr>
                                         </thead>
@@ -317,11 +319,18 @@
                         } else{
                             tinhTrang = 'Đã nhận hàng';
                         }
+                        var loaiThanhToan = '';
+                        if(value.loai_thanh_toan == 1) {
+                            loaiThanhToan = 'Chuyển khoản';
+                        } else {
+                            loaiThanhToan = 'Khi nhận hàng';
+                        }
                         noiDung += '<tr>',
                         noiDung += '<td>' + (key + 1) + '</td>';
                         noiDung += '<td>' + GetNow(value.created_at) + '</td>';
                         noiDung += '<td>' + tinhTrang + '</td>';
                         noiDung += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDung += '<td>' + loaiThanhToan + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
                         if(value.tinh_trang == 0 || value.tinh_trang == 1){
@@ -329,7 +338,7 @@
                         }
                         noiDung += '</td>';
                         if(value.tinh_trang == 1){
-                            noiDung += '<td><a data-id="' + value.id + '" class="btn btn-fill-out btn-sm orderCompleted">Đã nhận được hàng</a></td>';
+                            noiDung += '<td><a data-id="' + value.id + '" class="btn btn-fill-out btn-sm orderCompleted">Đã nhận</a></td>';
                         }
                         noiDung += '</tr>';
 
@@ -340,11 +349,18 @@
                         if(value.tinh_trang == -1){
                             var tinhTrang = 'Đã hủy';
                         }
+                        var loaiThanhToan = '';
+                        if(value.loai_thanh_toan == 1) {
+                            loaiThanhToan = 'Chuyển khoản';
+                        } else {
+                            loaiThanhToan = 'Khi nhận hàng';
+                        }
                         noiDungHuy += '<tr>';
                         noiDungHuy += '<td>' + (key+1) + '</td>';
                         noiDungHuy += '<td>' + GetNow(value.created_at) + '</td>';
                         noiDungHuy += '<td>' + tinhTrang + '</td>';
                         noiDungHuy += '<td>' + numberFormat(value.thuc_tra) + '</td>';
+                        noiDungHuy += '<td>' + loaiThanhToan + '</td>';
                         noiDungHuy += '<td>';
                         noiDungHuy += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
                         noiDungHuy += '</td>';
