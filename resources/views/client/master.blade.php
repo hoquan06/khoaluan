@@ -110,7 +110,7 @@
                         if(res.giohang){
                             toastr.success("Đã thêm vào giỏ hàng!");
                         } else{
-                            toastr.error("Vui lòng đăng nhập để sử dụng chức năng này!!!");
+                            toastr.error("Mời bạn đăng nhập để sử dụng chức năng này!!!");
                         }
                     },
                     error           : function(res){

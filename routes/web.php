@@ -78,6 +78,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/da-giao/index', [\App\Http\Controllers\DonHangController::class, 'donHangDaGiao']); // tinh trang 2
 
         Route::get('/that-bai/index', [\App\Http\Controllers\DonHangController::class, 'donThatBai']); // tinh trang 3
+        Route::get('/cho-hoan-phi', [\App\Http\Controllers\DonHangController::class, 'choHoanPhi']);
+        Route::get('/dã-hoan-phi', [\App\Http\Controllers\DonHangController::class, 'daHoanPhi']);
 
         Route::get('/delete/{id}', [\App\Http\Controllers\DonHangController::class, 'destroy']);
         Route::get('/view/{id}', [\App\Http\Controllers\DonHangController::class, 'view']);

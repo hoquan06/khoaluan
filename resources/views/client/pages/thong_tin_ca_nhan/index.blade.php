@@ -222,28 +222,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalToggleLabel">Hủy đơn hàng</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Đơn hàng này đã thanh toán, hãy để lại số điện thoại, chúng tôi sẽ liên hệ để hoàn tiền cho bạn
-                    <input type="text" class="form-control" placeholder="Nhập vào id cần xóa" id="idDelete" hidden>
-                    <input type="text" class="form-control" placeholder="Nhập vào số điện thoại" id="so_dien_thoai">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button class="btn btn-danger delete" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Hủy đơn hàng</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
@@ -337,11 +315,8 @@
                         noiDung += '<td>' + loaiThanhToan + '</td>';
                         noiDung += '<td>';
                         noiDung += '<a href="/khach-hang/don-hang/chi-tiet/' + value.id + '" class="btn btn-fill-out btn-sm">Xem</a>';
-                        if((value.tinh_trang == 0 || value.tinh_trang == 1) && value.loai_thanh_toan == 0){
+                        if(value.tinh_trang == 0 || value.tinh_trang == 1){
                             noiDung += '<a data-id="' + value.id + '" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
-                        }
-                        else if((value.tinh_trang == 0 || value.tinh_trang == 1) && value.loai_thanh_toan == 1){
-                            noiDung += '<a data-id="' + value.id + '" data-bs-toggle="modal" data-bs-target="#exampleModalToggle2" class="btn btn-fill-out btn-sm cancelOrder">Hủy</a>';
                         }
                         noiDung += '</td>';
                         if(value.tinh_trang == 1){
@@ -408,6 +383,9 @@
                         toastr.success("Hủy đơn hàng thành công!");
                         loadTable();
                     } else if(res.data.huy == 2){
+                        toastr.success("Hủy đơn hàng thành công, chúng tôi sẽ liên hệ bạn qua số điện thoại hoặc email để hoàn phí!");
+                        loadTable();
+                    } else if(res.data.huy == 3){
                         toastr.warning("Hủy không thành công do đơn hàng đang được vận chuyển!");
                     } else{
                         toastr.error("Đơn hàng không tồn tại!");

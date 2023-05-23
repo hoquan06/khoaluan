@@ -113,6 +113,14 @@ class DonHangController extends Controller
         return view('admin.pages.don_hang.that_bai.index', compact('data'));
     }
 
+    public function choHoanPhi()
+    {
+        $sql = "SELECT * FROM `khach_hangs` JOIN don_hangs ON khach_hangs.id = don_hangs.agent_id
+                WHERE loai_thanh_toan = 1 AND tinh_trang = -1";
+        $choHoanPhi = DB::select($sql);
+        return view('admin.pages.don_hang.cho_hoan_phi.index', compact('choHoanPhi'));
+    }
+
     public function accept($id)
     {
         $data = DonHang::find($id);
@@ -167,21 +175,39 @@ class DonHangController extends Controller
 
     public function destroy($id)
     {
-        $data = DonHang::find($id);
-        if($data){
-            if($data->loai_thanh_toan == 1 && $data->tinh_trang == 0){
+        $donHang = DonHang::find($id);
+        if($donHang){
+            if($donHang->loai_thanh_toan == 1 && $donHang->tinh_trang == 0){
                 return response()->json([
                     'xoa'       => 0,
                     'message'   => 'Xóa không thành công do đơn hàng thanh toán chuyển khoản!'
                 ]);
-            } else if($data->tinh_trang == 1){
+            } else if($donHang->tinh_trang == 1){
                 return response()->json([
                     'xoa'       => 1,
                     'message'   => 'Xóa không thành công do đơn hàng đang được vận chuyển!'
 
                 ]);
+            } else if($donHang->tinh_trang == 0){
+                $donHang->delete();
+                // Lấy danh sách chi tiết đơn hàng
+                $chiTietDonHang = ChiTietDonHang::where('don_hang_id', $donHang->id)->get();
+
+                // Hoàn lại số lượng sản phẩm
+                foreach ($chiTietDonHang as $value) {
+                    $sanPham = SanPham::find($value->san_pham_id);
+                    if ($sanPham) {
+                        $sanPham->so_luong += $value->so_luong;
+                        $sanPham->save();
+                    }
+                }
+                return response()->json([
+                    'xoa'       => 2,
+                    'message'   => 'Đã xóa đơn hàng thành công!'
+
+                ]);
             } else{
-                $data->delete();
+                $donHang->delete();
                 return response()->json([
                     'xoa'       => 2,
                     'message'   => 'Đã xóa đơn hàng thành công!'
@@ -513,17 +539,34 @@ class DonHangController extends Controller
                 if($donHang->tinh_trang == 0){
                     $donHang->tinh_trang = -1;
                     $donHang->save();
-                    return response()->json([
-                        'huy'       => 1,
-                    ]);
+                    // Lấy danh sách chi tiết đơn hàng
+                    $chiTietDonHang = ChiTietDonHang::where('don_hang_id', $donHang->id)->get();
+
+                    // Hoàn lại số lượng sản phẩm
+                    foreach ($chiTietDonHang as $value) {
+                        $sanPham = SanPham::find($value->san_pham_id);
+                        if ($sanPham) {
+                            $sanPham->so_luong += $value->so_luong;
+                            $sanPham->save();
+                        }
+                    }
+                    if($donHang->loai_thanh_toan == 0){
+                        return response()->json([
+                            'huy'       => 1,
+                        ]);
+                    } else if($donHang->loai_thanh_toan == 1){
+                        return response()->json([
+                            'huy'       => 2,
+                        ]);
+                    }
                 } else{
                     return response()->json([
-                        'huy'       => 2,
+                        'huy'       => 3,
                     ]);
                 }
             } else{
                 return response()->json([
-                    'huy'       => 3,
+                    'huy'       => 4,
                 ]);
             }
         }
