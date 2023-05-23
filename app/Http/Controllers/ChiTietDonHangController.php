@@ -16,7 +16,7 @@ class ChiTietDonHangController extends Controller
         return view('client.pages.gio_hang.index');
     }
 
-    public function addToCart(GioHangRequest $request)
+    public function addToCart(Request $request)
     {
         $agent = Auth::guard('khach_hang')->user();
         if($agent){

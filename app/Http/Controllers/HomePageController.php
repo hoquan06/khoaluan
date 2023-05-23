@@ -48,10 +48,11 @@ class HomePageController extends Controller
         $sp_moi = SanPham::orderByDesc('created_at')->get()->take(20);
 
 
-        $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id
-        WHERE so_sao > 3
-        GROUP BY san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet
-        ORDER BY sosao DESC";
+        $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao
+                FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id
+                WHERE so_sao > 3
+                GROUP BY san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet
+                ORDER BY sosao DESC";
         $spDanhGiaCao = DB::select($sp);
 
         return view('client.pages.home', compact('menuCha', 'menuCon','spGiam','allSanPham', 'slide','khuyenmai', 'banner', 'sp_moi', 'spDanhGiaCao'));

@@ -61,6 +61,10 @@
                     </li>
                     <li><a class="d-flex align-items-center" href="/admin/don-hang/that-bai/index"><i data-feather='calendar'></i><span class="menu-item text-truncate" data-i18n="List">Giao thất bại</span></a>
                     </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/cho-hoan-phi"><i data-feather='dollar-sign'></i><span class="menu-item text-truncate" data-i18n="List">Chờ hoàn phí</span></a>
+                    </li>
+                    <li><a class="d-flex align-items-center" href="/admin/don-hang/da-hoan-phi"><i data-feather='dollar-sign'></i><span class="menu-item text-truncate" data-i18n="List">Đã hoàn phí</span></a>
+                    </li>
                 </ul>
             </li>
             {{-- Chi Tiết Giao Dịch --}}
@@ -88,10 +92,10 @@
             </li>
             <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke/san-pham-chua-co-luot-mua"><i data-feather='alert-triangle'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm tồn</span></a>
             </li>
-            {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a> --}}
+            {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">Sản phẩm được đánh giá cao</span></a>
             </li>
-            {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia/2"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">SP được đánh giá cao</span></a> --}}
-            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="/admin/thong-ke-danh-gia/2"><i data-feather='compass'></i><span class="menu-title text-truncate" data-i18n="Invoice">SP được đánh giá cao</span></a>
+            </li> --}}
         </ul>
     </div>
 </div>
