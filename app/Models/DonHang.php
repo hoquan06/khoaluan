@@ -20,5 +20,6 @@ class DonHang extends Model
         'loai_thanh_toan',
         'dia_chi_giao_hang',
         'tinh_trang',
+        'hoan_phi',
     ];
 }
