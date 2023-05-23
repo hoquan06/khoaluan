@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('loai_thanh_toan');
             $table->string('dia_chi_giao_hang');
             $table->integer('tinh_trang')->default(0);
+            $table->integer('hoan_phi')->nullable();
             $table->timestamps();
         });
     }

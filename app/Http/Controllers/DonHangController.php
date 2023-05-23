@@ -121,6 +121,33 @@ class DonHangController extends Controller
         return view('admin.pages.don_hang.cho_hoan_phi.index', compact('choHoanPhi'));
     }
 
+    public function daHoanPhi()
+    {
+        $daHoanPhi = DonHang::join('khach_hangs', 'don_hangs.agent_id', 'khach_hangs.id')
+                            ->where('hoan_phi', 1)
+                            ->select('don_hangs.*', 'khach_hangs.ho_va_ten', 'khach_hangs.so_dien_thoai', 'khach_hangs.email')
+                            ->get();
+        return view('admin.pages.don_hang.da_hoan_phi.index', compact('daHoanPhi'));
+    }
+
+    public function hoanTat($id)
+    {
+        $donHang = DonHang::find($id);
+        if($donHang){
+            if($donHang->loai_thanh_toan == 1 && $donHang->tinh_trang == -1){
+                $donHang->hoan_phi = 1;
+                $donHang->save();
+                return response()->json([
+                    'status'        => true,
+                ]);
+            }
+        } else{
+            return response()->json([
+                'status'        => false,
+            ]);
+        }
+    }
+
     public function accept($id)
     {
         $data = DonHang::find($id);
@@ -216,7 +243,7 @@ class DonHangController extends Controller
         } else{
             return response()->json([
                 'xoa'       => false,
-                'message'   => 'Đã xóa không tồn tại!'
+                'message'   => 'Đơn hàng không tồn tại!'
             ]);
         }
     }
