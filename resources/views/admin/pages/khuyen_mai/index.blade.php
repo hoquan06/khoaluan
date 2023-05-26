@@ -59,7 +59,7 @@
 </div>
 <div class="table-responsive card">
         <div class="main-card mb-3 card">
-            <div class="card-body"><h5 class="card-title">Danh Sách Các Mặt Hàng Khuyến Mãi</h5>
+            <div class="card-body"><h5 class="card-title">Danh Sách Các Sản Phẩm Khuyến Mãi</h5>
                 <table class="mb-0 table table-bordered table-hover" id="tableKhuyenMai">
                     <thead>
                         <tr>

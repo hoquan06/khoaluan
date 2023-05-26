@@ -401,9 +401,7 @@
             axios
                 .post('/khach-hang/thay-doi-mat-khau', payload)
                 .then((res) => {
-                    if(res.data.doimatkhau == 0){
-                        toastr.error("Bạn đã nhập mật khẩu cũ!");
-                    }else if(res.data.doimatkhau){
+                    if(res.data.doimatkhau){
                         toastr.success("Đã thay đổi mật khẩu thành công!");
                         $("#password").val('');
                         $("#re_password").val('');

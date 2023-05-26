@@ -22,7 +22,7 @@
                             <div class="product_header">
                                 <div class="product_header_left">
                                     <div class="custom_select">
-                                        <select class="form-control form-control-sm">
+                                        <select id="sort-select" class="form-control form-control-sm">
                                             <option value="order">Mặc định</option>
                                             <option value="price">Giá: Từ thấp đến cao</option>
                                             <option value="price-desc">Giá: Từ cao xuống thấp</option>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row shop_container grid">
                         @foreach ($khuyenmai as $key => $value)
-                            <div class="col-lg-3 col-md-4 col-6">
+                            <div class="col-lg-3 col-md-4 col-6" data-price="{{ $value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban }}">
                                 <div class="product">
                                     <div class="product_img">
                                         <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">
@@ -141,8 +141,8 @@
                         <span> hoặc</span>
                     </div>
                     <ul class="btn-login list_none text-center">
-                        <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
-                        <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                        <li><a data-toggle="modal" data-target="#updateModal" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
+                        <li><a data-toggle="modal" data-target="#updateModal" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
                     </ul>
                     <div class="form-note text-center">Bạn chưa có tài khoản? <a href="/khach-hang/register">Đăng ký</a></div>
                 </form>
@@ -150,4 +150,48 @@
         </div>
     </div>
 </div>
+<div class="modal fade modal-danger text-left" id="updateModal" tabindex="-1" aria-labelledby="myModalLabel120" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="myModalLabel120">Tiếc quá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Tính năng này đang được chúng tôi nâng cấp, vui lòng thử lại sau!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect waves-float waves-light" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section('js')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+        $(document).ready(function() {
+            $('#sort-select').on('change', function() {
+                var sortBy = $(this).val();
+                var productsContainer = $('.shop_container');
 
+                if (sortBy === 'price') {
+                    // Sắp xếp tăng dần theo giá
+                    productsContainer.find('.col-lg-3').sort(function(a, b) {
+                        var priceA = parseFloat($(a).data('price'));
+                        var priceB = parseFloat($(b).data('price'));
+                        return priceA - priceB;
+                    }).appendTo(productsContainer);
+                } else if (sortBy === 'price-desc') {
+                    // Sắp xếp giảm dần theo giá
+                    productsContainer.find('.col-lg-3').sort(function(a, b) {
+                        var priceA = parseFloat($(a).data('price'));
+                        var priceB = parseFloat($(b).data('price'));
+                        return priceB - priceA;
+                    }).appendTo(productsContainer);
+                }
+            });
+        });
+    </script>
+@endsection

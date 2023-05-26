@@ -22,7 +22,7 @@
                             <div class="product_header">
                                 <div class="product_header_left">
                                     <div class="custom_select">
-                                        <select class="form-control form-control-sm">
+                                        <select id="sort-select" class="form-control form-control-sm">
                                             <option value="order">Mặc định</option>
                                             <option value="price">Giá: Từ thấp đến cao</option>
                                             <option value="price-desc">Giá: Từ cao xuống thấp</option>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row shop_container grid">
                         @foreach ($danhSach as $key => $value)
-                            <div class="col-lg-3 col-md-4 col-6">
+                            <div class="col-lg-3 col-md-4 col-6" data-price="{{ $value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban }}">
                                 <div class="product">
                                     <div class="product_img">
                                         <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="product_info">
-                                        <h6 class="product_title text-center"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
+                                        <h6 class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ $value->ten_san_pham }}</a></h6>
                                         <div class="product_price text-center">
                                             <span class="price">{{ number_format($value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban, 0) }} đ</span>
                                             @if($value->gia_khuyen_mai)
@@ -162,4 +162,31 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script>
+        $(document).ready(function() {
+            $('#sort-select').on('change', function() {
+                var sortBy = $(this).val();
+                var productsContainer = $('.shop_container');
+
+                if (sortBy === 'price') {
+                    // Sắp xếp tăng dần theo giá
+                    productsContainer.find('.col-lg-3').sort(function(a, b) {
+                        var priceA = parseFloat($(a).data('price'));
+                        var priceB = parseFloat($(b).data('price'));
+                        return priceA - priceB;
+                    }).appendTo(productsContainer);
+                } else if (sortBy === 'price-desc') {
+                    // Sắp xếp giảm dần theo giá
+                    productsContainer.find('.col-lg-3').sort(function(a, b) {
+                        var priceA = parseFloat($(a).data('price'));
+                        var priceB = parseFloat($(b).data('price'));
+                        return priceB - priceA;
+                    }).appendTo(productsContainer);
+                }
+            });
+        });
+    </script>
+@endsection
 

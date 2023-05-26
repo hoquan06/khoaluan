@@ -25,11 +25,12 @@ class ThongKeController extends Controller
                 AND tinh_trang = 2";
         $doanhThuNgay = DB::select($sql);
 
-        $sqlNgay = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
-                    FROM don_hangs JOIN khach_hangs ON khach_hangs.id = don_hangs.agent_id 
+        $sqlNgay = "SELECT DISTINCT khach_hangs.*, chi_tiet_don_hangs.*, chi_tiet_don_hangs.*
+                    FROM don_hangs
+                    JOIN khach_hangs ON khach_hangs.id = don_hangs.agent_id
                     JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
                     WHERE don_hangs.created_at LIKE '%$ngay%'
-                    AND tinh_trang = 2";
+                    AND don_hangs.tinh_trang = 2";
         $thongTinTheoNgay = DB::select($sqlNgay);
 
         //Doanh thu ngày hôm qua
@@ -80,7 +81,7 @@ class ThongKeController extends Controller
         $doanhThuTuanTruoc = DB::select($sql1);
 
         $sqlTuan = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
-                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id
                 JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
                 WHERE don_hangs.created_at between '$start' AND '$end'
                 AND tinh_trang = 2";
@@ -115,7 +116,7 @@ class ThongKeController extends Controller
         $doanhThuThang = DB::select($sql);
 
         $sqlThang = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
-                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id
                 JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
                 WHERE don_hangs.created_at  between '$start' AND '$end'
                 AND tinh_trang = 2";
@@ -165,7 +166,7 @@ class ThongKeController extends Controller
         $doanhThuNamTruoc = DB::select($sql1);
 
         $sqlNam = "SELECT khach_hangs.ho_va_ten, khach_hangs.ngay_sinh, khach_hangs.so_dien_thoai, khach_hangs.dia_chi ,chi_tiet_don_hangs.ten_san_pham,chi_tiet_don_hangs.don_gia
-                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id 
+                FROM don_hangs JOIN khach_hangs on khach_hangs.id = don_hangs.agent_id
                 JOIN chi_tiet_don_hangs ON chi_tiet_don_hangs.agent_id = khach_hangs.id
                 WHERE don_hangs.created_at LIKE '%$year%'
                 AND tinh_trang = 2";

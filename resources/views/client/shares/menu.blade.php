@@ -47,7 +47,7 @@
                         <ul class="navbar-nav">
                             @foreach ($menuCha as $key => $value_cha)
                             <li class="dropdown">
-                                <a class="dropdown-toggle nav-link" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{$value_cha->id}}" data-toggle="dropdown">{{ $value_cha->ten_danh_muc }}</a>
+                                <a class="dropdown-toggle nav-link" href="/danh-muc/{{$value_cha->slug_danh_muc}}-post{{$value_cha->id}}" >{{ $value_cha->ten_danh_muc }}</a>
                                 <div class="dropdown-menu">
                                     <ul>
                                         @foreach ($menuCon as $key => $value_con)

@@ -67,8 +67,8 @@
                                                                 @if ($valueSP->gia_khuyen_mai)
                                                                     <del>{{ number_format($valueSP->gia_ban, 0) }} đ</del>
                                                                 @endif
-                                                                <br>
-                                                                <span class="stock-available text-center">Còn lại: <strong>{{$valueSP->so_luong}}</strong></span>
+                                                                {{-- <br>
+                                                                <span class="stock-available text-center">Còn lại: <strong>{{$valueSP->so_luong}}</strong></span> --}}
                                                             </div>
                                                             <div class="pr_desc">
                                                                 <p>{{$valueSP->mo_ta_ngan}}</p>
