@@ -41,12 +41,11 @@ class HomePageController extends Controller
         $allSanPham = SanPham::all();
 
         $sp_giam_gia = "SELECT san_phams.* , khuyen_mais.*
-                 FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
-                Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
+                        FROM san_phams JOIN khuyen_mais on san_phams.id = khuyen_mais.san_pham_id
+                        Where '$ngay' between thoi_gian_bat_dau and thoi_gian_ket_thuc";
         $spGiam = DB::select($sp_giam_gia);
 
         $sp_moi = SanPham::orderByDesc('created_at')->get()->take(20);
-
 
         $sp = "SELECT san_phams.id, san_phams.ten_san_pham,san_phams.slug_san_pham, san_phams.so_luong, san_phams.gia_ban, san_phams.gia_khuyen_mai, san_phams.hinh_anh, san_phams.hinh_anh_2, san_phams.hinh_anh_3, san_phams.hinh_anh_4, san_phams.mo_ta_ngan, san_phams.mo_ta_chi_tiet, COUNT(so_sao) as sosao
                 FROM `danh_gias` JOIN san_phams on danh_gias.san_pham_id = san_phams.id

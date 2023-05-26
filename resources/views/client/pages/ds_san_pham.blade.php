@@ -40,7 +40,7 @@
                     </div>
                     <div class="row shop_container grid">
                         @foreach ($sanPham as $key => $value)
-                            <div class="col-lg-3 col-md-4 col-6"data-price="{{ $value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban }}">
+                            <div class="col-lg-3 col-md-4 col-6" data-price="{{ $value->gia_khuyen_mai ? $value->gia_khuyen_mai : $value->gia_ban }}">
                                 <div class="product">
                                     <div class="product_img">
                                         <a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">

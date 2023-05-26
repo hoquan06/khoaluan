@@ -32,9 +32,9 @@
                                         </div>
                                     </div>
                                     <span class="product_title"><a href="/san-pham/{{$value->slug_san_pham}}-post{{$value->id}}">{{ Str::length($value->mo_ta_ngan) > 100 ? Str::substr($value->mo_ta_ngan, 0, 100) . '...' :  $value->mo_ta_ngan}}</a></span>
-                                    <div>
+                                    {{-- <div>
                                         <span class="stock-available">Còn lại: <strong>{{$value->so_luong}}</strong></span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

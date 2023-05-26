@@ -97,7 +97,7 @@
     </div>
     <!--/ Statistics Card -->
 </div>
-<div class="table-responsive card" id="tableKhachHang">
+{{-- <div class="table-responsive card" id="tableKhachHang">
     <div class="main-card mb-3 card">
         <div class="card-body"><h5 class="card-title">Danh Sách Khách Hàng Mua Trong Năm</h5>
             <table class="mb-0 table table-bordered table-hover" id="tableSanPham">
@@ -128,7 +128,7 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
 @section('js')
 <script>

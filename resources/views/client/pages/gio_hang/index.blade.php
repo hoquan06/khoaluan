@@ -234,9 +234,9 @@
                     'dia_chi_nhan_hang' : diaChi
                 }
 
-                if (hinhThucThanhToan == 1) {
+                 else {if (hinhThucThanhToan == 1) {
                     this.thanhToanMomo(payload);
-                } else {
+                }
                     axios
                         .post('/khach-hang/tao-don-hang', payload)
                         .then((res) => {

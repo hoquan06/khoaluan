@@ -22,7 +22,7 @@ class ThayDoiMatKhauRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password'              => 'required|min:2|max:50|different:password',
+            'password'              => 'required|min:2|max:50',
             're_password'           => 'required|same:password'
         ];
     }

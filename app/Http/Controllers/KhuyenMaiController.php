@@ -100,6 +100,7 @@ class KhuyenMaiController extends Controller
     {
         $data = KhuyenMai::join('san_phams','khuyen_mais.san_pham_id','san_phams.id')
                         ->select("khuyen_mais.*", 'san_phams.ten_san_pham')
+                        ->orderByDesc('khuyen_mais.created_at')
                         ->get();
         return response()->json([
             'khuyen_mai'         => $data,

@@ -81,9 +81,9 @@
                                                     <del>{{number_format($value->gia_ban, 0)}} đ</del>
                                                 @endif
                                             </div>
-                                            <div class="text-left">
+                                            {{-- <div class="text-left">
                                                 <span class="">Còn lại: <strong>{{$value->so_luong}}</strong></span>
-                                            </div>
+                                            </div> --}}
                                             <div class="pr_desc">
                                                 <p>{{$value->mo_ta_ngan}}</p>
                                             </div>
