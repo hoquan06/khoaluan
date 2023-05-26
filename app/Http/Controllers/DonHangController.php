@@ -116,7 +116,7 @@ class DonHangController extends Controller
     public function choHoanPhi()
     {
         $sql = "SELECT * FROM `khach_hangs` JOIN don_hangs ON khach_hangs.id = don_hangs.agent_id
-                WHERE loai_thanh_toan = 1 AND tinh_trang = -1";
+                WHERE loai_thanh_toan = 1 AND tinh_trang = -1 AND hoan_phi is null";
         $choHoanPhi = DB::select($sql);
         return view('admin.pages.don_hang.cho_hoan_phi.index', compact('choHoanPhi'));
     }
